@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobina Kosmetik Düsseldorf - Bespoke Skincare & Aesthetic Treatments</title>
+    
+    <!-- Tailwind CSS for modern, responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Playfair Display (Serif for headings), Lato (Sans-serif for body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* Custom styles for a luxury aesthetic */
+        :root {
+            --bg-main: #FDFBF6;
+            --bg-dark: #1a1a1a;
+            --text-dark: #333333;
+            --text-light: #555555;
+            --text-on-dark: #e0e0e0;
+            --accent-gold: #B4A284; /* Muted, elegant gold */
+            --accent-gold-hover: #A39171;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .section-title {
+            font-weight: 700;
+            font-size: 2.75rem; /* 44px */
+            letter-spacing: 0.01em;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-gold);
+            color: white;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .btn-primary:hover {
+            background-color: var(--accent-gold-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: var(--accent-gold);
+            color: white;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+        
+        /* Animation for elements fading in on scroll */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Parallax Background Style */
+        .parallax-section {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1;
+        }
+        .parallax-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Language switcher styles */
+        .lang-switcher button.active {
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        /* Chatbot styles */
+        #chatbot-container { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+        #chat-window { height: 70vh; max-height: 500px; width: 350px; transition: all 0.3s ease-in-out; border: 1px solid #eee; }
+        #chat-toggle { background-color: var(--accent-gold); }
+        #chat-header { background-color: var(--accent-gold); }
+        
+        /* Voice Attendant Modal Styles */
+        #voice-attendant-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        #voice-attendant-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Spinner for loading state */
+        .loader { border: 4px solid #f3f3f3; border-top: 4px solid var(--accent-gold); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+
+    <!-- SEO & Metadata -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HealthAndBeautyBusiness",
+      "name": "Mobina Kosmetik Düsseldorf",
+      "description": "Ihr Institut für wissenschaftlich fundierte und State-of-the-Art Kosmetikbehandlungen in Düsseldorf. Wir kombinieren modernste Technologie mit personalisierter Pflege für sichtbare Ergebnisse.",
+      "address": { "@type": "PostalAddress", "streetAddress": "Steinstraße 35", "addressLocality": "Düsseldorf", "postalCode": "40210", "addressCountry": "DE" },
+      "telephone": "+4921198399349",
+      "url": "http://www.mobinashahri.de/",
+      "priceRange": "$$$$",
+      "image": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1200&h=630&fit=crop&q=80",
+      "openingHours": "Mo,Tu,We,Th,Fr 09:30-15:30",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "37"
+      },
+      "hasOffer": [ { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Hautanalyse" } }, { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "RF Microneedling" } }, { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "HydraFacial" } } ]
+    }
+    </script>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-5 flex justify-between items-center">
+            <a href="#" class="text-3xl font-serif tracking-wider">Mobina</a>
+            <div class="hidden md:flex flex-grow justify-center items-center space-x-10 text-sm tracking-widest uppercase">
+                <a href="#services" class="text-text-light hover:text-accent-gold transition duration-300" data-lang-key="nav_protocols">Signature Protocols</a>
+                <a href="#philosophy" class="text-text-light hover:text-accent-gold transition duration-300" data-lang-key="nav_philosophy">Our Philosophy</a>
+                <a href="#journal" class="text-text-light hover:text-accent-gold transition duration-300" data-lang-key="nav_journal">Journal</a>
+                <a href="#testimonials" class="text-text-light hover:text-accent-gold transition duration-300" data-lang-key="nav_acclaim">Client Acclaim</a>
+            </div>
+            <div class="hidden md:flex items-center">
+                 <div class="lang-switcher text-sm tracking-widest uppercase mr-6">
+                    <button class="lang-btn" data-lang="en">EN</button>
+                    <span class="mx-1 text-gray-300">|</span>
+                    <button class="lang-btn active" data-lang="de">DE</button>
+                    <span class="mx-1 text-gray-300">|</span>
+                    <button class="lang-btn" data-lang="fa">FA</button>
+                </div>
+                <a href="#contact" class="btn-secondary px-6 py-2 rounded-full text-sm tracking-widest uppercase" data-lang-key="nav_book">Book Now</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-2xl"><i class="fas fa-bars"></i></button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+             <a href="#services" class="block py-2" data-lang-key="nav_protocols_mob">Signature Protocols</a>
+             <a href="#philosophy" class="block py-2" data-lang-key="nav_philosophy_mob">Our Philosophy</a>
+             <a href="#journal" class="block py-2" data-lang-key="nav_journal_mob">Journal</a>
+             <a href="#testimonials" class="block py-2" data-lang-key="nav_acclaim_mob">Client Acclaim</a>
+             <a href="#contact" class="block py-2" data-lang-key="nav_contact_mob">Contact</a>
+             <div class="lang-switcher text-center my-4">
+                <button class="lang-btn-mob" data-lang="en">English</button>
+                <span class="mx-2">|</span>
+                <button class="lang-btn-mob active" data-lang="de">Deutsch</button>
+                <span class="mx-2">|</span>
+                <button class="lang-btn-mob" data-lang="fa">فارسی</button>
+            </div>
+             <a href="#contact" class="block mt-4 btn-secondary text-center px-6 py-2 rounded-full" data-lang-key="nav_book_mob">Book Now</a>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Hero Section -->
+        <section class="relative h-[80vh] flex items-center justify-center text-white text-center overflow-hidden">
+            <div class="absolute inset-0 bg-black/40 z-10"></div>
+            <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1920&q=80" 
+                 onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/333333/FDFBF6?text=Mobina+Kosmetik';"
+                 alt="Luxurious and serene cosmetic studio interior" 
+                 class="absolute inset-0 w-full h-full object-cover">
+            <div class="relative z-20 container mx-auto px-6 fade-in-up">
+                <h1 class="text-5xl md:text-7xl font-serif leading-tight" data-lang-key="hero_title">Bespoke Beauty, <br class="hidden md:block"> Perfected by Science.</h1>
+                <p class="mt-6 max-w-2xl mx-auto text-lg font-light tracking-wider" data-lang-key="hero_subtitle">An exclusive sanctuary in Düsseldorf where transformative skincare meets unparalleled personal service.</p>
+                <div class="mt-10">
+                    <a href="#services" class="btn-primary px-10 py-4 rounded-full text-base tracking-widest uppercase" data-lang-key="hero_button">Discover Our Protocols</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-24 bg-bg-main">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 fade-in-up">
+                    <h2 class="section-title" data-lang-key="protocols_title">Signature Protocols</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-text-light" data-lang-key="protocols_subtitle">We do not offer a menu of services. We provide a collection of highly specialized, results-driven protocols, each tailored to your skin's precise needs on the day of your visit.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Protocol 1 -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-sm transition duration-500 card-hover fade-in-up">
+                        <img src="https://images.unsplash.com/photo-1600965953047-311314a4a7a8?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/ccc/333?text=Service';" alt="AI Skin Analysis" class="w-full h-48 object-cover">
+                        <div class="p-8"><h3 class="text-2xl font-serif mb-2" data-lang-key="protocol1_title">The Düsseldorf Matrix™</h3><p class="text-text-light text-sm" data-lang-key="protocol1_desc">Our foundational analysis. Using advanced imaging and AI, we map 12 distinct biomarkers of skin health. This digital blueprint is not just a scan; it is the architectural plan for your skin's revival. It is the mandatory first step for all new clientele.</p></div>
+                    </div>
+                    <!-- Protocol 2 -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-sm transition duration-500 card-hover fade-in-up" style="transition-delay: 100ms;">
+                        <img src="https://images.unsplash.com/photo-1515699192394-c199a4194553?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/ccc/333?text=Service';" alt="RF Microneedling" class="w-full h-48 object-cover">
+                        <div class="p-8"><h3 class="text-2xl font-serif mb-2" data-lang-key="protocol2_title">Collagen Induction Therapy</h3><p class="text-text-light text-sm" data-lang-key="protocol2_desc">A precisely controlled application of radiofrequency and microneedling. We re-awaken the skin's innate architectural memory, signaling fibroblasts to produce the firm, youthful collagen that time has diminished. The result is a lift that is both visible and profoundly natural.</p></div>
+                    </div>
+                    <!-- Protocol 3 -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-sm transition duration-500 card-hover fade-in-up" style="transition-delay: 200ms;">
+                        <img src="https://images.unsplash.com/photo-1617897298305-6a3c8a9f4e4a?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/ccc/333?text=Service';" alt="HydraFacial" class="w-full h-48 object-cover">
+                        <div class="p-8"><h3 class="text-2xl font-serif mb-2" data-lang-key="protocol3_title">The Pre-Event Infusion</h3><p class="text-text-light text-sm" data-lang-key="protocol3_desc">Our answer to tired, travel-weary skin. A multi-stage hydro-dermabrasion that clears congestion and then bathes the fresh skin in a bespoke cocktail of antioxidants and hyaluronic acid. Ideal for achieving a flawless canvas before a major event or board meeting.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Philosophy Section with Parallax -->
+        <section id="philosophy" class="py-32 parallax-section" style="background-image: url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1920&q=80');">
+            <div class="overlay"></div>
+            <div class="parallax-content container mx-auto px-6 text-white text-center">
+                <div class="max-w-3xl mx-auto fade-in-up">
+                    <h2 class="section-title" data-lang-key="philosophy_title">Our Philosophy</h2>
+                    <p class="mt-6 text-lg text-on-dark font-light leading-relaxed" data-lang-key="philosophy_desc">We believe in a singular vision: that true beauty is a reflection of cellular health. Our approach is not about trends, but about deep, physiological understanding. We bypass the hype, investing only in technologies and formulations with proven, peer-reviewed efficacy. Each treatment is a meticulously crafted dialogue between science and skin, designed to deliver not just fleeting results, but lasting, vibrant health.</p>
+                    <a href="#contact" class="inline-block mt-8 btn-secondary border-white text-white hover:bg-white hover:text-text-dark px-8 py-3 rounded-full text-sm tracking-widest uppercase" data-lang-key="philosophy_button">Begin Your Journey</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Journal Section -->
+        <section id="journal" class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 fade-in-up">
+                    <h2 class="section-title" data-lang-key="journal_title">The Journal</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-text-light" data-lang-key="journal_subtitle">Insights and perspectives on the art and science of skin health. A resource for our discerning clientele.</p>
+                </div>
+                <div id="journal-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Posts will be dynamically injected here by JavaScript -->
+                    <div class="text-center col-span-full"><div class="loader"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-24 bg-bg-main">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 fade-in-up">
+                    <h2 class="section-title" data-lang-key="acclaim_title">Client Acclaim</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-text-light" data-lang-key="acclaim_subtitle">Discretion and results are our cornerstones. A glimpse into the experiences of our valued clientele.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-white p-8 rounded-lg shadow-sm fade-in-up">
+                        <div class="flex items-center mb-4"><div class="text-accent-gold"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
+                        <p class="text-text-light italic mb-4" data-lang-key="testimonial1_text">"After flying in from New York, my skin was utterly depleted. The Pre-Event Infusion was a rescue mission. I walked into my meetings looking rested and radiant. Mobina's discretion and skill are unmatched."</p>
+                        <p class="font-bold text-sm tracking-wider uppercase" data-lang-key="testimonial1_author">- C. W., Private Equity</p>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="bg-white p-8 rounded-lg shadow-sm fade-in-up" style="transition-delay: 100ms;">
+                        <div class="flex items-center mb-4"><div class="text-accent-gold"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
+                        <p class="text-text-light italic mb-4" data-lang-key="testimonial2_text">"I don't trust my face to anyone else. The Collagen Induction therapy has done more for my skin in three sessions than years of trying other treatments. The results are subtle, yet undeniable."</p>
+                        <p class="font-bold text-sm tracking-wider uppercase" data-lang-key="testimonial2_author">- A. S., Art Collector</p>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="bg-white p-8 rounded-lg shadow-sm fade-in-up" style="transition-delay: 200ms;">
+                        <div class="flex items-center mb-4"><div class="text-accent-gold"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
+                        <p class="text-text-light italic mb-4" data-lang-key="testimonial3_text">"The mobile service is a necessity for my schedule. To receive this level of professional care at home is the ultimate luxury. The hygiene and attention to detail are impeccable. Worth every cent."</p>
+                        <p class="font-bold text-sm tracking-wider uppercase" data-lang-key="testimonial3_author">- M. L., Legal Counsel</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 bg-bg-main">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 fade-in-up">
+                    <h2 class="section-title" data-lang-key="contact_title">Request a Consultation</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-text-light" data-lang-key="contact_subtitle">We invite you to our sanctuary in Düsseldorf to begin your transformative journey.</p>
+                </div>
+                <div class="max-w-4xl mx-auto bg-white rounded-lg p-8 md:p-12 fade-in-up shadow-lg">
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div>
+                            <h3 class="text-2xl font-serif mb-6" data-lang-key="form_title">Send an Inquiry</h3>
+                            <form action="#" method="POST">
+                                <div class="mb-4"><label for="name" class="block text-sm font-medium text-text-light" data-lang-key="form_name">Name</label><input type="text" id="name" name="name" class="mt-1 block w-full p-3 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-accent-gold focus:border-accent-gold"></div>
+                                <div class="mb-4"><label for="email" class="block text-sm font-medium text-text-light" data-lang-key="form_email">Email</label><input type="email" id="email" name="email" class="mt-1 block w-full p-3 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-accent-gold focus:border-accent-gold"></div>
+                                <div class="mb-4"><label for="message" class="block text-sm font-medium text-text-light" data-lang-key="form_message">Message</label><textarea id="message" name="message" rows="4" class="mt-1 block w-full p-3 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-accent-gold focus:border-accent-gold"></textarea></div>
+                                <button type="submit" class="w-full btn-primary px-6 py-3 rounded-full font-semibold tracking-widest uppercase text-sm" data-lang-key="form_submit">Submit</button>
+                            </form>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-serif mb-6" data-lang-key="visit_title">Visit Us</h3>
+                            <div class="space-y-6 text-text-light">
+                                <p class="flex items-start"><i class="fas fa-map-marker-alt mt-1 mr-4 text-accent-gold"></i><span><strong>Mobina Kosmetik</strong><br>Steinstraße 35<br>40210 Düsseldorf, DE</span></p>
+                                <p class="flex items-center"><i class="fas fa-phone-alt mr-4 text-accent-gold"></i><a href="tel:+4921198399349" class="hover:text-accent-gold">+49 211 98399349</a></p>
+                                <p class="flex items-start"><i class="fas fa-clock mt-1 mr-4 text-accent-gold"></i><span data-lang-key="visit_hours"><strong>Hours of Operation</strong><br>By Appointment Only</span></p>
+                            </div>
+                            <!-- AI Booking Call Button -->
+                            <div class="mt-8 pt-6 border-t border-gray-200">
+                                <h4 class="text-lg font-serif mb-3" data-lang-key="booking_call_title">Immediate Assistance</h4>
+                                <p class="text-sm text-text-light mb-4" data-lang-key="booking_call_desc">For appointment scheduling, please use our dedicated AI voice attendant.</p>
+                                <button id="ai-booking-call-btn" class="w-full btn-primary px-6 py-3 rounded-full font-semibold tracking-widest uppercase text-sm flex items-center justify-center">
+                                    <i class="fas fa-phone-volume mr-2"></i>
+                                    <span data-lang-key="booking_call_btn">Initiate AI Booking Call</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-text-dark text-white">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p class="text-sm tracking-wider" data-lang-key="footer_copyright">&copy; 2025 Mobina Kosmetik Düsseldorf. A Bespoke Beauty Destination.</p>
+            <div class="flex justify-center space-x-6 mt-4 text-xs uppercase tracking-widest">
+                <a href="#" class="text-gray-400 hover:text-white" data-lang-key="footer_imprint">Impressum</a>
+                <a href="#" class="text-gray-400 hover:text-white" data-lang-key="footer_privacy">Datenschutz</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container">
+        <div id="chat-window" class="hidden bg-white rounded-xl shadow-2xl flex flex-col overflow-hidden">
+            <div id="chat-header" class="text-white p-4 flex justify-between items-center"><h3 class="font-bold" data-lang-key="chat_title">AI Concierge</h3><button id="close-chat-button" class="text-white text-2xl">&times;</button></div>
+            <div id="chat-messages" class="flex-1 p-4 overflow-y-auto bg-bg-main">
+                <div class="mb-3"><div class="bg-gray-200 text-text-dark p-3 rounded-lg inline-block max-w-xs text-sm" data-lang-key="chat_greeting">Good day. How may I assist you? You can ask a question or press the microphone for voice service.</div></div>
+            </div>
+            <div class="p-4 bg-white border-t border-gray-200 flex items-center">
+                <input type="text" id="chat-input" placeholder="Inquire here..." class="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-1 focus:ring-accent-gold text-sm" data-lang-key="chat_placeholder">
+                <button id="voice-chat-button" class="ml-3 text-accent-gold hover:text-accent-gold-hover p-2 rounded-full"><i class="fas fa-microphone-alt fa-lg"></i></button>
+                <button id="send-chat-button" class="ml-2 text-accent-gold hover:text-accent-gold-hover p-2 rounded-full"><i class="fas fa-paper-plane fa-lg"></i></button>
+            </div>
+        </div>
+        <button id="chat-toggle" class="text-white w-auto h-16 px-6 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-105">
+            <i class="fas fa-headset fa-2x mr-3"></i>
+            <span class="font-semibold tracking-wider" data-lang-key="chat_toggle">AI Voice Concierge</span>
+        </button>
+    </div>
+    
+    <!-- AI Voice Attendant Modal -->
+    <div id="voice-attendant-modal">
+        <!-- The Voice Attendant UI will be injected here by JavaScript -->
+    </div>
+
+    <script>
+        // --- Translations Object ---
+        const translations = {
+            de: {
+                nav_protocols: "Signature Protocols",
+                nav_philosophy: "Unsere Philosophie",
+                nav_journal: "Journal",
+                nav_acclaim: "Kundenstimmen",
+                nav_contact: "Kontakt",
+                nav_book: "Buchen",
+                nav_protocols_mob: "Signature Protocols",
+                nav_philosophy_mob: "Unsere Philosophie",
+                nav_journal_mob: "Journal",
+                nav_acclaim_mob: "Kundenstimmen",
+                nav_contact_mob: "Kontakt",
+                nav_book_mob: "Buchen",
+                hero_title: "Maßgeschneiderte Schönheit, <br class='hidden md:block'> perfektioniert durch Wissenschaft.",
+                hero_subtitle: "Ein exklusiver Zufluchtsort in Düsseldorf, wo transformative Hautpflege auf unvergleichlichen persönlichen Service trifft.",
+                hero_button: "Unsere Protokolle entdecken",
+                protocols_title: "Signature Protocols",
+                protocols_subtitle: "Wir bieten keine Service-Liste. Wir bieten eine Sammlung hochspezialisierter, ergebnisorientierter Protokolle, die am Tag Ihres Besuchs genau auf die Bedürfnisse Ihrer Haut zugeschnitten sind.",
+                protocol1_title: "Die Düsseldorf Matrix™",
+                protocol1_desc: "Unsere grundlegende Analyse. Mittels fortschrittlicher Bildgebung und KI erfassen wir 12 verschiedene Biomarker der Hautgesundheit. Dieser digitale Bauplan ist nicht nur ein Scan; er ist der architektonische Plan für die Erneuerung Ihrer Haut. Er ist der obligatorische erste Schritt für alle neuen Kunden.",
+                protocol2_title: "Kollagen-Induktionstherapie",
+                protocol2_desc: "Eine präzise gesteuerte Anwendung von Radiofrequenz und Microneedling. Wir erwecken das angeborene architektonische Gedächtnis der Haut wieder und signalisieren den Fibroblasten, das straffe, jugendliche Kollagen zu produzieren, das die Zeit gemindert hat. Das Ergebnis ist ein Lifting, das sowohl sichtbar als auch zutiefst natürlich ist.",
+                protocol3_title: "Die Pre-Event Infusion",
+                protocol3_desc: "Unsere Antwort auf müde, reisegestresste Haut. Eine mehrstufige Hydro-Dermabrasion, die Verstopfungen beseitigt und die frische Haut dann in einem maßgeschneiderten Cocktail aus Antioxidantien und Hyaluronsäure badet. Ideal, um vor einem wichtigen Ereignis oder Meeting eine makellose Leinwand zu schaffen.",
+                philosophy_title: "Unsere Philosophie",
+                philosophy_desc: "Wir glauben an eine einzige Vision: Wahre Schönheit ist ein Spiegelbild der zellulären Gesundheit. Unser Ansatz handelt nicht von Trends, sondern von tiefem, physiologischem Verständnis. Wir umgehen den Hype und investieren nur in Technologien und Formulierungen mit nachgewiesener, von Experten überprüfter Wirksamkeit. Jede Behandlung ist ein sorgfältig ausgearbeiteter Dialog zwischen Wissenschaft und Haut, der nicht nur flüchtige Ergebnisse, sondern dauerhafte, lebendige Gesundheit liefern soll.",
+                philosophy_button: "Ihre Reise beginnen",
+                journal_title: "Das Journal",
+                journal_subtitle: "Einblicke und Perspektiven zur Kunst und Wissenschaft der Hautgesundheit. Eine Ressource für unsere anspruchsvolle Klientel.",
+                acclaim_title: "Kundenstimmen",
+                acclaim_subtitle: "Diskretion und Ergebnisse sind unsere Eckpfeiler. Ein Einblick in die Erfahrungen unserer geschätzten Klientel.",
+                testimonial1_text: "\"Nach meinem Flug aus New York war meine Haut völlig erschöpft. Die Pre-Event Infusion war eine Rettungsaktion. Ich ging erholt und strahlend in meine Meetings. Mobinas Diskretion und Können sind unübertroffen.\"",
+                testimonial1_author: "- C. W., Private Equity",
+                testimonial2_text: "\"Ich vertraue mein Gesicht niemand anderem an. Die Kollagen-Induktionstherapie hat in drei Sitzungen mehr für meine Haut getan als jahrelange Versuche mit anderen Behandlungen. Die Ergebnisse sind subtil, aber unbestreitbar.\"",
+                testimonial2_author: "- A. S., Kunstsammlerin",
+                testimonial3_text: "\"Der mobile Service ist eine Notwendigkeit für meinen Terminkalender. Dieses Niveau an professioneller Pflege zu Hause zu erhalten, ist der ultimative Luxus. Die Hygiene und die Liebe zum Detail sind tadellos. Jeden Cent wert.\"",
+                testimonial3_author: "- M. L., Rechtsberaterin",
+                contact_title: "Beratung anfragen",
+                contact_subtitle: "Wir laden Sie in unser Refugium in Düsseldorf ein, um Ihre transformative Reise zu beginnen.",
+                form_title: "Anfrage senden",
+                form_name: "Name",
+                form_email: "Email",
+                form_message: "Nachricht",
+                form_submit: "Senden",
+                visit_title: "Besuchen Sie uns",
+                visit_hours: "<strong>Öffnungszeiten</strong><br>Nach Vereinbarung",
+                booking_call_title: "Sofortige Unterstützung",
+                booking_call_desc: "Für die Terminvereinbarung nutzen Sie bitte unseren dedizierten KI-Sprachassistenten.",
+                booking_call_btn: "KI-Buchungsanruf starten",
+                footer_copyright: "&copy; 2025 Mobina Kosmetik Düsseldorf. Eine maßgeschneiderte Schönheitsdestination.",
+                footer_imprint: "Impressum",
+                footer_privacy: "Datenschutz",
+                chat_title: "AI Concierge",
+                chat_greeting: "Guten Tag. Wie kann ich Ihnen helfen? Sie können eine Frage stellen oder für den Sprachdienst das Mikrofon drücken.",
+                chat_placeholder: "Stellen Sie hier Ihre Anfrage...",
+                chat_toggle: "AI Voice Concierge",
+            },
+            fa: {
+                nav_protocols: "پروتکل‌های ویژه",
+                nav_philosophy: "فلسفه ما",
+                nav_journal: "ژورنال",
+                nav_acclaim: "تحسین مشتریان",
+                nav_contact: "تماس",
+                nav_book: "رزرو",
+                nav_protocols_mob: "پروتکل‌های ویژه",
+                nav_philosophy_mob: "فلسفه ما",
+                nav_journal_mob: "ژورنال",
+                nav_acclaim_mob: "تحسین مشتریان",
+                nav_contact_mob: "تماس",
+                nav_book_mob: "رزرو",
+                hero_title: "زیبایی سفارشی، <br class='hidden md:block'> تکمیل شده با علم.",
+                hero_subtitle: "پناهگاهی انحصاری در دوسلدورف که در آن مراقبت از پوست تحول‌آفرین با خدمات شخصی بی‌نظیر همراه می‌شود.",
+                hero_button: "پروتکل‌های ما را کشف کنید",
+                protocols_title: "پروتکل‌های ویژه",
+                protocols_subtitle: "ما منوی خدمات ارائه نمی‌دهیم. ما مجموعه‌ای از پروتکل‌های بسیار تخصصی و نتیجه‌گرا را ارائه می‌دهیم که هر کدام در روز مراجعه شما دقیقاً متناسب با نیازهای پوست شما طراحی شده‌اند.",
+                protocol1_title: "ماتریکس دوسلدورف™",
+                protocol1_desc: "تحلیل بنیادی ما. با استفاده از تصویربرداری پیشرفته و هوش مصنوعی، ما ۱۲ نشانگر زیستی متمایز سلامت پوست را ترسیم می‌کنیم. این طرح دیجیتال فقط یک اسکن نیست؛ این نقشه معماری برای احیای پوست شماست. این اولین قدم اجباری برای همه مشتریان جدید است.",
+                protocol2_title: "درمان القایی کلاژن",
+                protocol2_desc: "کاربرد دقیق کنترل شده فرکانس رادیویی و میکرونیدلینگ. ما حافظه معماری ذاتی پوست را دوباره بیدار می‌کنیم و به فیبروبلاست‌ها سیگنال می‌دهیم تا کلاژن سفت و جوانی را که زمان کاهش داده است، تولید کنند. نتیجه یک لیفت است که هم قابل مشاهده و هم عمیقاً طبیعی است.",
+                protocol3_title: "اینفیوژن قبل از رویداد",
+                protocol3_desc: "پاسخ ما به پوست خسته و فرسوده از سفر. یک هیدرو-درم ابریژن چند مرحله‌ای که گرفتگی را برطرف می‌کند و سپس پوست تازه را در یک کوکتل سفارشی از آنتی‌اکسیدان‌ها و اسید هیالورونیک غرق می‌کند. ایده‌آل برای دستیابی به یک بوم بی‌عیب و نقص قبل از یک رویداد مهم یا جلسه هیئت مدیره.",
+                philosophy_title: "فلسفه ما",
+                philosophy_desc: "ما به یک دیدگاه واحد اعتقاد داریم: زیبایی واقعی بازتابی از سلامت سلولی است. رویکرد ما در مورد روندها نیست، بلکه در مورد درک عمیق و فیزیولوژیکی است. ما از هیاهو عبور می‌کنیم و فقط در فناوری‌ها و فرمولاسیون‌هایی با کارایی اثبات شده و مورد بررسی همتایان سرمایه‌گذاری می‌کنیم. هر درمان یک گفتگوی دقیق ساخته شده بین علم و پوست است که برای ارائه نتایج نه تنها گذرا، بلکه سلامت پایدار و پر جنب و جوش طراحی شده است.",
+                philosophy_button: "سفر خود را آغاز کنید",
+                journal_title: "ژورنال",
+                journal_subtitle: "بینش‌ها و دیدگاه‌ها در مورد هنر و علم سلامت پوست. منبعی برای مشتریان فهیم ما.",
+                acclaim_title: "تحسین مشتریان",
+                acclaim_subtitle: "احتیاط و نتایج سنگ بنای ما هستند. نگاهی به تجربیات مشتریان گرامی ما.",
+                testimonial1_text: "\"پس از پرواز از نیویورک، پوست من کاملاً تحلیل رفته بود. اینفیوژن قبل از رویداد یک مأموریت نجات بود. من با ظاهری استراحت کرده و درخشان وارد جلساتم شدم. احتیاط و مهارت مبینا بی‌نظیر است.\"",
+                testimonial1_author: "- س. و.، سهام خصوصی",
+                testimonial2_text: "\"من صورتم را به هیچ کس دیگری نمی‌سپارم. درمان القایی کلاژن در سه جلسه برای پوست من بیشتر از سال‌ها تلاش با درمان‌های دیگر کار کرده است. نتایج ظریف، اما غیرقابل انکار هستند.\"",
+                testimonial2_author: "- ا. ش.، مجموعه‌دار هنری",
+                testimonial3_text: "\"خدمات سیار برای برنامه من یک ضرورت است. دریافت این سطح از مراقبت حرفه‌ای در خانه، نهایت تجمل است. بهداشت و توجه به جزئیات بی‌عیب و نقص است. ارزش هر سنت را دارد.\"",
+                testimonial3_author: "- م. ل.، مشاور حقوقی",
+                contact_title: "درخواست مشاوره",
+                contact_subtitle: "ما شما را به پناهگاه خود در دوسلدورف دعوت می‌کنیم تا سفر تحول‌آفرین خود را آغاز کنید.",
+                form_title: "ارسال درخواست",
+                form_name: "نام",
+                form_email: "ایمیل",
+                form_message: "پیام",
+                form_submit: "ارسال",
+                visit_title: "به ما سر بزنید",
+                visit_hours: "<strong>ساعات کار</strong><br>فقط با وقت قبلی",
+                booking_call_title: "کمک فوری",
+                booking_call_desc: "برای تعیین وقت ملاقات، لطفاً از دستیار صوتی اختصاصی هوش مصنوعی ما استفاده کنید.",
+                booking_call_btn: "شروع تماس رزرو هوش مصنوعی",
+                footer_copyright: "&copy; ۲۰۲۵ مبینا کازمتیک دوسلدورف. یک مقصد زیبایی سفارشی.",
+                footer_imprint: "شناسنامه",
+                footer_privacy: "حریم خصوصی",
+                chat_title: "دستیار هوش مصنوعی",
+                chat_greeting: "روز بخیر. چگونه می‌توانم به شما کمک کنم؟ می‌توانید سوالی بپرسید یا برای خدمات صوتی میکروفون را فشار دهید.",
+                chat_placeholder: "سوال خود را اینجا بپرسید...",
+                chat_toggle: "دستیار صوتی هوش مصنوعی",
+            },
+            en: {
+                nav_protocols: "Signature Protocols",
+                nav_philosophy: "Our Philosophy",
+                nav_journal: "Journal",
+                nav_acclaim: "Client Acclaim",
+                nav_contact: "Contact",
+                nav_book: "Book Now",
+                nav_protocols_mob: "Signature Protocols",
+                nav_philosophy_mob: "Our Philosophy",
+                nav_journal_mob: "Journal",
+                nav_acclaim_mob: "Client Acclaim",
+                nav_contact_mob: "Contact",
+                nav_book_mob: "Book Now",
+                hero_title: "Bespoke Beauty, <br class='hidden md:block'> Perfected by Science.",
+                hero_subtitle: "An exclusive sanctuary in Düsseldorf where transformative skincare meets unparalleled personal service.",
+                hero_button: "Discover Our Protocols",
+                protocols_title: "Signature Protocols",
+                protocols_subtitle: "We do not offer a menu of services. We provide a collection of highly specialized, results-driven protocols, each tailored to your skin's precise needs on the day of your visit.",
+                protocol1_title: "The Düsseldorf Matrix™",
+                protocol1_desc: "Our foundational analysis. Using advanced imaging and AI, we map 12 distinct biomarkers of skin health. This digital blueprint is not just a scan; it is the architectural plan for your skin's revival. It is the mandatory first step for all new clientele.",
+                protocol2_title: "Collagen Induction Therapy",
+                protocol2_desc: "A precisely controlled application of radiofrequency and microneedling. We re-awaken the skin's innate architectural memory, signaling fibroblasts to produce the firm, youthful collagen that time has diminished. The result is a lift that is both visible and profoundly natural.",
+                protocol3_title: "The Pre-Event Infusion",
+                protocol3_desc: "Our answer to tired, travel-weary skin. A multi-stage hydro-dermabrasion that clears congestion and then bathes the fresh skin in a bespoke cocktail of antioxidants and hyaluronic acid. Ideal for achieving a flawless canvas before a major event or board meeting.",
+                philosophy_title: "Our Philosophy",
+                philosophy_desc: "We believe in a singular vision: that true beauty is a reflection of cellular health. Our approach is not about trends, but about deep, physiological understanding. We bypass the hype, investing only in technologies and formulations with proven, peer-reviewed efficacy. Each treatment is a meticulously crafted dialogue between science and skin, designed to deliver not just fleeting results, but lasting, vibrant health.",
+                philosophy_button: "Begin Your Journey",
+                journal_title: "The Journal",
+                journal_subtitle: "Insights and perspectives on the art and science of skin health. A resource for our discerning clientele.",
+                acclaim_title: "Client Acclaim",
+                acclaim_subtitle: "Discretion and results are our cornerstones. A glimpse into the experiences of our valued clientele.",
+                testimonial1_text: "\"After flying in from New York, my skin was utterly depleted. The Pre-Event Infusion was a rescue mission. I walked into my meetings looking rested and radiant. Mobina's discretion and skill are unmatched.\"",
+                testimonial1_author: "- C. W., Private Equity",
+                testimonial2_text: "\"I don't trust my face to anyone else. The Collagen Induction therapy has done more for my skin in three sessions than years of trying other treatments. The results are subtle, yet undeniable.\"",
+                testimonial2_author: "- A. S., Art Collector",
+                testimonial3_text: "\"The mobile service is a necessity for my schedule. To receive this level of professional care at home is the ultimate luxury. The hygiene and attention to detail are impeccable. Worth every cent.\"",
+                testimonial3_author: "- M. L., Legal Counsel",
+                contact_title: "Request a Consultation",
+                contact_subtitle: "We invite you to our sanctuary in Düsseldorf to begin your transformative journey.",
+                form_title: "Send an Inquiry",
+                form_name: "Name",
+                form_email: "Email",
+                form_message: "Message",
+                form_submit: "Submit",
+                visit_title: "Visit Us",
+                visit_hours: "<strong>Hours of Operation</strong><br>By Appointment Only",
+                booking_call_title: "Immediate Assistance",
+                booking_call_desc: "For appointment scheduling, please use our dedicated AI voice attendant.",
+                booking_call_btn: "Initiate AI Booking Call",
+                footer_copyright: "&copy; 2025 Mobina Kosmetik Düsseldorf. A Bespoke Beauty Destination.",
+                footer_imprint: "Imprint",
+                footer_privacy: "Privacy Policy",
+                chat_title: "AI Concierge",
+                chat_greeting: "Good day. How may I assist you? You can ask a question or press the microphone for voice service.",
+                chat_placeholder: "Inquire here...",
+                chat_toggle: "AI Voice Concierge",
+            }
+        };
+
+        // --- Language Switcher Logic ---
+        function switchLanguage(lang) {
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+
+            document.querySelectorAll('[data-lang-key]').forEach(el => {
+                const key = el.getAttribute('data-lang-key');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+            
+            document.querySelectorAll('.lang-btn, .lang-btn-mob').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        document.querySelectorAll('.lang-btn, .lang-btn-mob').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                switchLanguage(e.target.getAttribute('data-lang'));
+            });
+        });
+
+        // --- Animation on Scroll ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
+        });
+
+        // --- Mobile Menu Toggle ---
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // --- Chatbot UI Logic ---
+        const chatToggle = document.getElementById('chat-toggle');
+        const chatWindow = document.getElementById('chat-window');
+        const closeChatButton = document.getElementById('close-chat-button');
+        const chatInput = document.getElementById('chat-input');
+        const sendChatButton = document.getElementById('send-chat-button');
+        const voiceChatButton = document.getElementById('voice-chat-button');
+        const chatMessages = document.getElementById('chat-messages');
+
+        chatToggle.addEventListener('click', () => { chatWindow.classList.remove('hidden'); chatToggle.classList.add('hidden'); });
+        closeChatButton.addEventListener('click', () => { chatWindow.classList.add('hidden'); chatToggle.classList.remove('hidden'); });
+
+        function addChatMessage(message, sender = 'bot') {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('mb-3', 'text-sm');
+            const contentDiv = document.createElement('div');
+            contentDiv.textContent = message;
+            contentDiv.classList.add('p-3', 'rounded-lg', 'inline-block', 'max-w-xs');
+            if (sender === 'user') {
+                messageDiv.classList.add('text-right');
+                contentDiv.classList.add('bg-accent-gold', 'text-white');
+            } else {
+                contentDiv.classList.add('bg-gray-200', 'text-text-dark');
+            }
+            messageDiv.appendChild(contentDiv);
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // --- Dynamic Journal/Blog Post Fetching ---
+        async function fetchPosts() {
+            const grid = document.getElementById('journal-grid');
+            try {
+                // --- SIMULATED DATA (REMOVE FOR PRODUCTION) ---
+                const posts = [
+                    { id: 1, category: { en: "Skin Health", de: "Hautgesundheit", fa: "سلامت پوست" }, title: { en: "The Science of Winter Skin: Protecting from the Cold", de: "Die Wissenschaft der Winterhaut: Schutz vor Kälte", fa: "علم پوست زمستانی: محافظت در برابر سرما" }, snippet: { en: "As temperatures drop, our skin's physiology changes. Discover the science-backed strategies to protect the skin barrier and lock in moisture.", de: "Wenn die Temperaturen sinken, verändert sich die Physiologie unserer Haut. Entdecken Sie die wissenschaftlich fundierten Strategien, um die Hautbarriere zu schützen und Feuchtigkeit zu bewahren.", fa: "با کاهش دما، فیزیولوژی پوست ما تغییر می‌کند. استراتژی‌های علمی برای محافظت از سد پوستی و حفظ رطوبت را کشف کنید." }, imageUrl: "https://images.unsplash.com/photo-1613231422037-2e4045a25b1b?auto=format&fit=crop&w=600&q=80" },
+                    { id: 2, category: { en: "Ingredient Spotlight", de: "Inhaltsstoffe im Fokus", fa: "مواد تشکیل دهنده در کانون توجه" }, title: { en: "Decoding Peptides: The Building Blocks of Youth", de: "Peptide entschlüsseln: Die Bausteine der Jugend", fa: "رمزگشایی پپتیدها: بلوک‌های سازنده جوانی" }, snippet: { en: "Peptides are more than a trend. We dive deep into cellular signaling and explain how these potent molecules stimulate collagen production for visibly firmer skin.", de: "Peptide sind mehr als nur ein Trend. Wir tauchen tief in die zelluläre Signalisierung ein und erklären, wie diese potenten Moleküle die Kollagenproduktion für eine sichtbar straffere Haut anregen.", fa: "پپتیدها فراتر از یک روند هستند. ما عمیقاً به سیگنال‌دهی سلولی می‌پردازیم و توضیح می‌دهیم که چگونه این مولکول‌های قوی تولید کلاژن را برای پوستی به وضوح سفت‌تر تحریک می‌کنند." }, imageUrl: "https://images.unsplash.com/photo-1620916566398-39f1686d7070?auto=format&fit=crop&w=600&q=80" },
+                    { id: 3, category: { en: "Lifestyle & Skin", de: "Lifestyle & Haut", fa: "سبک زندگی و پوست" }, title: { en: "Why Your CEO Needs a Skincare Protocol", de: "Warum Ihr CEO ein Hautpflegeprotokoll benötigt", fa: "چرا مدیرعامل شما به یک پروتکل مراقبت از پوست نیاز دارد" }, snippet: { en: "Stress, travel, and long hours take their toll. A strategic skincare protocol is not a luxury, but an essential tool for peak performance and boardroom presence.", de: "Stress, Reisen und lange Arbeitszeiten fordern ihren Tribut. Ein strategisches Hautpflegeprotokoll ist kein Luxus, sondern ein wesentliches Instrument für Spitzenleistungen und Präsenz im Vorstandszimmer.", fa: "استرس، سفر و ساعات کاری طولانی عوارض خود را دارند. یک پروتکل استراتژیک مراقبت از پوست یک تجمل نیست، بلکه ابزاری ضروری برای عملکرد عالی و حضور در اتاق هیئت مدیره است." }, imageUrl: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80" }
+                ];
+                // --- END SIMULATION ---
+
+                grid.innerHTML = ''; // Clear loader
+                posts.forEach((post, index) => {
+                    const postEl = document.createElement('div');
+                    postEl.className = 'bg-white rounded-lg overflow-hidden shadow-sm transition duration-500 card-hover fade-in-up';
+                    postEl.style.transitionDelay = `${index * 100}ms`;
+                    postEl.innerHTML = `
+                        <img src="${post.imageUrl}" onerror="this.onerror=null;this.src='https://placehold.co/600x400/ccc/333?text=Journal';" alt="${post.title.en}" class="w-full h-48 object-cover">
+                        <div class="p-8">
+                            <p class="text-xs text-accent-gold tracking-widest uppercase" data-lang-key="post_cat_${post.id}">${post.category.de}</p>
+                            <h3 class="text-xl font-serif my-2" data-lang-key="post_title_${post.id}">${post.title.de}</h3>
+                            <p class="text-text-light text-sm mb-4" data-lang-key="post_snippet_${post.id}">${post.snippet.de}</p>
+                            <a href="#" class="font-bold text-sm tracking-widest uppercase text-text-dark hover:text-accent-gold transition" data-lang-key="post_readmore_${post.id}">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                        </div>
+                    `;
+                    grid.appendChild(postEl);
+                    
+                    // Add translations for this dynamic content
+                    translations.en[`post_cat_${post.id}`] = post.category.en; translations.de[`post_cat_${post.id}`] = post.category.de; translations.fa[`post_cat_${post.id}`] = post.category.fa;
+                    translations.en[`post_title_${post.id}`] = post.title.en; translations.de[`post_title_${post.id}`] = post.title.de; translations.fa[`post_title_${post.id}`] = post.title.fa;
+                    translations.en[`post_snippet_${post.id}`] = post.snippet.en; translations.de[`post_snippet_${post.id}`] = post.snippet.de; translations.fa[`post_snippet_${post.id}`] = post.snippet.fa;
+                    translations.en[`post_readmore_${post.id}`] = "Read More"; translations.de[`post_readmore_${post.id}`] = "Weiterlesen"; translations.fa[`post_readmore_${post.id}`] = "بیشتر بخوانید";
+                });
+                
+                 switchLanguage('de');
+
+            } catch (error) {
+                console.error("Failed to fetch posts:", error);
+                grid.innerHTML = '<p class="text-center col-span-full text-text-light">The Journal is currently unavailable.</p>';
+            }
+        }
+
+        // --- Voice Attendant Application Logic ---
+        const voiceAttendantModal = document.getElementById('voice-attendant-modal');
+        let recognition; // Make recognition instance globally accessible within this scope
+        
+        function launchVoiceAttendant() {
+            voiceAttendantModal.classList.add('active');
+            voiceAttendantModal.innerHTML = `
+                <div class="w-full max-w-md h-[90vh] flex flex-col bg-white rounded-2xl shadow-2xl relative">
+                    <button id="close-voice-modal" class="absolute top-4 right-4 text-2xl text-gray-400 hover:text-gray-600 z-10">&times;</button>
+                    <div class="bg-[#B4A284] text-white p-4 rounded-t-2xl text-center">
+                        <h1 class="text-xl font-bold font-serif">Live Booking Assistance</h1>
+                    </div>
+                    <div id="voice-transcript" class="flex-1 p-4 overflow-y-auto bg-[#FDFBF6] space-y-4">
+                        <!-- Transcript will be added here -->
+                    </div>
+                    <div id="voice-status" class="p-4 bg-white border-t border-gray-200 text-center text-lg font-bold text-[#B4A284]">
+                        Connecting...
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('close-voice-modal').addEventListener('click', () => {
+                if(recognition) recognition.stop(); // Stop listening if active
+                voiceAttendantModal.classList.remove('active');
+            });
+
+            startVoiceConversation();
+        }
+
+        let voiceTranscript = [];
+        
+        function updateVoiceTranscript() {
+            const transcriptContainer = document.getElementById('voice-transcript');
+            if (!transcriptContainer) return;
+            transcriptContainer.innerHTML = '';
+            voiceTranscript.forEach(item => {
+                const messageEl = document.createElement('div');
+                messageEl.className = `flex items-start gap-3 ${item.speaker === 'user' ? 'flex-row-reverse' : ''}`;
+                messageEl.innerHTML = `
+                    <div class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center ${item.speaker === 'user' ? 'bg-gray-600' : 'bg-[#B4A284]'}">
+                        <i class="fas ${item.speaker === 'user' ? 'fa-user' : 'fa-headset'} text-white text-sm"></i>
+                    </div>
+                    <div class="p-3 rounded-lg max-w-xs text-sm ${item.speaker === 'user' ? 'bg-gray-200 text-text-dark' : 'bg-[#e9e4dd]'}">
+                        ${item.text}
+                    </div>
+                `;
+                transcriptContainer.appendChild(messageEl);
+            });
+            transcriptContainer.scrollTop = transcriptContainer.scrollHeight;
+        }
+        
+        function setVoiceStatus(status) {
+            const statusContainer = document.getElementById('voice-status');
+            if(statusContainer) statusContainer.innerHTML = `<div class="animate-pulse">${status}</div>`;
+        }
+
+        async function startVoiceConversation() {
+            voiceTranscript = [{ speaker: 'bot', text: "Good day, this is Mobi, your booking attendant. How may I assist you today?" }];
+            updateVoiceTranscript();
+            setVoiceStatus('Speaking...');
+            
+            await new Promise(resolve => setTimeout(resolve, 2500));
+            listenForVoiceCommand();
+        }
+
+        function listenForVoiceCommand() {
+            setVoiceStatus('Listening...');
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                voiceTranscript.push({ speaker: 'bot', text: "Pardon, voice recognition is not supported on your browser." });
+                updateVoiceTranscript();
+                setVoiceStatus('Call Ended');
+                return;
+            }
+            recognition = new SpeechRecognition();
+            recognition.lang = document.documentElement.lang === 'fa' ? 'fa-IR' : (document.documentElement.lang === 'de' ? 'de-DE' : 'en-US');
+            recognition.onresult = (event) => {
+                const userText = event.results[0][0].transcript;
+                voiceTranscript.push({ speaker: 'user', text: userText });
+                updateVoiceTranscript();
+                processVoiceCommand(userText);
+            };
+            recognition.onerror = () => {
+                voiceTranscript.push({ speaker: 'bot', text: 'My apologies, I could not understand. Please try again.' });
+                updateVoiceTranscript();
+                setTimeout(listenForVoiceCommand, 2000);
+            };
+            recognition.start();
+        }
+
+        async function processVoiceCommand(userText) {
+            setVoiceStatus('Processing...');
+            try {
+                const n8nWebhookUrl = 'YOUR_N8N_WEBHOOK_URL_HERE'; 
+                
+                const response = await fetch(n8nWebhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query: userText })
+                });
+
+                if (!response.ok) throw new Error('n8n webhook failed');
+
+                const data = await response.json();
+                const { botReplyText, botAudioUrl } = data;
+
+                voiceTranscript.push({ speaker: 'bot', text: botReplyText });
+                updateVoiceTranscript();
+                setVoiceStatus('Speaking...');
+
+                const audio = new Audio(botAudioUrl);
+                audio.play();
+                audio.onended = () => {
+                    listenForVoiceCommand();
+                };
+
+            } catch (error) {
+                console.error("Error processing voice command:", error);
+                voiceTranscript.push({ speaker: 'bot', text: 'Pardon, a technical issue has occurred. The call will now end.' });
+                updateVoiceTranscript();
+                setVoiceStatus('Call Ended');
+            }
+        }
+
+        document.getElementById('ai-booking-call-btn').addEventListener('click', launchVoiceAttendant);
+        
+        // --- FIXED: Text Chatbot Logic ---
+        async function sendTextMessage(messageText) {
+            if (!messageText.trim()) return;
+            addChatMessage(messageText, 'user');
+            chatInput.value = '';
+            
+            const typingIndicator = document.createElement('div');
+            typingIndicator.id = 'typing-indicator';
+            typingIndicator.innerHTML = `<div class="bg-gray-200 text-text-dark p-3 rounded-lg inline-block max-w-xs text-sm">...</div>`;
+            chatMessages.appendChild(typingIndicator);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            try {
+                const n8nWebhookUrl = 'YOUR_N8N_WEBHOOK_URL_HERE'; // This can be the same or a different webhook
+                const response = await fetch(n8nWebhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query: messageText, isText: true }) // Differentiate text from voice
+                });
+                if (!response.ok) throw new Error('n8n webhook failed');
+                const data = await response.json();
+                
+                document.getElementById('typing-indicator')?.remove();
+                addChatMessage(data.botReplyText, 'bot');
+
+            } catch (error) {
+                console.error('Error with text chatbot:', error);
+                document.getElementById('typing-indicator')?.remove();
+                addChatMessage('Pardon, a technical issue has occurred.', 'bot');
+            }
+        }
+        
+        sendChatButton.addEventListener('click', () => sendTextMessage(chatInput.value));
+        chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendTextMessage(chatInput.value); });
+        voiceChatButton.addEventListener('click', () => {
+            // This button can launch the main voice attendant or just do speech-to-text for the chat
+            listenForTextChat();
+        });
+
+        function listenForTextChat() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                addChatMessage('Pardon, voice service is not supported on your browser.');
+                return;
+            }
+            const recognition = new SpeechRecognition();
+            recognition.lang = document.documentElement.lang === 'fa' ? 'fa-IR' : (document.documentElement.lang === 'de' ? 'de-DE' : 'en-US');
+            recognition.onresult = (event) => {
+                chatInput.value = event.results[0][0].transcript;
+                sendTextMessage(chatInput.value);
+            };
+            recognition.start();
+        }
+
+        // Initial calls on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchPosts();
+        });
+
+    </script>
+</body>
+</html>
