@@ -678,10 +678,71 @@
                 grid.innerHTML = '<p class="text-center col-span-full text-text-light">The Journal is currently unavailable.</p>';
             }
         }
+        
+        // --- FIXED: Text Chatbot Logic ---
+        async function sendTextMessage(messageText, isVoice = false) {
+            if (!messageText.trim()) return;
+            addChatMessage(messageText, 'user');
+            chatInput.value = '';
+            
+            const typingIndicator = document.createElement('div');
+            typingIndicator.id = 'typing-indicator';
+            typingIndicator.innerHTML = `<div class="bg-gray-200 text-text-dark p-3 rounded-lg inline-block max-w-xs text-sm">...</div>`;
+            chatMessages.appendChild(typingIndicator);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            try {
+                // ===================================================================
+                // FINAL INTEGRATION POINT: Replace this URL with your n8n Webhook URL
+                // ===================================================================
+                const n8nWebhookUrl = 'http://localhost:5678/webhook-test/ai-voice-attendant'; 
+                
+                const response = await fetch(n8nWebhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query: messageText })
+                });
+
+                if (!response.ok) throw new Error('n8n webhook failed');
+
+                const data = await response.json();
+                const { botReplyText, botAudioUrl } = data;
+                
+                document.getElementById('typing-indicator')?.remove();
+                addChatMessage(botReplyText, 'bot');
+
+                if (isVoice && botAudioUrl) {
+                    const audio = new Audio(botAudioUrl);
+                    audio.play();
+                }
+
+            } catch (error) {
+                console.error('Error with chatbot:', error);
+                document.getElementById('typing-indicator')?.remove();
+                addChatMessage('Pardon, a technical issue has occurred.', 'bot');
+            }
+        }
+
+        sendChatButton.addEventListener('click', () => sendTextMessage(chatInput.value, false));
+        chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendTextMessage(chatInput.value, false); });
+        voiceChatButton.addEventListener('click', () => {
+             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                addChatMessage('Pardon, voice service is not supported on your browser.');
+                return;
+            }
+            const recognition = new SpeechRecognition();
+            recognition.lang = document.documentElement.lang === 'fa' ? 'fa-IR' : (document.documentElement.lang === 'de' ? 'de-DE' : 'en-US');
+            recognition.onresult = (event) => {
+                sendTextMessage(event.results[0][0].transcript, true);
+            };
+            recognition.start();
+        });
+
 
         // --- Voice Attendant Application Logic ---
         const voiceAttendantModal = document.getElementById('voice-attendant-modal');
-        let recognition; // Make recognition instance globally accessible within this scope
+        let recognition; // Make recognition instance globally accessible
         
         function launchVoiceAttendant() {
             voiceAttendantModal.classList.add('active');
@@ -772,7 +833,7 @@
         async function processVoiceCommand(userText) {
             setVoiceStatus('Processing...');
             try {
-                const n8nWebhookUrl = 'YOUR_N8N_WEBHOOK_URL_HERE'; 
+                const n8nWebhookUrl = 'http://localhost:5678/webhook-test/ai-voice-attendant'; 
                 
                 const response = await fetch(n8nWebhookUrl, {
                     method: 'POST',
@@ -805,60 +866,6 @@
 
         document.getElementById('ai-booking-call-btn').addEventListener('click', launchVoiceAttendant);
         
-        // --- FIXED: Text Chatbot Logic ---
-        async function sendTextMessage(messageText) {
-            if (!messageText.trim()) return;
-            addChatMessage(messageText, 'user');
-            chatInput.value = '';
-            
-            const typingIndicator = document.createElement('div');
-            typingIndicator.id = 'typing-indicator';
-            typingIndicator.innerHTML = `<div class="bg-gray-200 text-text-dark p-3 rounded-lg inline-block max-w-xs text-sm">...</div>`;
-            chatMessages.appendChild(typingIndicator);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-
-            try {
-                const n8nWebhookUrl = 'YOUR_N8N_WEBHOOK_URL_HERE'; // This can be the same or a different webhook
-                const response = await fetch(n8nWebhookUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ query: messageText, isText: true }) // Differentiate text from voice
-                });
-                if (!response.ok) throw new Error('n8n webhook failed');
-                const data = await response.json();
-                
-                document.getElementById('typing-indicator')?.remove();
-                addChatMessage(data.botReplyText, 'bot');
-
-            } catch (error) {
-                console.error('Error with text chatbot:', error);
-                document.getElementById('typing-indicator')?.remove();
-                addChatMessage('Pardon, a technical issue has occurred.', 'bot');
-            }
-        }
-        
-        sendChatButton.addEventListener('click', () => sendTextMessage(chatInput.value));
-        chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendTextMessage(chatInput.value); });
-        voiceChatButton.addEventListener('click', () => {
-            // This button can launch the main voice attendant or just do speech-to-text for the chat
-            listenForTextChat();
-        });
-
-        function listenForTextChat() {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (!SpeechRecognition) {
-                addChatMessage('Pardon, voice service is not supported on your browser.');
-                return;
-            }
-            const recognition = new SpeechRecognition();
-            recognition.lang = document.documentElement.lang === 'fa' ? 'fa-IR' : (document.documentElement.lang === 'de' ? 'de-DE' : 'en-US');
-            recognition.onresult = (event) => {
-                chatInput.value = event.results[0][0].transcript;
-                sendTextMessage(chatInput.value);
-            };
-            recognition.start();
-        }
-
         // Initial calls on page load
         document.addEventListener('DOMContentLoaded', () => {
             fetchPosts();
