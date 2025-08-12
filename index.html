@@ -124,28 +124,6 @@
         #ai-planner-result li { padding: 0.75rem 0; border-bottom: 1px solid #f0ebe5; }
         #ai-planner-result li strong { color: var(--text-dark); }
         
-        /* Voice Attendant Modal Styles */
-        #voice-attendant-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
-            z-index: 2000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        #voice-attendant-modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
         /* Spinner for loading state */
         .loader { border: 4px solid #f3f3f3; border-top: 4px solid var(--accent-gold); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 20px auto; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
@@ -363,15 +341,6 @@
                                 <p class="flex items-center"><i class="fas fa-phone-alt mr-4 text-accent-gold"></i><a href="tel:+4921198399349" class="hover:text-accent-gold">+49 211 98399349</a></p>
                                 <p class="flex items-start"><i class="fas fa-clock mt-1 mr-4 text-accent-gold"></i><span data-lang-key="visit_hours"><strong>Hours of Operation</strong><br>By Appointment Only</span></p>
                             </div>
-                            <!-- AI Booking Call Button -->
-                            <div class="mt-8 pt-6 border-t border-gray-200">
-                                <h4 class="text-lg font-serif mb-3" data-lang-key="booking_call_title">Immediate Assistance</h4>
-                                <p class="text-sm text-text-light mb-4" data-lang-key="booking_call_desc">For appointment scheduling, please use our dedicated AI voice attendant.</p>
-                                <button id="ai-booking-call-btn" class="w-full btn-primary px-6 py-3 rounded-full font-semibold tracking-widest uppercase text-sm flex items-center justify-center">
-                                    <i class="fas fa-phone-volume mr-2"></i>
-                                    <span data-lang-key="booking_call_btn">Initiate AI Booking Call</span>
-                                </button>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -409,11 +378,6 @@
         </button>
     </div>
     
-    <!-- AI Voice Attendant Modal -->
-    <div id="voice-attendant-modal">
-        <!-- The Voice Attendant UI will be injected here by JavaScript -->
-    </div>
-
     <script>
         // --- Translations Object ---
         const translations = {
@@ -760,8 +724,8 @@
             }
         }
         
-        // --- FIXED: Text Chatbot Logic ---
-        async function sendTextMessage(messageText, isVoice = false) {
+        // --- Text Chatbot Logic ---
+        async function sendTextMessage(messageText) {
             if (!messageText.trim()) return;
             addChatMessage(messageText, 'user');
             chatInput.value = '';
@@ -773,26 +737,28 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
             try {
-                const n8nWebhookUrl = 'https://47bfee6d25a7.ngrok-free.app/webhook/81c4ade4-d6df-46f1-829d-b59c479d2f70';
+                const apiKey = "AIzaSyDOVNfAa2z4SriftxlkZyf7EjQQJ0Q3pTE";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
                 
-                const response = await fetch(n8nWebhookUrl, {
+                const prompt = `You are an elite, discreet, and helpful digital concierge for 'Mobina Kosmetik', a high-end beauty sanctuary in Düsseldorf. Your name is 'Mobi'. Be concise, professional, and elegant. Answer the user's question: "${messageText}". Our signature protocols are The Düsseldorf Matrix™, Collagen Induction Therapy, and The Pre-Event Infusion. We are located at Steinstraße 35, 40210 Düsseldorf, and operate by appointment only.`;
+                
+                const payload = {
+                    contents: [{ role: "user", parts: [{ text: prompt }] }]
+                };
+
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ query: messageText })
+                    body: JSON.stringify(payload)
                 });
 
-                if (!response.ok) throw new Error('n8n webhook failed');
+                if (!response.ok) throw new Error('API request failed');
 
-                const data = await response.json();
-                const { botReplyText, botAudioUrl } = data;
+                const result = await response.json();
+                const botReplyText = result.candidates[0].content.parts[0].text;
                 
                 document.getElementById('typing-indicator')?.remove();
                 addChatMessage(botReplyText, 'bot');
-
-                if (isVoice && botAudioUrl) {
-                    const audio = new Audio(botAudioUrl);
-                    audio.play();
-                }
 
             } catch (error) {
                 console.error('Error with chatbot:', error);
@@ -801,8 +767,8 @@
             }
         }
         
-        sendChatButton.addEventListener('click', () => sendTextMessage(chatInput.value, false));
-        chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendTextMessage(chatInput.value, false); });
+        sendChatButton.addEventListener('click', () => sendTextMessage(chatInput.value));
+        chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendTextMessage(chatInput.value); });
         voiceChatButton.addEventListener('click', () => {
              const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             if (!SpeechRecognition) {
@@ -812,138 +778,10 @@
             const recognition = new SpeechRecognition();
             recognition.lang = document.documentElement.lang === 'fa' ? 'fa-IR' : (document.documentElement.lang === 'de' ? 'de-DE' : 'en-US');
             recognition.onresult = (event) => {
-                sendTextMessage(event.results[0][0].transcript, true);
+                sendTextMessage(event.results[0][0].transcript);
             };
             recognition.start();
         });
-
-
-        // --- Voice Attendant Application Logic ---
-        const voiceAttendantModal = document.getElementById('voice-attendant-modal');
-        let recognition; // Make recognition instance globally accessible
-        
-        function launchVoiceAttendant() {
-            voiceAttendantModal.classList.add('active');
-            voiceAttendantModal.innerHTML = `
-                <div class="w-full max-w-md h-[90vh] flex flex-col bg-white rounded-2xl shadow-2xl relative">
-                    <button id="close-voice-modal" class="absolute top-4 right-4 text-2xl text-gray-400 hover:text-gray-600 z-10">&times;</button>
-                    <div class="bg-[#B4A284] text-white p-4 rounded-t-2xl text-center">
-                        <h1 class="text-xl font-bold font-serif">Live Booking Assistance</h1>
-                    </div>
-                    <div id="voice-transcript" class="flex-1 p-4 overflow-y-auto bg-[#FDFBF6] space-y-4">
-                        <!-- Transcript will be added here -->
-                    </div>
-                    <div id="voice-status" class="p-4 bg-white border-t border-gray-200 text-center text-lg font-bold text-[#B4A284]">
-                        Connecting...
-                    </div>
-                </div>
-            `;
-
-            document.getElementById('close-voice-modal').addEventListener('click', () => {
-                if(recognition) recognition.stop(); // Stop listening if active
-                voiceAttendantModal.classList.remove('active');
-            });
-
-            startVoiceConversation();
-        }
-
-        let voiceTranscript = [];
-        
-        function updateVoiceTranscript() {
-            const transcriptContainer = document.getElementById('voice-transcript');
-            if (!transcriptContainer) return;
-            transcriptContainer.innerHTML = '';
-            voiceTranscript.forEach(item => {
-                const messageEl = document.createElement('div');
-                messageEl.className = `flex items-start gap-3 ${item.speaker === 'user' ? 'flex-row-reverse' : ''}`;
-                messageEl.innerHTML = `
-                    <div class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center ${item.speaker === 'user' ? 'bg-gray-600' : 'bg-[#B4A284]'}">
-                        <i class="fas ${item.speaker === 'user' ? 'fa-user' : 'fa-headset'} text-white text-sm"></i>
-                    </div>
-                    <div class="p-3 rounded-lg max-w-xs text-sm ${item.speaker === 'user' ? 'bg-gray-200 text-text-dark' : 'bg-[#e9e4dd]'}">
-                        ${item.text}
-                    </div>
-                `;
-                transcriptContainer.appendChild(messageEl);
-            });
-            transcriptContainer.scrollTop = transcriptContainer.scrollHeight;
-        }
-        
-        function setVoiceStatus(status) {
-            const statusContainer = document.getElementById('voice-status');
-            if(statusContainer) statusContainer.innerHTML = `<div class="animate-pulse">${status}</div>`;
-        }
-
-        async function startVoiceConversation() {
-            voiceTranscript = [{ speaker: 'bot', text: "Good day, this is Mobi, your booking attendant. How may I assist you today?" }];
-            updateVoiceTranscript();
-            setVoiceStatus('Speaking...');
-            
-            await new Promise(resolve => setTimeout(resolve, 2500));
-            listenForVoiceCommand();
-        }
-
-        function listenForVoiceCommand() {
-            setVoiceStatus('Listening...');
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (!SpeechRecognition) {
-                voiceTranscript.push({ speaker: 'bot', text: "Pardon, voice recognition is not supported on your browser." });
-                updateVoiceTranscript();
-                setVoiceStatus('Call Ended');
-                return;
-            }
-            recognition = new SpeechRecognition();
-            recognition.lang = document.documentElement.lang === 'fa' ? 'fa-IR' : (document.documentElement.lang === 'de' ? 'de-DE' : 'en-US');
-            recognition.onresult = (event) => {
-                const userText = event.results[0][0].transcript;
-                voiceTranscript.push({ speaker: 'user', text: userText });
-                updateVoiceTranscript();
-                processVoiceCommand(userText);
-            };
-            recognition.onerror = () => {
-                voiceTranscript.push({ speaker: 'bot', text: 'My apologies, I could not understand. Please try again.' });
-                updateVoiceTranscript();
-                setTimeout(listenForVoiceCommand, 2000);
-            };
-            recognition.start();
-        }
-
-        async function processVoiceCommand(userText) {
-            setVoiceStatus('Processing...');
-            try {
-                const n8nWebhookUrl = 'https://47bfee6d25a7.ngrok-free.app/webhook/81c4ade4-d6df-46f1-829d-b59c479d2f70'; 
-                
-                const response = await fetch(n8nWebhookUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ query: userText })
-                });
-
-                if (!response.ok) throw new Error('n8n webhook failed');
-
-                const data = await response.json();
-                const { botReplyText, botAudioUrl } = data;
-
-                voiceTranscript.push({ speaker: 'bot', text: botReplyText });
-                updateVoiceTranscript();
-                setVoiceStatus('Speaking...');
-
-                // Play the audio from ElevenLabs
-                const audio = new Audio(botAudioUrl);
-                audio.play();
-                audio.onended = () => {
-                    listenForVoiceCommand();
-                };
-
-            } catch (error) {
-                console.error("Error processing voice command:", error);
-                voiceTranscript.push({ speaker: 'bot', text: 'Pardon, a technical issue has occurred. The call will now end.' });
-                updateVoiceTranscript();
-                setVoiceStatus('Call Ended');
-            }
-        }
-
-        document.getElementById('ai-booking-call-btn').addEventListener('click', launchVoiceAttendant);
         
         // --- AI Skincare Plan Generator Logic ---
         const generatePlanButton = document.getElementById('generate-plan-button');
