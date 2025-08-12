@@ -119,6 +119,11 @@
         #chat-toggle { background-color: var(--accent-gold); }
         #chat-header { background-color: var(--accent-gold); }
         
+        /* AI Planner Styles */
+        #ai-planner-result h4 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-dark); }
+        #ai-planner-result li { padding: 0.75rem 0; border-bottom: 1px solid #f0ebe5; }
+        #ai-planner-result li strong { color: var(--text-dark); }
+        
         /* Voice Attendant Modal Styles */
         #voice-attendant-modal {
             position: fixed;
@@ -176,6 +181,7 @@
             <a href="#" class="text-3xl font-serif tracking-wider">Mobina</a>
             <div class="hidden md:flex flex-grow justify-center items-center space-x-10 text-sm tracking-widest uppercase">
                 <a href="#services" class="text-text-light hover:text-accent-gold transition duration-300" data-lang-key="nav_protocols">Signature Protocols</a>
+                <a href="#ai-planner" class="text-text-light hover:text-accent-gold transition duration-300" data-lang-key="nav_planner">AI Ritual</a>
                 <a href="#philosophy" class="text-text-light hover:text-accent-gold transition duration-300" data-lang-key="nav_philosophy">Our Philosophy</a>
                 <a href="#journal" class="text-text-light hover:text-accent-gold transition duration-300" data-lang-key="nav_journal">Journal</a>
                 <a href="#testimonials" class="text-text-light hover:text-accent-gold transition duration-300" data-lang-key="nav_acclaim">Client Acclaim</a>
@@ -195,6 +201,7 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
              <a href="#services" class="block py-2" data-lang-key="nav_protocols_mob">Signature Protocols</a>
+             <a href="#ai-planner" class="block py-2" data-lang-key="nav_planner_mob">AI Ritual</a>
              <a href="#philosophy" class="block py-2" data-lang-key="nav_philosophy_mob">Our Philosophy</a>
              <a href="#journal" class="block py-2" data-lang-key="nav_journal_mob">Journal</a>
              <a href="#testimonials" class="block py-2" data-lang-key="nav_acclaim_mob">Client Acclaim</a>
@@ -251,6 +258,26 @@
                         <img src="https://images.unsplash.com/photo-1617897298305-6a3c8a9f4e4a?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/ccc/333?text=Service';" alt="HydraFacial" class="w-full h-48 object-cover">
                         <div class="p-8"><h3 class="text-2xl font-serif mb-2" data-lang-key="protocol3_title">The Pre-Event Infusion</h3><p class="text-text-light text-sm" data-lang-key="protocol3_desc">Our answer to tired, travel-weary skin. A multi-stage hydro-dermabrasion that clears congestion and then bathes the fresh skin in a bespoke cocktail of antioxidants and hyaluronic acid. Ideal for achieving a flawless canvas before a major event or board meeting.</p></div>
                     </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- AI Skincare Plan Generator -->
+        <section id="ai-planner" class="py-24 bg-white parallax-section" style="background-image: url('https://images.unsplash.com/photo-1552694477-2a23ddA1d303?auto=format&fit=crop&w=1920&q=80');">
+            <div class="overlay bg-white/80"></div>
+            <div class="parallax-content container mx-auto px-6">
+                <div class="text-center mb-16 fade-in-up">
+                    <h2 class="section-title" data-lang-key="planner_title">Your AI Skincare Concierge</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-text-light" data-lang-key="planner_subtitle">Receive a complimentary, AI-generated daily ritual, designed as a prelude to your in-salon experience.</p>
+                </div>
+                <div class="max-w-4xl mx-auto bg-bg-main/90 rounded-lg p-8 md:p-12 fade-in-up shadow-xl">
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div><label for="skin-type" class="block text-sm font-medium text-text-light" data-lang-key="planner_skin_type">1. Skin Type</label><select id="skin-type" class="mt-1 block w-full p-3 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-accent-gold focus:border-accent-gold"><option data-lang-key="skin_type_combo">Combination</option><option data-lang-key="skin_type_dry">Dry</option><option data-lang-key="skin_type_oily">Oily</option><option data-lang-key="skin_type_normal">Normal</option><option data-lang-key="skin_type_sensitive">Sensitive</option></select></div>
+                        <div><label for="skin-concern" class="block text-sm font-medium text-text-light" data-lang-key="planner_concern">2. Primary Concern</label><select id="skin-concern" class="mt-1 block w-full p-3 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-accent-gold focus:border-accent-gold"><option data-lang-key="concern_acne">Acne & Blemishes</option><option data-lang-key="concern_aging">Fine Lines & Wrinkles</option><option data-lang-key="concern_pigment">Pigmentation</option><option data-lang-key="concern_redness">Redness</option><option data-lang-key="concern_dullness">Dullness</option></select></div>
+                        <div><label for="age-group" class="block text-sm font-medium text-text-light" data-lang-key="planner_age">3. Age Group</label><select id="age-group" class="mt-1 block w-full p-3 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-accent-gold focus:border-accent-gold"><option>Under 25</option><option>25-34</option><option>35-44</option><option>45-54</option><option>55+</option></select></div>
+                    </div>
+                    <div class="text-center"><button id="generate-plan-button" class="w-full md:w-auto btn-primary px-10 py-3 rounded-full font-semibold tracking-widest uppercase text-sm" data-lang-key="planner_button">Generate My Ritual</button></div>
+                    <div id="ai-planner-result" class="mt-10 pt-8 border-t border-gray-200"></div>
                 </div>
             </div>
         </section>
@@ -392,12 +419,14 @@
         const translations = {
             de: {
                 nav_protocols: "Signature Protocols",
+                nav_planner: "AI Ritual",
                 nav_philosophy: "Unsere Philosophie",
                 nav_journal: "Journal",
                 nav_acclaim: "Kundenstimmen",
                 nav_contact: "Kontakt",
                 nav_book: "Buchen",
                 nav_protocols_mob: "Signature Protocols",
+                nav_planner_mob: "AI Ritual",
                 nav_philosophy_mob: "Unsere Philosophie",
                 nav_journal_mob: "Journal",
                 nav_acclaim_mob: "Kundenstimmen",
@@ -414,6 +443,22 @@
                 protocol2_desc: "Eine präzise gesteuerte Anwendung von Radiofrequenz und Microneedling. Wir erwecken das angeborene architektonische Gedächtnis der Haut wieder und signalisieren den Fibroblasten, das straffe, jugendliche Kollagen zu produzieren, das die Zeit gemindert hat. Das Ergebnis ist ein Lifting, das sowohl sichtbar als auch zutiefst natürlich ist.",
                 protocol3_title: "Die Pre-Event Infusion",
                 protocol3_desc: "Unsere Antwort auf müde, reisegestresste Haut. Eine mehrstufige Hydro-Dermabrasion, die Verstopfungen beseitigt und die frische Haut dann in einem maßgeschneiderten Cocktail aus Antioxidantien und Hyaluronsäure badet. Ideal, um vor einem wichtigen Ereignis oder Meeting eine makellose Leinwand zu schaffen.",
+                planner_title: "Ihr AI Hautpflege Concierge",
+                planner_subtitle: "Erhalten Sie ein kostenloses, KI-generiertes tägliches Ritual, das als Auftakt für Ihr Salonerlebnis konzipiert ist.",
+                planner_skin_type: "1. Hauttyp",
+                planner_concern: "2. Hauptanliegen",
+                planner_age: "3. Altersgruppe",
+                skin_type_combo: "Mischhaut",
+                skin_type_dry: "Trocken",
+                skin_type_oily: "Fettig",
+                skin_type_normal: "Normal",
+                skin_type_sensitive: "Empfindlich",
+                concern_acne: "Akne & Unreinheiten",
+                concern_aging: "Falten & Linien",
+                concern_pigment: "Pigmentierung",
+                concern_redness: "Rötungen",
+                concern_dullness: "Fahler Teint",
+                planner_button: "Mein Ritual erstellen",
                 philosophy_title: "Unsere Philosophie",
                 philosophy_desc: "Wir glauben an eine einzige Vision: Wahre Schönheit ist ein Spiegelbild der zellulären Gesundheit. Unser Ansatz handelt nicht von Trends, sondern von tiefem, physiologischem Verständnis. Wir umgehen den Hype und investieren nur in Technologien und Formulierungen mit nachgewiesener, von Experten überprüfter Wirksamkeit. Jede Behandlung ist ein sorgfältig ausgearbeiteter Dialog zwischen Wissenschaft und Haut, der nicht nur flüchtige Ergebnisse, sondern dauerhafte, lebendige Gesundheit liefern soll.",
                 philosophy_button: "Ihre Reise beginnen",
@@ -449,12 +494,14 @@
             },
             fa: {
                 nav_protocols: "پروتکل‌های ویژه",
+                nav_planner: "ریтуال هوش مصنوعی",
                 nav_philosophy: "فلسفه ما",
                 nav_journal: "ژورنال",
                 nav_acclaim: "تحسین مشتریان",
                 nav_contact: "تماس",
                 nav_book: "رزرو",
                 nav_protocols_mob: "پروتکل‌های ویژه",
+                nav_planner_mob: "ریтуال هوش مصنوعی",
                 nav_philosophy_mob: "فلسفه ما",
                 nav_journal_mob: "ژورنال",
                 nav_acclaim_mob: "تحسین مشتریان",
@@ -471,6 +518,22 @@
                 protocol2_desc: "کاربرد دقیق کنترل شده فرکانس رادیویی و میکرونیدلینگ. ما حافظه معماری ذاتی پوست را دوباره بیدار می‌کنیم و به فیبروبلاست‌ها سیگنال می‌دهیم تا کلاژن سفت و جوانی را که زمان کاهش داده است، تولید کنند. نتیجه یک لیفت است که هم قابل مشاهده و هم عمیقاً طبیعی است.",
                 protocol3_title: "اینفیوژن قبل از رویداد",
                 protocol3_desc: "پاسخ ما به پوست خسته و فرسوده از سفر. یک هیدرو-درم ابریژن چند مرحله‌ای که گرفتگی را برطرف می‌کند و سپس پوست تازه را در یک کوکتل سفارشی از آنتی‌اکسیدان‌ها و اسید هیالورونیک غرق می‌کند. ایده‌آل برای دستیابی به یک بوم بی‌عیب و نقص قبل از یک رویداد مهم یا جلسه هیئت مدیره.",
+                planner_title: "دستیار مراقبت از پوست هوش مصنوعی شما",
+                planner_subtitle: "یک ریтуال روزانه رایگان و تولید شده توسط هوش مصنوعی دریافت کنید که به عنوان مقدمه‌ای برای تجربه شما در سالن طراحی شده است.",
+                planner_skin_type: "۱. نوع پوست",
+                planner_concern: "۲. نگرانی اصلی",
+                planner_age: "۳. گروه سنی",
+                skin_type_combo: "مختلط",
+                skin_type_dry: "خشک",
+                skin_type_oily: "چرب",
+                skin_type_normal: "معمولی",
+                skin_type_sensitive: "حساس",
+                concern_acne: "آکنه و لک",
+                concern_aging: "خطوط ریز و چین و چروک",
+                concern_pigment: "لک",
+                concern_redness: "قرمزی",
+                concern_dullness: "کدری",
+                planner_button: "ریтуال من را ایجاد کن",
                 philosophy_title: "فلسفه ما",
                 philosophy_desc: "ما به یک دیدگاه واحد اعتقاد داریم: زیبایی واقعی بازتابی از سلامت سلولی است. رویکرد ما در مورد روندها نیست، بلکه در مورد درک عمیق و فیزیولوژیکی است. ما از هیاهو عبور می‌کنیم و فقط در فناوری‌ها و فرمولاسیون‌هایی با کارایی اثبات شده و مورد بررسی همتایان سرمایه‌گذاری می‌کنیم. هر درمان یک گفتگوی دقیق ساخته شده بین علم و پوست است که برای ارائه نتایج نه تنها گذرا، بلکه سلامت پایدار و پر جنب و جوش طراحی شده است.",
                 philosophy_button: "سفر خود را آغاز کنید",
@@ -506,12 +569,14 @@
             },
             en: {
                 nav_protocols: "Signature Protocols",
+                nav_planner: "AI Ritual",
                 nav_philosophy: "Our Philosophy",
                 nav_journal: "Journal",
                 nav_acclaim: "Client Acclaim",
                 nav_contact: "Contact",
                 nav_book: "Book Now",
                 nav_protocols_mob: "Signature Protocols",
+                nav_planner_mob: "AI Ritual",
                 nav_philosophy_mob: "Our Philosophy",
                 nav_journal_mob: "Journal",
                 nav_acclaim_mob: "Client Acclaim",
@@ -528,6 +593,22 @@
                 protocol2_desc: "A precisely controlled application of radiofrequency and microneedling. We re-awaken the skin's innate architectural memory, signaling fibroblasts to produce the firm, youthful collagen that time has diminished. The result is a lift that is both visible and profoundly natural.",
                 protocol3_title: "The Pre-Event Infusion",
                 protocol3_desc: "Our answer to tired, travel-weary skin. A multi-stage hydro-dermabrasion that clears congestion and then bathes the fresh skin in a bespoke cocktail of antioxidants and hyaluronic acid. Ideal for achieving a flawless canvas before a major event or board meeting.",
+                planner_title: "Your AI Skincare Concierge",
+                planner_subtitle: "Receive a complimentary, AI-generated daily ritual, designed as a prelude to your in-salon experience.",
+                planner_skin_type: "1. Skin Type",
+                planner_concern: "2. Primary Concern",
+                planner_age: "3. Age Group",
+                skin_type_combo: "Combination",
+                skin_type_dry: "Dry",
+                skin_type_oily: "Oily",
+                skin_type_normal: "Normal",
+                skin_type_sensitive: "Sensitive",
+                concern_acne: "Acne & Blemishes",
+                concern_aging: "Fine Lines & Wrinkles",
+                concern_pigment: "Pigmentation",
+                concern_redness: "Redness",
+                concern_dullness: "Dullness",
+                planner_button: "Generate My Ritual",
                 philosophy_title: "Our Philosophy",
                 philosophy_desc: "We believe in a singular vision: that true beauty is a reflection of cellular health. Our approach is not about trends, but about deep, physiological understanding. We bypass the hype, investing only in technologies and formulations with proven, peer-reviewed efficacy. Each treatment is a meticulously crafted dialogue between science and skin, designed to deliver not just fleeting results, but lasting, vibrant health.",
                 philosophy_button: "Begin Your Journey",
@@ -864,9 +945,103 @@
 
         document.getElementById('ai-booking-call-btn').addEventListener('click', launchVoiceAttendant);
         
+        // --- AI Skincare Plan Generator Logic ---
+        const generatePlanButton = document.getElementById('generate-plan-button');
+        const resultContainer = document.getElementById('ai-planner-result');
+
+        generatePlanButton.addEventListener('click', async () => {
+            const skinType = document.getElementById('skin-type').value;
+            const skinConcern = document.getElementById('skin-concern').value;
+            const ageGroup = document.getElementById('age-group').value;
+
+            resultContainer.innerHTML = '<div class="loader"></div>';
+
+            try {
+                const apiKey = "AIzaSyDOVNfAa2z4SriftxlkZyf7EjQQJ0Q3pTE";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
+                
+                const prompt = `You are a world-class esthetician at a high-end German beauty salon. A client has the following characteristics: Skin Type: ${skinType}, Primary Concern: ${skinConcern}, Age Group: ${ageGroup}. Create a personalized, step-by-step skincare routine. The routine should have two parts: 'Morgens' and 'Abends'. For each part, list the steps (e.g., Reinigung, Toner, Serum, Feuchtigkeitspflege, LSF). For each step, provide a brief, one-sentence explanation of why it's important for this client's specific needs. The tone should be professional, reassuring, and scientific.`;
+
+                const payload = {
+                    contents: [{ role: "user", parts: [{ text: prompt }] }],
+                    generationConfig: {
+                        responseMimeType: "application/json",
+                        responseSchema: {
+                            type: "OBJECT",
+                            properties: {
+                                "morgens": {
+                                    type: "ARRAY",
+                                    items: {
+                                        type: "OBJECT",
+                                        properties: {
+                                            "schritt": { "type": "STRING" },
+                                            "beschreibung": { "type": "STRING" }
+                                        },
+                                        required: ["schritt", "beschreibung"]
+                                    }
+                                },
+                                "abends": {
+                                    type: "ARRAY",
+                                    items: {
+                                        type: "OBJECT",
+                                        properties: {
+                                            "schritt": { "type": "STRING" },
+                                            "beschreibung": { "type": "STRING" }
+                                        },
+                                        required: ["schritt", "beschreibung"]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
+                
+                const result = await response.json();
+                const plan = JSON.parse(result.candidates[0].content.parts[0].text);
+                displayPlan(plan);
+
+            } catch (error) {
+                console.error('Error generating skincare plan:', error);
+                resultContainer.innerHTML = `<p class="text-red-500 text-center">Pardon, the ritual could not be generated. Please try again shortly.</p>`;
+            }
+        });
+
+        function displayPlan(plan) {
+            let html = '<div class="grid md:grid-cols-2 gap-x-12 gap-y-8">';
+            
+            // Morning Routine
+            html += '<div><h4 data-lang-key="planner_morning">Morning</h4><ul>';
+            plan.morgens.forEach(item => {
+                html += `<li><strong>${item.schritt}:</strong> ${item.beschreibung}</li>`;
+            });
+            html += '</ul></div>';
+
+            // Evening Routine
+            html += '<div><h4 data-lang-key="planner_evening">Evening</h4><ul>';
+            plan.abends.forEach(item => {
+                html += `<li><strong>${item.schritt}:</strong> ${item.beschreibung}</li>`;
+            });
+            html += '</ul></div>';
+            
+            html += '</div>';
+            html += '<p class="text-xs text-gray-500 mt-8 text-center italic" data-lang-key="planner_disclaimer">This AI-generated ritual is a recommendation and does not replace a professional consultation. For a truly bespoke experience, we invite you to book an appointment.</p>';
+
+            resultContainer.innerHTML = html;
+            switchLanguage(document.documentElement.lang); // Re-apply translations
+        }
+        
         // Initial calls on page load
         document.addEventListener('DOMContentLoaded', () => {
             fetchPosts();
+            switchLanguage('de'); // Set default language
         });
 
     </script>
