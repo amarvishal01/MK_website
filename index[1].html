@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mobina Nail Studio Düsseldorf</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <meta name="description" content="Elegantes Nagelstudio in Düsseldorf. Maniküre, Pediküre, Gel/Acryl, Nail Art & persischsprachige Kurse (DE/AT/CH).">
+  <script>
+  // Inject JSON-LD from content.json after load
+  fetch('content.json').then(r=>r.json()).then(c=>{
+    const ld = document.createElement('script');
+    ld.type='application/ld+json';
+    ld.textContent = JSON.stringify(c.seo);
+    document.head.appendChild(ld);
+  });
+  </script>
+  <style>
+    :root { --accent:#B4A284; }
+    body { font-family: 'Lato', sans-serif; color:#333; }
+    h1,h2,h3,.serif { font-family: 'Playfair Display', serif; }
+    .btn-primary { background: var(--accent); color:#fff; }
+    .btn-primary:hover { filter: brightness(0.95); }
+  </style>
+</head>
+<body class="bg-[#FDFBF6]">
+  <!-- Header -->
+  <header class="bg-white/80 backdrop-blur sticky top-0 z-40 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <img src="images/logo.svg" class="h-8" alt="Mobina Nails Logo">
+        <span id="brand" class="serif text-2xl">Mobina Nails</span>
+      </div>
+      <nav class="hidden md:flex items-center space-x-6 text-sm uppercase tracking-wider">
+        <a href="#services" id="nav-services" class="hover:text-[var(--accent)]">Leistungen</a>
+        <a href="#courses"  id="nav-courses"  class="hover:text-[var(--accent)]">Kurse</a>
+        <a href="#about"    id="nav-about"    class="hover:text-[var(--accent)]">Über mich</a>
+        <a href="#gallery"  id="nav-gallery"  class="hover:text-[var(--accent)]">Galerie</a>
+        <a href="#reviews"  id="nav-reviews"  class="hover:text-[var(--accent)]">Stimmen</a>
+        <a href="#contact"  id="nav-contact"  class="hover:text-[var(--accent)]">Kontakt</a>
+        <button data-lang="de" class="px-2">DE</button>
+        <span class="text-gray-300">|</span>
+        <button data-lang="en" class="px-2">EN</button>
+        <span class="text-gray-300">|</span>
+        <button data-lang="fa" class="px-2">FA</button>
+        <a href="#contact" class="btn-primary btn-book-now px-4 py-2 rounded-full text-xs">Termin buchen</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative h-[70vh] flex items-center">
+    <img id="hero-img" src="images/hero.jpg" class="absolute inset-0 w-full h-full object-cover" alt="Hero">
+    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center text-white">
+      <h1 id="hero-title" class="serif text-5xl md:text-6xl leading-tight">Elegante Nägel, präzise gestaltet.</h1>
+      <p id="hero-sub" class="mt-6 text-lg max-w-3xl mx-auto">Mobina Nail Studio in Düsseldorf …</p>
+      <a href="#contact" class="btn-primary inline-block mt-8 px-8 py-3 rounded-full text-sm btn-book-now">Termin buchen</a>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="py-20">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+      <img id="services-img" src="images/services.jpg" class="w-full rounded-2xl shadow-soft" alt="Services">
+      <div>
+        <h2 id="services-title" class="serif text-3xl mb-4">Leistungen</h2>
+        <ul id="services-list" class="space-y-3 list-disc pl-5 text-gray-700">
+          <li>Maniküre & Pediküre</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Courses -->
+  <section id="courses" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h2 id="courses-title" class="serif text-3xl mb-4">Nagelkurse (DE/AT/CH)</h2>
+        <p id="courses-text" class="text-gray-700 mb-4">Intensive, praxisnahe Kurse …</p>
+        <ul id="courses-bullets" class="space-y-2 text-gray-700 list-disc pl-5"></ul>
+        <a href="#contact" class="btn-primary inline-block mt-6 px-6 py-3 rounded-full text-sm btn-book-now">Jetzt buchen</a>
+      </div>
+      <img id="courses-img" src="images/courses.jpg" class="w-full rounded-2xl shadow-soft" alt="Courses">
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-20">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+      <img id="about-img" src="images/about.jpg" class="w-full rounded-2xl shadow-soft" alt="About">
+      <div>
+        <h2 id="about-title" class="serif text-3xl mb-4">Über mich</h2>
+        <p id="about-text" class="text-gray-700 leading-relaxed">Ich bin Mobina …</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 id="gallery-title" class="serif text-3xl mb-8">Galerie</h2>
+      <div id="gallery-grid" class="grid sm:grid-cols-2 md:grid-cols-4 gap-4"></div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section id="reviews" class="py-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 id="reviews-title" class="serif text-3xl mb-8">Kundenstimmen</h2>
+      <div id="reviews-wrap" class="grid md:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10">
+      <div>
+        <h2 id="contact-title" class="serif text-3xl mb-4">Kontakt & Standort</h2>
+        <p id="contact-text" class="text-gray-700 mb-6">Studio in Düsseldorf …</p>
+        <div class="space-y-2 text-gray-700">
+          <div><strong>Mobina Nails</strong><br>Steinstraße 35<br>40210 Düsseldorf, DE</div>
+          <div>Tel: <a class="underline" href="tel:+4921198399349">+49 211 98399349</a></div>
+          <div><span id="hours-label">Öffnungszeiten</span>: <span id="by-appt">Nur nach Vereinbarung</span></div>
+        </div>
+      </div>
+      <form class="bg-[#FDFBF6] p-6 rounded-2xl shadow-soft">
+        <label for="name" id="label-name" class="text-sm">Name</label>
+        <input id="name" class="w-full mb-4 mt-1 px-3 py-2 border rounded-lg" type="text" placeholder="">
+        <label for="email" id="label-email" class="text-sm">E‑Mail</label>
+        <input id="email" class="w-full mb-4 mt-1 px-3 py-2 border rounded-lg" type="email" placeholder="">
+        <label for="message" id="label-message" class="text-sm">Nachricht</label>
+        <textarea id="message" class="w-full mb-4 mt-1 px-3 py-2 border rounded-lg" rows="4" placeholder=""></textarea>
+        <button id="btn-send" type="button" class="btn-primary px-5 py-2 rounded-full text-sm">Senden</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#1a1a1a] text-white">
+    <div class="max-w-6xl mx-auto px-4 py-8 flex items-center justify-between">
+      <p class="text-sm">© 2025 Mobina Nail Studio Düsseldorf</p>
+      <div class="space-x-4 text-sm">
+        <a href="#" class="text-gray-300 hover:text-white">Impressum</a>
+        <a href="#" class="text-gray-300 hover:text-white">Datenschutz</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Chatbot (scripted) -->
+  <div class="fixed bottom-4 right-4">
+    <button id="chat-toggle" class="btn-primary px-4 py-3 rounded-full shadow-lg">Chat</button>
+    <div id="chat-window" class="hidden mt-2 w-80 bg-white rounded-2xl shadow-2xl overflow-hidden">
+      <div class="bg-[var(--accent)] text-white px-4 py-2 flex justify-between items-center">
+        <span>Concierge</span>
+        <button onclick="document.getElementById('chat-window').classList.add('hidden')">×</button>
+      </div>
+      <div id="chat-messages" class="h-64 overflow-y-auto p-3 bg-gray-50">
+        <div class="mb-2"><div class="inline-block bg-gray-100 text-gray-800 px-3 py-2 rounded-2xl">Hallo! Wie kann ich helfen?</div></div>
+      </div>
+      <div class="p-3 flex space-x-2">
+        <input id="chat-input" class="flex-1 border rounded-full px-3 py-2" placeholder="Schreiben Sie hier …">
+        <button id="chat-send" class="btn-primary rounded-full px-3">➤</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

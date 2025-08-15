@@ -1,0 +1,280 @@
+{
+  "seo": {
+    "@context": "https://schema.org",
+    "@type": "NailSalon",
+    "name": "Mobina Nail Studio Düsseldorf",
+    "description": "Elegantes Nagelstudio in Düsseldorf. Maniküre, Pediküre, Gel- und Acrylnägel, Nail Art sowie persischsprachige Nagelkurse in Deutschland, Österreich und der Schweiz.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Steinstraße 35",
+      "addressLocality": "Düsseldorf",
+      "postalCode": "40210",
+      "addressCountry": "DE"
+    },
+    "telephone": "+49 211 98399349",
+    "url": "https://your-domain.example",
+    "priceRange": "$$",
+    "image": "images/hero.jpg",
+    "openingHours": "Mo,Tu,We,Th,Fr 09:30-15:30"
+  },
+  "media": {
+    "hero": "images/hero.jpg",
+    "services": "images/services.jpg",
+    "courses": "images/courses.jpg",
+    "about": "images/about.jpg",
+    "gallery": [
+      "images/gallery1.jpg",
+      "images/gallery2.jpg",
+      "images/gallery3.jpg",
+      "images/gallery4.jpg"
+    ],
+    "logo": "images/logo.svg"
+  },
+  "languages": [
+    "de",
+    "en",
+    "fa"
+  ],
+  "de": {
+    "brand": "Mobina Nails",
+    "nav": [
+      "Leistungen",
+      "Kurse",
+      "Über mich",
+      "Galerie",
+      "Stimmen",
+      "Kontakt"
+    ],
+    "cta_book": "Termin buchen",
+    "hero_title": "Elegante Nägel, präzise gestaltet.",
+    "hero_sub": "Mobina Nail Studio in Düsseldorf – moderne Maniküre, Pediküre, Gel & Acryl, Nail Art. Persischsprachige Kurse in Deutschland, Österreich und der Schweiz.",
+    "sections": {
+      "services_title": "Leistungen",
+      "services_points": [
+        "Maniküre & Pediküre (klassisch, Spa)",
+        "Gel- & Acrylnägel (natürlich bis extralang)",
+        "Nail Art (French, Ombré, Minimal, Glitzer)",
+        "Reparatur & Auffüllen • Hygiene nach deutschen Standards"
+      ],
+      "courses_title": "Nagelkurse (DE/AT/CH) – فارسی",
+      "courses_text": "Intensive, praxisnahe Kurse für persischsprachige Teilnehmer in Deutschland, Österreich und der Schweiz. Inhalte: Hygiene, Vorbereitung, Formgebung, Modellage (Gel/Acryl), Designs, schnelle Salon-Techniken, Kund:innenkommunikation und Preiskalkulation.",
+      "courses_bullets": [
+        "Sprachen: فارسی / Deutsch / English",
+        "Formate: 1–3 Tage Intensiv, Einzelcoaching oder Gruppen",
+        "Zertifikat, Starter-Checkliste und Vorlagen inklusive",
+        "Für Anfänger und Fortgeschrittene"
+      ],
+      "about_title": "Über mich",
+      "about_text": "Ich bin Mobina – ausgebildete Nail-Designerin mit 10+ Jahren Erfahrung in hochwertigen Studios. Mein Stil: präzise, hygienisch, langlebig. Ich liebe natürliche Looks ebenso wie kreative Designs, immer angepasst an Hände, Alltag und Persönlichkeit.",
+      "gallery_title": "Galerie",
+      "testimonials_title": "Kundenstimmen",
+      "testimonial_list": [
+        {
+          "t": "Sehr sauber gearbeitet und super freundlich. Meine Nägel halten endlich!",
+          "a": "— S. K."
+        },
+        {
+          "t": "Tolles French, genau wie gewünscht. Ich komme wieder!",
+          "a": "— L. M."
+        },
+        {
+          "t": "Kurs war mega strukturiert. Endlich verstehe ich Feilen und Formen richtig.",
+          "a": "— N. R."
+        }
+      ],
+      "contact_title": "Kontakt & Standort",
+      "contact_text": "Studio in Düsseldorf (Steinstraße 35). Termine nach Vereinbarung. Gerne auf Deutsch, Englisch oder Persisch."
+    },
+    "labels": {
+      "hours": "Öffnungszeiten",
+      "by_appt": "Nur nach Vereinbarung",
+      "send": "Senden",
+      "name": "Name",
+      "email": "E‑Mail",
+      "message": "Nachricht",
+      "book_now": "Jetzt buchen"
+    }
+  },
+  "en": {
+    "brand": "Mobina Nails",
+    "nav": [
+      "Services",
+      "Courses",
+      "About",
+      "Gallery",
+      "Reviews",
+      "Contact"
+    ],
+    "cta_book": "Book Now",
+    "hero_title": "Elegant nails, crafted with precision.",
+    "hero_sub": "Mobina Nail Studio in Düsseldorf – modern manicure, pedicure, gel & acrylic, nail art. Persian-language nail courses across Germany, Austria, and Switzerland.",
+    "sections": {
+      "services_title": "Services",
+      "services_points": [
+        "Manicure & Pedicure (classic, spa)",
+        "Gel & Acrylic (natural to extra-long)",
+        "Nail Art (French, ombré, minimal, glitter)",
+        "Repair & refills • German hygiene standards"
+      ],
+      "courses_title": "Nail Courses (DE/AT/CH) – فارسی",
+      "courses_text": "Intensive, hands-on courses for Persian speakers in Germany, Austria, and Switzerland. Topics: hygiene, prep, shaping, gel/acrylic structure, designs, fast salon techniques, client communication, pricing.",
+      "courses_bullets": [
+        "Languages: فارسی / Deutsch / English",
+        "Formats: 1–3 day intensives, 1:1 or groups",
+        "Certificate, starter checklist & templates included",
+        "For beginners and advanced"
+      ],
+      "about_title": "About Me",
+      "about_text": "I’m Mobina—trained nail designer with 10+ years in premium studios. My style: precise, hygienic, long-lasting. From natural looks to creative designs, always tailored to hands, lifestyle, and personality.",
+      "gallery_title": "Gallery",
+      "testimonials_title": "Reviews",
+      "testimonial_list": [
+        {
+          "t": "Super clean work and very friendly. My nails finally last!",
+          "a": "— S. K."
+        },
+        {
+          "t": "Perfect French, exactly as I wanted. I’ll be back!",
+          "a": "— L. M."
+        },
+        {
+          "t": "Course was very well-structured. I finally understand filing and shaping.",
+          "a": "— N. R."
+        }
+      ],
+      "contact_title": "Contact & Location",
+      "contact_text": "Studio in Düsseldorf (Steinstraße 35). By appointment only. Happy to serve in German, English, or Persian."
+    },
+    "labels": {
+      "hours": "Hours",
+      "by_appt": "By appointment only",
+      "send": "Send",
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "book_now": "Book now"
+    }
+  },
+  "fa": {
+    "brand": "مبینا نیلز",
+    "nav": [
+      "خدمات",
+      "دوره‌ها",
+      "درباره من",
+      "گالری",
+      "نظرات",
+      "تماس"
+    ],
+    "cta_book": "رزرو نوبت",
+    "hero_title": "ناخن‌های شیک، با دقّت حرفه‌ای.",
+    "hero_sub": "استودیوی ناخن مبینا در دوسلدورف – مانیکور، پدیکور، ژل و آکریل، دیزاین. دوره‌های فارسی در آلمان، اتریش و سوئیس.",
+    "sections": {
+      "services_title": "خدمات",
+      "services_points": [
+        "مانیکور و پدیکور (کلاسیک، اسپا)",
+        "ژل و آکریل (طبیعی تا خیلی بلند)",
+        "دیزاین ناخن (فرنچ، آمبره، مینیمال، اکلیلی)",
+        "ترمیم • رعایت کامل بهداشت آلمان"
+      ],
+      "courses_title": "دوره‌های ناخن (آلمان/اتریش/سوئیس) – فارسی",
+      "courses_text": "دوره‌های فشرده و عملی برای فارسی‌زبانان در آلمان، اتریش و سوئیس. مباحث: بهداشت، آماده‌سازی، فرم‌دهی، ساختار ژل/آکریل، دیزاین‌ها، تکنیک‌های سریع سالن، ارتباط با مشتری و قیمت‌گذاری.",
+      "courses_bullets": [
+        "زبان‌ها: فارسی / آلمانی / انگلیسی",
+        "فرمت‌ها: ۱ تا ۳ روزه، خصوصی یا گروهی",
+        "شامل گواهی، چک‌لیست شروع و قالب‌ها",
+        "مناسب برای مبتدی و پیشرفته"
+      ],
+      "about_title": "درباره من",
+      "about_text": "من مبینا هستم—طراح ناخن با بیش از ۱۰ سال تجربه در استودیوهای حرفه‌ای. سبک من: دقیق، بهداشتی و بادوام. از ظاهر طبیعی تا دیزاین‌های خلاقانه، همیشه متناسب با دست‌ها، سبک زندگی و سلیقه شما.",
+      "gallery_title": "گالری",
+      "testimonials_title": "نظرات",
+      "testimonial_list": [
+        {
+          "t": "کار بسیار تمیز و برخورد عالی. بالاخره ناخن‌هایم دوام دارد!",
+          "a": "— س. ک."
+        },
+        {
+          "t": "فرنچ دقیقاً همان چیزی بود که می‌خواستم. حتماً برمی‌گردم!",
+          "a": "— ل. م."
+        },
+        {
+          "t": "دوره خیلی منظم و عالی بود. بالاخره فرم‌دهی و سوهان‌کشی را درست فهمیدم.",
+          "a": "— ن. ر."
+        }
+      ],
+      "contact_title": "تماس و نشانی",
+      "contact_text": "استودیو در دوسلدورف (خیابان اشتاین، پلاک ۳۵). فقط با تعیین وقت. با کمال میل فارسی/آلمانی/انگلیسی."
+    },
+    "labels": {
+      "hours": "ساعات کاری",
+      "by_appt": "فقط با وقت قبلی",
+      "send": "ارسال",
+      "name": "نام",
+      "email": "ایمیل",
+      "message": "پیام",
+      "book_now": "رزرو"
+    }
+  },
+  "faq": [
+    {
+      "q": [
+        "Öffnungszeiten",
+        "Wann geöffnet",
+        "Hours"
+      ],
+      "a": {
+        "de": "Nach Vereinbarung.",
+        "en": "By appointment only.",
+        "fa": "فقط با وقت قبلی."
+      }
+    },
+    {
+      "q": [
+        "Sprachen",
+        "Languages",
+        "زبان"
+      ],
+      "a": {
+        "de": "Deutsch, Englisch und Persisch.",
+        "en": "German, English, and Persian.",
+        "fa": "آلمانی، انگلیسی و فارسی."
+      }
+    },
+    {
+      "q": [
+        "Preise",
+        "Price",
+        "Kosten"
+      ],
+      "a": {
+        "de": "Preise je nach Service. Fragen Sie gern im Chat oder per E‑Mail.",
+        "en": "Prices depend on the service. Ask via chat or email.",
+        "fa": "قیمت‌ها بسته به خدمت متفاوت است. در چت یا ایمیل بپرسید."
+      }
+    },
+    {
+      "q": [
+        "Kurse",
+        "Course",
+        "دوره"
+      ],
+      "a": {
+        "de": "Persischsprachige Intensivkurse in DE/AT/CH. Termine auf Anfrage.",
+        "en": "Persian-language intensive courses in DE/AT/CH. Dates on request.",
+        "fa": "دوره‌های فشرده فارسی در آلمان/اتریش/سوئیس. تاریخ با هماهنگی."
+      }
+    },
+    {
+      "q": [
+        "Buchen",
+        "Book",
+        "رزرو"
+      ],
+      "a": {
+        "de": "Schreiben Sie uns im Formular – wir melden uns zeitnah.",
+        "en": "Use the form – we'll get back shortly.",
+        "fa": "از طریق فرم پیام دهید – سریعاً پاسخ می‌دهیم."
+      }
+    }
+  ]
+}
