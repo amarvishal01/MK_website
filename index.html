@@ -319,18 +319,23 @@
         </div>
       </div>
 
-      <form class="bg-[#FDFBF6] p-6 rounded-2xl shadow-soft">
-        <label for="name" class="text-sm">Name</label>
-        <input id="name" class="w-full mb-4 mt-1 px-3 py-2 border rounded-lg" type="text">
+      <form action="https://formspree.io/f/xbdpwqkl" method="POST" class="bg-[#FDFBF6] p-6 rounded-2xl shadow-soft">
 
-        <label for="email" class="text-sm">E-Mail</label>
-        <input id="email" class="w-full mb-4 mt-1 px-3 py-2 border rounded-lg" type="email">
+  <label for="name" class="text-sm">Name</label>
+  <input id="name" name="name" class="w-full mb-4 mt-1 px-3 py-2 border rounded-lg" type="text" required>
 
-        <label for="message" class="text-sm">Nachricht</label>
-        <textarea id="message" class="w-full mb-4 mt-1 px-3 py-2 border rounded-lg" rows="4"></textarea>
+  <label for="email" class="text-sm">E-Mail</label>
+  <input id="email" name="email" class="w-full mb-4 mt-1 px-3 py-2 border rounded-lg" type="email" required>
 
-        <button type="button" class="btn-primary px-5 py-2 rounded-full text-sm">Nachricht senden</button>
-      </form>
+  <label for="message" class="text-sm">Nachricht</label>
+  <textarea id="message" name="message" class="w-full mb-4 mt-1 px-3 py-2 border rounded-lg" rows="4" required></textarea>
+
+  <button type="submit" class="btn-primary px-5 py-2 rounded-full text-sm">
+    Nachricht senden
+  </button>
+
+</form>
+      
     </div>
   </section>
 
