@@ -388,48 +388,46 @@
   </div>
 
 <script>
-  (function () {
-    const root = document.getElementById('hero-carousel');
-    if (!root) return;
+(function () {
+  const root = document.getElementById('hero-carousel');
+  if (!root) return;
 
-    const slides = Array.from(root.querySelectorAll('.hero-slide'));
-    const prevBtn = document.getElementById('hero-prev');
-    const nextBtn = document.getElementById('hero-next');
+  const slides = Array.from(root.querySelectorAll('.hero-slide'));
+  const prevBtn = document.getElementById('hero-prev');
+  const nextBtn = document.getElementById('hero-next');
 
-    let index = 0;
-    let timer = null;
-    const delay = 5000;
+  let index = 0;
+  let timer;
 
-    function showSlide(newIndex) {
-      slides[index].classList.remove('is-active');
-      index = (newIndex + slides.length) % slides.length;
-      slides[index].classList.add('is-active');
-    }
+  function showSlide(newIndex) {
+    slides[index].classList.remove('is-active');
+    index = (newIndex + slides.length) % slides.length; // ✅ LOOP
+    slides[index].classList.add('is-active');
+  }
 
-    function startAuto() {
-      stopAuto();
-      timer = setInterval(() => showSlide(index + 1), delay);
-    }
-
-    function stopAuto() {
-      if (timer) clearInterval(timer);
-    }
-
-    nextBtn.addEventListener('click', () => {
+  function startAutoSlide() {
+    timer = setInterval(() => {
       showSlide(index + 1);
-      startAuto();
-    });
+    }, 2000); // ✅ 2 seconds
+  }
 
-    prevBtn.addEventListener('click', () => {
-      showSlide(index - 1);
-      startAuto();
-    });
+  function resetAutoSlide() {
+    clearInterval(timer);
+    startAutoSlide();
+  }
 
-    root.addEventListener('mouseenter', stopAuto);
-    root.addEventListener('mouseleave', startAuto);
+  nextBtn.addEventListener('click', () => {
+    showSlide(index + 1);
+    resetAutoSlide();
+  });
 
-    startAuto();
-  })();
+  prevBtn.addEventListener('click', () => {
+    showSlide(index - 1);
+    resetAutoSlide();
+  });
+
+  startAutoSlide();
+})();
 </script>
 <script src="assets/js/app.js"></script>
 </body>
