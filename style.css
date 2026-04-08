@@ -7,7 +7,7 @@ html { scroll-behavior: smooth; }
 #hero-carousel .hero-slide {
   opacity: 0;
   transform: scale(1.02);
-  transition: opacity 900ms ease, transform 7000ms ease;
+  transition: opacity 600ms ease, transform 2000ms ease;
   will-change: opacity, transform;
 }
 
