@@ -53,33 +53,48 @@
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="relative h-[78vh] flex items-center">
-    <img id="hero-img" src="images/hero.jpg" class="absolute inset-0 w-full h-full object-cover" alt="Private Beauty Atelier Düsseldorf">
-    <div class="absolute inset-0 bg-black/45"></div>
+  <!-- Hero Carousel -->
+<section id="hero-carousel" class="relative h-[78vh] flex items-center overflow-hidden">
+  <div class="absolute inset-0">
+    <img src="images/hero1.jpg" class="hero-slide is-active absolute inset-0 w-full h-full object-cover" alt="Private Beauty Atelier Düsseldorf">
+    <img src="images/hero2.jpg" class="hero-slide absolute inset-0 w-full h-full object-cover" alt="Luxury beauty treatment">
+    <img src="images/hero3.jpg" class="hero-slide absolute inset-0 w-full h-full object-cover" alt="Elegant beauty atelier interior">
+  </div>
 
-    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center text-white">
-      <p class="uppercase tracking-[0.35em] text-xs md:text-sm mb-4 text-white/80">Düsseldorf · Private Beauty Atelier</p>
+  <div class="absolute inset-0 bg-black/45"></div>
 
-      <h1 id="hero-title" class="serif text-5xl md:text-6xl leading-tight">
-        MS_COSMETICS.de<br>
-        by Mobina Shahri
-      </h1>
+  <div class="relative z-10 max-w-4xl mx-auto px-4 text-center text-white">
+    <p class="uppercase tracking-[0.35em] text-xs md:text-sm mb-4 text-white/80">
+      Düsseldorf · Private Beauty Atelier
+    </p>
 
-      <p id="hero-sub" class="mt-6 text-lg max-w-3xl mx-auto">
-        A private, appointment-led beauty experience shaped by more than 18 years of professional practice, educator-level expertise, multilingual care, and a calm premium setting.
-      </p>
+    <h1 id="hero-title" class="serif text-5xl md:text-6xl leading-tight">
+      MS_COSMETICS.de<br>
+      by Mobina Shahri
+    </h1>
 
-      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#contact" class="btn-primary inline-block px-8 py-3 rounded-full text-sm">Private Appointment</a>
-        <a href="#services" class="inline-block border border-white/60 px-8 py-3 rounded-full text-sm hover:bg-white/10">Signature Treatments</a>
-      </div>
+    <p id="hero-sub" class="mt-6 text-lg max-w-3xl mx-auto">
+      A private, appointment-led beauty experience shaped by more than 18 years of professional practice, educator-level expertise, multilingual care, and a calm premium setting.
+    </p>
 
-      <p class="mt-6 text-sm text-white/85">
-        By appointment only · Persian · German · English
-      </p>
+    <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="#contact" class="btn-primary inline-block px-8 py-3 rounded-full text-sm cta-contact">Private Appointment</a>
+      <a href="#services" class="inline-block border border-white/60 px-8 py-3 rounded-full text-sm hover:bg-white/10">Signature Treatments</a>
     </div>
-  </section>
+
+    <p class="mt-6 text-sm text-white/85">
+      By appointment only · Persian · German · English
+    </p>
+  </div>
+
+  <button id="hero-prev" aria-label="Previous slide" class="hero-nav absolute left-4 top-1/2 -translate-y-1/2 z-20 text-white text-3xl px-4 py-2 rounded-full">
+    ‹
+  </button>
+
+  <button id="hero-next" aria-label="Next slide" class="hero-nav absolute right-4 top-1/2 -translate-y-1/2 z-20 text-white text-3xl px-4 py-2 rounded-full">
+    ›
+  </button>
+</section>
 
   <!-- Trust Strip -->
   <section class="py-10 bg-white border-y border-gray-100">
