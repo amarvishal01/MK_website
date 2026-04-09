@@ -2,7 +2,7 @@
 
 #hero-carousel .hero-slide {
   opacity: 0;
-  transition: opacity 600ms ease; /* only fade */
+  transition: opacity 1000ms ease; /* only fade */
 }
 
 #hero-carousel .hero-slide.is-active {
