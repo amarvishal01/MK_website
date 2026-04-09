@@ -1,40 +1,10 @@
-
-/* Minimal extras */
-html { scroll-behavior: smooth; }
-.shadow-soft { box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
 /* HERO CAROUSEL */
 
 #hero-carousel .hero-slide {
   opacity: 0;
-  transform: scale(1.02);
-  transition: opacity 600ms ease, transform 2000ms ease;
-  will-change: opacity, transform;
+  transition: opacity 600ms ease; /* only fade */
 }
 
 #hero-carousel .hero-slide.is-active {
   opacity: 1;
-  transform: scale(1.08);
-}
-
-#hero-carousel .hero-nav {
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.28);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transition: background 0.25s ease, transform 0.25s ease;
-}
-
-#hero-carousel .hero-nav:hover {
-  background: rgba(255,255,255,0.22);
-  transform: translateY(-50%) scale(1.05);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #hero-carousel .hero-slide {
-    transition: none;
-    transform: none;
-  }
-  #hero-carousel .hero-slide.is-active {
-    transform: none;
-  }
 }
