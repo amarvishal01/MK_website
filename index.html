@@ -388,6 +388,8 @@
     </div>
   </div>
 
+
+  
 <script>
 (function () {
   const root = document.getElementById('hero-carousel');
@@ -401,19 +403,19 @@
   let timer;
 
   function showSlide(newIndex) {
-    slides[index].classList.remove('is-active');
-    index = (newIndex + slides.length) % slides.length; // ✅ LOOP
+    slides.forEach(slide => slide.classList.remove('is-active'));
+    index = (newIndex + slides.length) % slides.length;
     slides[index].classList.add('is-active');
   }
 
   function startAutoSlide() {
+    clearInterval(timer);
     timer = setInterval(() => {
       showSlide(index + 1);
-    }, 2000); // ✅ 2 seconds
+    }, 3000);
   }
 
   function resetAutoSlide() {
-    clearInterval(timer);
     startAutoSlide();
   }
 
@@ -427,6 +429,7 @@
     resetAutoSlide();
   });
 
+  showSlide(0);
   startAutoSlide();
 })();
 </script>
