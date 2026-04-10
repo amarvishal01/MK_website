@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MS Cosmetics by Mobina Shahri | Private Beauty Atelier in Düsseldorf</title>
+  <title>MS Cosmetics by Mobina Shahri | Private Beauty Atelier Düsseldorf</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,64 +39,63 @@
       </div>
 
       <nav class="hidden md:flex items-center space-x-6 text-sm uppercase tracking-wider">
-        <a href="#about" class="hover:text-[var(--accent)]">About Mobina</a>
+        <a href="#about" class="hover:text-[var(--accent)]">Über Mobina</a>
         <a href="#services" class="hover:text-[var(--accent)]">Treatments</a>
         <a href="#courses" class="hover:text-[var(--accent)]">Training</a>
         <a href="#gallery" class="hover:text-[var(--accent)]">Atelier</a>
-        <a href="#reviews" class="hover:text-[var(--accent)]">Reviews</a>
-        <a href="#contact" class="hover:text-[var(--accent)]">Contact</a>
+        <a href="#reviews" class="hover:text-[var(--accent)]">Stimmen</a>
+        <a href="#contact" class="hover:text-[var(--accent)]">Kontakt</a>
 
-        <a href="de.html" class="hover:text-[var(--accent)] text-xs">DE</a>
-        <a href="fa.html" class="hover:text-[var(--accent)] text-xs">FA</a>
 
-        <a href="#contact" class="btn-primary px-4 py-2 rounded-full text-xs">Private Booking</a>
+
+        <a href="#contact" class="btn-primary px-4 py-2 rounded-full text-xs">Private Buchung</a>
       </nav>
     </div>
   </header>
 
-  <!-- Hero Carousel -->
-  <section id="hero-carousel" class="relative overflow-hidden">
-    <div class="absolute inset-0">
-      <img src="images/hero1.jpg" class="hero-slide is-active absolute inset-0 w-full h-full object-contain object-top" alt="Private Beauty Atelier in Düsseldorf">
-      <img src="images/hero2.jpg" class="hero-slide absolute inset-0 w-full h-full object-contain object-top" alt="Luxury beauty treatment">
-      <img src="images/hero3.jpg" class="hero-slide absolute inset-0 w-full h-full object-contain object-top" alt="Elegant beauty atelier interior">
+ <!-- Hero Carousel -->
+<section id="hero-carousel" class="relative h-[78vh] overflow-hidden">
+  <div class="absolute inset-0">
+    <img src="images/hero1.jpg" class="hero-slide is-active absolute inset-0 w-full h-full object-cover object-top" alt="Private Beauty Atelier Düsseldorf">
+    <img src="images/hero2.jpg" class="hero-slide absolute inset-0 w-full h-full object-cover object-top" alt="Luxury beauty treatment">
+    <img src="images/hero3.jpg" class="hero-slide absolute inset-0 w-full h-full object-cover object-top" alt="Elegant beauty atelier interior">
+  </div>
+
+  <button id="hero-prev" aria-label="Previous slide" class="hero-nav absolute left-4 top-1/2 -translate-y-1/2 z-20 text-white text-3xl px-4 py-2 rounded-full">
+    ‹
+  </button>
+
+  <button id="hero-next" aria-label="Next slide" class="hero-nav absolute right-4 top-1/2 -translate-y-1/2 z-20 text-white text-3xl px-4 py-2 rounded-full">
+    ›
+  </button>
+</section>
+
+<!-- Hero Text Block -->
+<section class="bg-[#FDFBF6] py-14 md:py-16">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <p class="uppercase tracking-[0.35em] text-xs md:text-sm mb-4 text-gray-500">
+      Düsseldorf · Private Beauty Atelier
+    </p>
+
+    <h1 id="hero-title" class="serif text-4xl md:text-6xl leading-tight text-gray-900">
+      MS_COSMETICS.de<br>
+      by Mobina Shahri
+    </h1>
+
+    <p id="hero-sub" class="mt-6 text-lg max-w-3xl mx-auto text-gray-700">
+      A private, appointment-led beauty experience shaped by more than 18 years of professional practice, educator-level expertise, multilingual care, and a calm premium setting.
+    </p>
+
+    <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="#contact" class="btn-primary inline-block px-8 py-3 rounded-full text-sm cta-contact">Private Appointment</a>
+      <a href="#services" class="inline-block border border-gray-400 text-gray-800 px-8 py-3 rounded-full text-sm hover:bg-gray-100">Signature Treatments</a>
     </div>
 
-    <button id="hero-prev" aria-label="Previous slide" class="hero-nav absolute left-4 top-1/2 -translate-y-1/2 z-20 text-white text-3xl px-4 py-2 rounded-full">
-      ‹
-    </button>
-
-    <button id="hero-next" aria-label="Next slide" class="hero-nav absolute right-4 top-1/2 -translate-y-1/2 z-20 text-white text-3xl px-4 py-2 rounded-full">
-      ›
-    </button>
-  </section>
-
-  <!-- Hero Text Block -->
-  <section class="bg-[#FDFBF6] py-14 md:py-16">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-      <p class="uppercase tracking-[0.35em] text-xs md:text-sm mb-4 text-gray-500">
-        Düsseldorf · Private Beauty Atelier
-      </p>
-
-      <h1 id="hero-title" class="serif text-4xl md:text-6xl leading-tight text-gray-900">
-        MS_COSMETICS.de<br>
-        by Mobina Shahri
-      </h1>
-
-      <p id="hero-sub" class="mt-6 text-lg max-w-3xl mx-auto text-gray-700">
-        A private, appointment-led beauty experience shaped by more than 18 years of professional practice, educator-level expertise, multilingual care, and a calm premium setting.
-      </p>
-
-      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#contact" class="btn-primary inline-block px-8 py-3 rounded-full text-sm cta-contact">Private Appointment</a>
-        <a href="#services" class="inline-block border border-gray-400 text-gray-800 px-8 py-3 rounded-full text-sm hover:bg-gray-100">Signature Treatments</a>
-      </div>
-
-      <p class="mt-6 text-sm text-gray-600">
-        By appointment only · Persian · German · English
-      </p>
-    </div>
-  </section>
+    <p class="mt-6 text-sm text-gray-600">
+      By appointment only · Persian · German · English
+    </p>
+  </div>
+</section>
 
   <!-- Trust Strip -->
   <section class="py-10 bg-white border-y border-gray-100">
@@ -316,40 +315,43 @@
         <div class="space-y-3 text-gray-700">
           <div>
             <strong>MS Cosmetics by Mobina Shahri</strong><br>
-            Toulouser Allee 15, 5-03<br>
+            ToulouserAllee 15, 5-03<br>
             40211 Düsseldorf, DE
           </div>
           <div>
-            Phone:
+            Tel:
             <a class="underline" href="tel:+491738983223">+49 173 8983223</a>
           </div>
           <div>
-            Email:
+            E-Mail:
             <a class="underline" href="mailto:Mobina.shahri@web.de">Mobina.shahri@web.de</a>
           </div>
           <div>
-            Opening Hours: By appointment only
+            Öffnungszeiten: Nur nach Vereinbarung
           </div>
           <div>
-            Languages: Persian · German · English
+            Sprachen: Persian · German · English
           </div>
         </div>
       </div>
 
       <form action="https://formspree.io/f/xbdpwqkl" method="POST" class="bg-[#FDFBF6] p-6 rounded-2xl shadow-soft">
-        <label for="name" class="text-sm">Name</label>
-        <input id="name" name="name" class="w-full mb-4 mt-1 px-3 py-2 border rounded-lg" type="text" required>
 
-        <label for="email" class="text-sm">Email</label>
-        <input id="email" name="email" class="w-full mb-4 mt-1 px-3 py-2 border rounded-lg" type="email" required>
+  <label for="name" class="text-sm">Name</label>
+  <input id="name" name="name" class="w-full mb-4 mt-1 px-3 py-2 border rounded-lg" type="text" required>
 
-        <label for="message" class="text-sm">Message</label>
-        <textarea id="message" name="message" class="w-full mb-4 mt-1 px-3 py-2 border rounded-lg" rows="4" required></textarea>
+  <label for="email" class="text-sm">E-Mail</label>
+  <input id="email" name="email" class="w-full mb-4 mt-1 px-3 py-2 border rounded-lg" type="email" required>
 
-        <button type="submit" class="btn-primary px-5 py-2 rounded-full text-sm">
-          Send Message
-        </button>
-      </form>
+  <label for="message" class="text-sm">Nachricht</label>
+  <textarea id="message" name="message" class="w-full mb-4 mt-1 px-3 py-2 border rounded-lg" rows="4" required></textarea>
+
+  <button type="submit" class="btn-primary px-5 py-2 rounded-full text-sm">
+    Nachricht senden
+  </button>
+
+</form>
+      
     </div>
   </section>
 
@@ -358,8 +360,8 @@
     <div class="max-w-6xl mx-auto px-4 py-8 flex items-center justify-between">
       <p class="text-sm">© 2025 MS Cosmetics by Mobina Shahri</p>
       <div class="space-x-4 text-sm">
-        <a href="#" class="text-gray-300 hover:text-white">Legal Notice</a>
-        <a href="#" class="text-gray-300 hover:text-white">Privacy Policy</a>
+        <a href="#" class="text-gray-300 hover:text-white">Impressum</a>
+        <a href="#" class="text-gray-300 hover:text-white">Datenschutz</a>
       </div>
     </div>
   </footer>
@@ -386,49 +388,48 @@
     </div>
   </div>
 
-  <script>
-    (function () {
-      const root = document.getElementById('hero-carousel');
-      if (!root) return;
+<script>
+(function () {
+  const root = document.getElementById('hero-carousel');
+  if (!root) return;
 
-      const slides = Array.from(root.querySelectorAll('.hero-slide'));
-      const prevBtn = document.getElementById('hero-prev');
-      const nextBtn = document.getElementById('hero-next');
+  const slides = Array.from(root.querySelectorAll('.hero-slide'));
+  const prevBtn = document.getElementById('hero-prev');
+  const nextBtn = document.getElementById('hero-next');
 
-      let index = 0;
-      let timer;
+  let index = 0;
+  let timer;
 
-      function showSlide(newIndex) {
-        slides.forEach(slide => slide.classList.remove('is-active'));
-        index = (newIndex + slides.length) % slides.length;
-        slides[index].classList.add('is-active');
-      }
+  function showSlide(newIndex) {
+    slides[index].classList.remove('is-active');
+    index = (newIndex + slides.length) % slides.length; // ✅ LOOP
+    slides[index].classList.add('is-active');
+  }
 
-      function startAutoSlide() {
-        clearInterval(timer);
-        timer = setInterval(() => {
-          showSlide(index + 1);
-        }, 3000);
-      }
+  function startAutoSlide() {
+    timer = setInterval(() => {
+      showSlide(index + 1);
+    }, 2000); // ✅ 2 seconds
+  }
 
-      function resetAutoSlide() {
-        startAutoSlide();
-      }
+  function resetAutoSlide() {
+    clearInterval(timer);
+    startAutoSlide();
+  }
 
-      nextBtn.addEventListener('click', () => {
-        showSlide(index + 1);
-        resetAutoSlide();
-      });
+  nextBtn.addEventListener('click', () => {
+    showSlide(index + 1);
+    resetAutoSlide();
+  });
 
-      prevBtn.addEventListener('click', () => {
-        showSlide(index - 1);
-        resetAutoSlide();
-      });
+  prevBtn.addEventListener('click', () => {
+    showSlide(index - 1);
+    resetAutoSlide();
+  });
 
-      showSlide(0);
-      startAutoSlide();
-    })();
-  </script>
+  startAutoSlide();
+})();
+</script>
 
 </body>
 </html>
