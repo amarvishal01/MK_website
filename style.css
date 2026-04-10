@@ -1,10 +1,24 @@
 /* HERO CAROUSEL */
 
+
 #hero-carousel .hero-slide {
   opacity: 0;
-  transition: opacity 1000ms ease; /* only fade */
+  transition: opacity 1000ms ease;
 }
 
 #hero-carousel .hero-slide.is-active {
   opacity: 1;
+}
+
+#hero-carousel .hero-nav {
+  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.28);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+#hero-carousel .hero-nav:hover {
+  background: rgba(0,0,0,0.35);
+  transform: translateY(-50%) scale(1.05);
 }
