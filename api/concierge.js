@@ -20,10 +20,8 @@ export default async function handler(req, res) {
 
     const CONTACT = {
       name: "MS Cosmetics by Mobina Shahri",
-    ,
       email: "Mobina.shahri@web.de",
-      
-      Instagram: "ms_cosmetics.de",
+      instagram: "ms_cosmetics.de",
       languages: "Persian, German, English",
       appointments: "By appointment only"
     };
@@ -35,7 +33,7 @@ export default async function handler(req, res) {
         lower.includes("buchen") ||
         lower.includes("buchung") ||
         lower.includes("kontakt") ||
-        lower.includes("telefon") ||
+        lower.includes("instagram") ||
         lower.includes("e-mail") ||
         lower.includes("email"))
     ) {
@@ -61,7 +59,6 @@ export default async function handler(req, res) {
         reply:
           `Appointments are by appointment only.\n\n` +
           `You can contact the studio directly:\n` +
-          
           `Email: ${CONTACT.email}\n` +
           `Instagram: ${CONTACT.instagram}`
       });
@@ -72,15 +69,15 @@ export default async function handler(req, res) {
       (lower.includes("رزرو") ||
         lower.includes("وقت") ||
         lower.includes("تماس") ||
+        lower.includes("اینستاگرام") ||
         lower.includes("ایمیل"))
     ) {
       return res.status(200).json({
         reply:
           `وقت‌ها فقط با تعیین وقت قبلی انجام می‌شوند.\n\n` +
           `می‌توانید مستقیماً با مجموعه تماس بگیرید:\n` +
-          `تلفن: ${CONTACT.phone}\n` +
           `ایمیل: ${CONTACT.email}\n` +
-          `Instagram: ${CONTACT.instagram}`
+          `اینستاگرام: ${CONTACT.instagram}`
       });
     }
 
@@ -192,54 +189,47 @@ Keep replies polite, clear, and fairly short.`,
       return res.status(500).json({ error: "Missing OPENAI_API_KEY" });
     }
 
-
-    
-   const hfResponse = await fetch("https://router.huggingface.co/v1/chat/completions", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
-  },
-  body: JSON.stringify({
-    model: "openai/gpt-oss-120b:fastest",
-    messages: [
-      {
-        role: "system",
-        content: systemPrompts[language] || systemPrompts.en
+    const hfResponse = await fetch("https://router.huggingface.co/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
       },
-      {
-        role: "user",
-        content: `User question: ${userMessage}
+      body: JSON.stringify({
+        model: "openai/gpt-oss-120b:fastest",
+        messages: [
+          {
+            role: "system",
+            content: systemPrompts[language] || systemPrompts.en
+          },
+          {
+            role: "user",
+            content: `User question: ${userMessage}
 
 Known contact details:
-Phone: ${CONTACT.phone}
 Email: ${CONTACT.email}
-Address: ${CONTACT.address}`
-      }
-    ],
-    max_tokens: 300,
-    temperature: 0.4
-  })
-});
+Instagram: ${CONTACT.instagram}`
+          }
+        ],
+        max_tokens: 300,
+        temperature: 0.4
+      })
+    });
 
-const data = await hfResponse.json();
+    const data = await hfResponse.json();
 
-if (!hfResponse.ok) {
-  console.error("Hugging Face API error:", data);
-  return res.status(hfResponse.status).json({
-    error: data?.error?.message || data?.error || "Hugging Face API request failed"
-  });
-}
+    if (!hfResponse.ok) {
+      console.error("Hugging Face API error:", data);
+      return res.status(hfResponse.status).json({
+        error: data?.error?.message || data?.error || "Hugging Face API request failed"
+      });
+    }
 
-const reply = data?.choices?.[0]?.message?.content || null;
-
-
-
-    
+    const reply = data?.choices?.[0]?.message?.content || null;
 
     if (!reply) {
-      console.error("Unexpected OpenAI response:", data);
-      return res.status(500).json({ error: "No reply text returned from OpenAI" });
+      console.error("Unexpected Hugging Face response:", data);
+      return res.status(500).json({ error: "No reply text returned from AI" });
     }
 
     return res.status(200).json({ reply });
