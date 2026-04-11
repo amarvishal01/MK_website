@@ -649,7 +649,7 @@
       bubble.style.textAlign = 'right';
     }
 
-    bubble.textContent = text;
+    bubble.textContent = text.replace(/\*\*/g, '');
     row.appendChild(bubble);
     chatMessages.appendChild(row);
     chatMessages.scrollTop = chatMessages.scrollHeight;
