@@ -511,10 +511,55 @@
   </script>
 
 
+ <script>
+    (function () {
+      const root = document.getElementById('hero-carousel');
+      if (!root) return;
+
+      const slides = Array.from(root.querySelectorAll('.hero-slide'));
+      const prevBtn = document.getElementById('hero-prev');
+      const nextBtn = document.getElementById('hero-next');
+
+      let index = 0;
+      let timer;
+
+      function showSlide(newIndex) {
+        slides.forEach(slide => slide.classList.remove('is-active'));
+        index = (newIndex + slides.length) % slides.length;
+        slides[index].classList.add('is-active');
+      }
+
+      function startAutoSlide() {
+        clearInterval(timer);
+        timer = setInterval(() => {
+          showSlide(index + 1);
+        }, 3000);
+      }
+
+      function resetAutoSlide() {
+        startAutoSlide();
+      }
+
+      nextBtn.addEventListener('click', () => {
+        showSlide(index + 1);
+        resetAutoSlide();
+      });
+
+      prevBtn.addEventListener('click', () => {
+        showSlide(index - 1);
+        resetAutoSlide();
+      });
+
+      showSlide(0);
+      startAutoSlide();
+    })();
+  </script>
+
 <script>
 (function () {
-  const GEMINI_API_KEY = "AIzaSyBIBfrDP-eKLhH3PeynrOeV88MwqNCtIGA";
-  const PAGE_LANG = "de"; // "de" for index.html, "en" for en.html, "fa" for fa.html
+  const OPENAI_API_KEY = "sk-5678ijklmnopabcd5678ijklmnopabcd5678ijkl";
+
+  const PAGE_LANG = "de"; // change per page: "de", "en", "fa"
 
   const toggleBtn = document.getElementById('chat-toggle');
   const chatWindow = document.getElementById('chat-window');
@@ -523,8 +568,6 @@
   const chatSend = document.getElementById('chat-send');
 
   if (!toggleBtn || !chatWindow || !chatMessages || !chatInput || !chatSend) return;
-
-  const conversationHistory = [];
 
   function addMessage(text, sender = 'bot') {
     const row = document.createElement('div');
@@ -556,99 +599,81 @@
   function getSystemPrompt(lang) {
     const prompts = {
       de: `
-Du bist der luxuriöse, diskrete und hilfreiche Concierge für MS Cosmetics by Mobina Shahri in Düsseldorf.
+Du bist der Concierge für MS Cosmetics by Mobina Shahri in Düsseldorf.
 Antworte immer auf Deutsch.
+Deine Aufgabe ist es, Besucher:innen bei privaten Buchungen, Behandlungsfragen,
+Trainingsanfragen, Kontaktdaten und Sprachunterstützung zu helfen.
 
-Deine Rolle:
-- höflich, elegant, warm, professionell
-- kurz und klar
-- verkaufsstark, aber niemals aufdringlich
-- unterstütze private Buchungen und Trainingsanfragen
-- leite Nutzer wenn passend freundlich zur Kontaktaufnahme oder Buchung weiter
+Du solltest insbesondere Fragen beantworten zu:
+- verfügbaren Behandlungen
+- privaten Buchungen
+- Trainingsinformationen
+- gesprochenen Sprachen
+- Standort in Düsseldorf
+- ob Termine nur nach Vereinbarung möglich sind
+- ob persischsprachige Schüler:innen in Europa Training anfragen können
 
-Wichtige Fakten:
-- MS Cosmetics ist ein privates Beauty Atelier in Düsseldorf
-- Adresse: Toulouser Allee 15, 5-03, 40211 Düsseldorf
+Bekannte Fakten:
+- Standort: Toulouser Allee 15, 5-03, 40211 Düsseldorf, Deutschland
 - Sprachen: Persisch, Deutsch, Englisch
 - Termine nur nach Vereinbarung
-- Training ist für persischsprachige Beauty-Professionals in Europa möglich
-- Themen: Treatments, Buchung, Training, Kontakt, Sprachen, Standort
+- Training für persischsprachige Beauty-Professionals in Europa ist möglich
 
-Verfügbare Themen:
-- Behandlungen: Nail Atelier, Lash Design & Lift, Skin Renewal Protocols, Bridal/Event Preparation, consultation-led beauty care
-- Training: professionelle Schulungen, Mentoring, Technikfokus, Trainer-Hintergrund
-
-Verhaltensregeln:
-- Wenn Nutzer buchen möchten, ermutige sie sanft zur Kontaktaufnahme über das Formular
-- Wenn Nutzer Training suchen, erkläre kurz die Relevanz und lade zur Anfrage ein
-- Wenn Preise oder exakte Zeiten nicht auf der Website stehen, sage höflich, dass das Studio direkt kontaktiert werden sollte
-- Erfinde keine Preise, Öffnungszeiten oder Zertifikate
-- Wenn etwas unklar ist, bitte höflich um Präzisierung
-- Halte Antworten möglichst unter 120 Wörtern
+Wenn nach Preisen oder konkreten Zeiten gefragt wird, die nicht auf der Website stehen,
+sage höflich, dass die Person das Studio direkt kontaktieren soll.
+Halte Antworten höflich, klar und eher kurz.
       `.trim(),
 
       en: `
-You are the luxury, discreet, and helpful concierge for MS Cosmetics by Mobina Shahri in Düsseldorf.
+You are the concierge for MS Cosmetics by Mobina Shahri in Düsseldorf.
 Always answer in English.
+Your job is to help visitors with private bookings, treatment questions,
+training inquiries, contact details, and language support.
 
-Your role:
-- polite, elegant, warm, professional
-- concise and clear
-- conversion-focused, but never pushy
-- support private bookings and training inquiries
-- gently guide users toward contacting or booking when relevant
+You should answer questions about:
+- available treatment types
+- private booking questions
+- training information
+- languages spoken
+- location in Düsseldorf
+- whether appointments are by appointment only
+- whether Persian-speaking students in Europe can inquire about training
 
-Key facts:
-- MS Cosmetics is a private beauty atelier in Düsseldorf
-- Address: Toulouser Allee 15, 5-03, 40211 Düsseldorf
+Known facts:
+- Location: Toulouser Allee 15, 5-03, 40211 Düsseldorf, Germany
 - Languages: Persian, German, English
 - Appointments are by appointment only
 - Training is available for Persian-speaking beauty professionals in Europe
-- Topics: treatments, booking, training, contact, languages, location
 
-Available topics:
-- Treatments: Nail Atelier, Lash Design & Lift, Skin Renewal Protocols, Bridal/Event Preparation, consultation-led beauty care
-- Training: professional education, mentoring, technique-focused learning, instructor background
-
-Behavior rules:
-- If a user wants to book, gently encourage them to contact through the form
-- If a user asks about training, explain the value briefly and invite them to inquire
-- If pricing or exact schedules are not listed, politely suggest contacting the studio directly
-- Do not invent prices, exact schedules, or certifications
-- If unclear, ask a short clarifying question
-- Keep answers preferably under 120 words
+If the user asks for prices or exact schedules that are not listed on the website,
+politely suggest contacting the studio directly.
+Keep replies polite, clear, and fairly short.
       `.trim(),
 
       fa: `
-تو کانسیرج لوکس، حرفه‌ای، مودب و قابل‌اعتماد MS Cosmetics by Mobina Shahri در دوسلدورف هستی.
-همیشه به فارسی پاسخ بده.
+تو کانسیرج وب‌سایت MS Cosmetics by Mobina Shahri در دوسلدورف هستی.
+همیشه به زبان فارسی پاسخ بده.
+وظیفه تو کمک به بازدیدکنندگان درباره رزرو خصوصی، سوالات مربوط به خدمات،
+اطلاعات آموزشی، اطلاعات تماس و پشتیبانی زبانی است.
 
-نقش تو:
-- مودب، گرم، حرفه‌ای و شیک
-- کوتاه، واضح و مفید
-- با هدف تبدیل بازدیدکننده به رزرو یا درخواست آموزش، بدون فشار آوردن
-- کمک در رزرو خصوصی و سوالات آموزشی
-- در زمان مناسب، کاربر را با لحن طبیعی به تماس یا ثبت درخواست هدایت کن
+باید به این موضوعات پاسخ بدهی:
+- انواع خدمات قابل ارائه
+- سوالات مربوط به رزرو خصوصی
+- اطلاعات آموزش
+- زبان‌های قابل پشتیبانی
+- آدرس در دوسلدورف
+- اینکه خدمات فقط با تعیین وقت قبلی انجام می‌شود
+- اینکه آیا فارسی‌زبانان ساکن اروپا می‌توانند برای آموزش درخواست بدهند
 
-اطلاعات مهم:
-- MS Cosmetics یک آتلیه خصوصی زیبایی در دوسلدورف است
-- آدرس: Toulouser Allee 15, 5-03, 40211 Düsseldorf
+اطلاعات قطعی:
+- آدرس: Toulouser Allee 15, 5-03, 40211 Düsseldorf, Germany
 - زبان‌ها: فارسی، آلمانی، انگلیسی
 - خدمات فقط با تعیین وقت قبلی انجام می‌شود
 - آموزش برای فارسی‌زبانان فعال در حوزه زیبایی در اروپا ارائه می‌شود
-- موضوعات: خدمات، رزرو، آموزش، اطلاعات تماس، زبان‌ها، موقعیت مکانی
 
-موضوعات قابل پاسخ:
-- خدمات: Nail Atelier، Lash Design & Lift، Skin Renewal Protocols، آماده‌سازی عروس و مراسم، خدمات مشاوره‌محور زیبایی
-- آموزش: آموزش حرفه‌ای، منتورینگ، آموزش تکنیک‌محور، سابقه مدرس
-
-قوانین پاسخ:
-- اگر کاربر قصد رزرو دارد، او را با لحن نرم به فرم تماس هدایت کن
-- اگر کاربر درباره آموزش پرسید، ارزش آن را کوتاه توضیح بده و او را به ثبت درخواست تشویق کن
-- اگر قیمت یا زمان دقیق در سایت نیست، محترمانه بگو بهتر است مستقیم تماس بگیرد
-- قیمت، زمان یا اطلاعات ناموجود را از خودت نساز
-- اگر سوال مبهم بود، یک سوال کوتاه برای روشن شدن بپرس
-- پاسخ‌ها بهتر است زیر ۱۲۰ کلمه باشند
+اگر کاربر درباره قیمت یا زمان‌های دقیق سوال کرد و این اطلاعات در سایت نیست،
+محترمانه بگو که بهتر است مستقیماً با مجموعه تماس بگیرد.
+پاسخ‌ها را مودبانه، روشن و نسبتاً کوتاه نگه دار.
       `.trim()
     };
 
@@ -656,85 +681,69 @@ Behavior rules:
   }
 
   function getTypingText(lang) {
-    return {
+    const map = {
       de: "Schreibt …",
       en: "Typing…",
       fa: "در حال نوشتن…"
-    }[lang] || "Typing…";
+    };
+    return map[lang] || "Typing…";
   }
 
   function getErrorText(lang) {
-    return {
+    const map = {
       de: "Entschuldigung, der Concierge ist momentan nicht verfügbar.",
       en: "Sorry, the concierge is temporarily unavailable.",
       fa: "متأسفم، کانسیرج در حال حاضر در دسترس نیست."
-    }[lang] || "Sorry, the concierge is temporarily unavailable.";
+    };
+    return map[lang] || "Sorry, the concierge is temporarily unavailable.";
   }
 
-  function buildGeminiContents(userMessage) {
-    const parts = [];
-
-    parts.push({
-      text: getSystemPrompt(PAGE_LANG)
-    });
-
-    if (conversationHistory.length > 0) {
-      const historyText = conversationHistory
-        .map(item => `${item.role === 'user' ? 'User' : 'Assistant'}: ${item.text}`)
-        .join('\n');
-      parts.push({
-        text: `Conversation so far:\n${historyText}`
-      });
-    }
-
-    parts.push({
-      text: `User: ${userMessage}`
-    });
-
-    return [
-      {
-        role: "user",
-        parts
-      }
-    ];
-  }
-
-  async function askGemini(message) {
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: buildGeminiContents(message),
-          generationConfig: {
-            temperature: 0.7,
-            topK: 32,
-            topP: 0.95,
-            maxOutputTokens: 220
+  async function askConcierge(message) {
+    const response = await fetch("https://api.openai.com/v1/responses", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${OPENAI_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: "gpt-4.1-mini",
+        input: [
+          {
+            role: "system",
+            content: getSystemPrompt(PAGE_LANG)
+          },
+          {
+            role: "user",
+            content: message
           }
-        })
-      }
-    );
+        ]
+      })
+    });
+
+    if (!response.ok) {
+      const errText = await response.text();
+      throw new Error(errText);
+    }
 
     const data = await response.json();
 
-    const text =
-      data?.candidates?.[0]?.content?.parts?.map(p => p.text).join("\n").trim();
+    if (data.output_text) return data.output_text;
 
-    if (!response.ok || !text) {
-      throw new Error(JSON.stringify(data));
+    if (Array.isArray(data.output)) {
+      const textParts = [];
+      for (const item of data.output) {
+        if (Array.isArray(item.content)) {
+          for (const part of item.content) {
+            if (part.type === "output_text" && part.text) {
+              textParts.push(part.text);
+            }
+          }
+        }
+      }
+      if (textParts.length) return textParts.join("\n");
     }
 
-    return text;
-  }
-
-  function pushHistory(role, text) {
-    conversationHistory.push({ role, text });
-
-    if (conversationHistory.length > 8) {
-      conversationHistory.splice(0, conversationHistory.length - 8);
-    }
+    return getErrorText(PAGE_LANG);
   }
 
   toggleBtn.addEventListener('click', () => {
@@ -746,30 +755,31 @@ Behavior rules:
     if (!message) return;
 
     addMessage(message, 'user');
-    pushHistory('user', message);
     chatInput.value = '';
-
     addMessage(getTypingText(PAGE_LANG), 'bot');
 
     try {
-      const reply = await askGemini(message);
+      const reply = await askConcierge(message);
 
-      const last = chatMessages.lastChild;
-      if (last) last.remove();
+      const botMessages = chatMessages.querySelectorAll('.text-left, .text-right');
+      const lastBot = botMessages[botMessages.length - 1];
+      if (lastBot) lastBot.remove();
 
       addMessage(reply, 'bot');
-      pushHistory('assistant', reply);
-    } catch (err) {
-      const last = chatMessages.lastChild;
-      if (last) last.remove();
+    } catch (error) {
+      const botMessages = chatMessages.querySelectorAll('.text-left, .text-right');
+      const lastBot = botMessages[botMessages.length - 1];
+      if (lastBot) lastBot.remove();
 
       addMessage(getErrorText(PAGE_LANG), 'bot');
-      console.error(err);
+      console.error(error);
     }
   });
 
   chatInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') chatSend.click();
+    if (e.key === 'Enter') {
+      chatSend.click();
+    }
   });
 })();
 </script>
