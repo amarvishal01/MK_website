@@ -1,1 +1,514 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MS Cosmetics by Mobina Shahri | Private Beauty Atelier in Düsseldorf</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Privates Beauty Atelier in Düsseldorf von Mobina Shahri. Anspruchsvolle Nail-, Lash- und Beauty-Expertise, educator-level care, mehrsprachiger Service sowie professionelle Schulungen für persischsprachige Beauty-Professionals in Europa.">
 
+  <script>
+    fetch('content.json').then(r => r.json()).then(c => {
+      const ld = document.createElement('script');
+      ld.type = 'application/ld+json';
+      ld.textContent = JSON.stringify(c.seo);
+      document.head.appendChild(ld);
+    });
+  </script>
+
+  <style>
+    :root { --accent:#B4A284; }
+    body { font-family: 'Lato', sans-serif; color:#333; }
+    h1,h2,h3,.serif { font-family: 'Playfair Display', serif; }
+    .btn-primary { background: var(--accent); color:#fff; }
+    .btn-primary:hover { filter: brightness(0.95); }
+  </style>
+</head>
+<body class="bg-[#FDFBF6]">
+
+  <!-- Header -->
+  <header class="bg-white/80 backdrop-blur sticky top-0 z-40 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <img src="images/logo.svg" class="h-8" alt="MS Cosmetics Logo">
+        <span id="brand" class="serif text-2xl">MS Cosmetics</span>
+      </div>
+
+      <nav class="hidden md:flex items-center space-x-6 text-sm uppercase tracking-wider">
+        <a href="#about" class="hover:text-[var(--accent)]">Über Mobina</a>
+        <a href="#services" class="hover:text-[var(--accent)]">Behandlungen</a>
+        <a href="#courses" class="hover:text-[var(--accent)]">Training</a>
+        <a href="#qualifications" class="hover:text-[var(--accent)]">Qualifikationen</a>
+        <a href="#gallery" class="hover:text-[var(--accent)]">Atelier</a>
+        <a href="#reviews" class="hover:text-[var(--accent)]">Bewertungen</a>
+        <a href="#contact" class="hover:text-[var(--accent)]">Kontakt</a>
+
+        <a href="index.html" class="hover:text-[var(--accent)] text-xs">EN</a>
+        <a href="fa.html" class="hover:text-[var(--accent)] text-xs">FA</a>
+
+        <a href="#contact" class="btn-primary px-4 py-2 rounded-full text-xs">Private Buchung</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Carousel -->
+  <section id="hero-carousel" class="relative h-[78vh] overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="images/hero1.jpg" class="hero-slide is-active absolute inset-0 w-full h-full object-cover object-top" alt="Privates Beauty Atelier in Düsseldorf">
+      <img src="images/hero2.jpg" class="hero-slide absolute inset-0 w-full h-full object-cover object-top" alt="Luxuriöse Beauty-Behandlung">
+      <img src="images/hero3.jpg" class="hero-slide absolute inset-0 w-full h-full object-cover object-top" alt="Elegantes Beauty Atelier Interieur">
+    </div>
+
+    <button id="hero-prev" aria-label="Vorherige Folie" class="hero-nav absolute left-4 top-1/2 -translate-y-1/2 z-20 text-white text-3xl px-4 py-2 rounded-full">
+      ‹
+    </button>
+
+    <button id="hero-next" aria-label="Nächste Folie" class="hero-nav absolute right-4 top-1/2 -translate-y-1/2 z-20 text-white text-3xl px-4 py-2 rounded-full">
+      ›
+    </button>
+  </section>
+
+  <!-- Hero Text Block -->
+  <section class="bg-[#FDFBF6] py-14 md:py-16">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <p class="uppercase tracking-[0.35em] text-xs md:text-sm mb-4 text-gray-500">
+        Düsseldorf · Private Beauty Atelier
+      </p>
+
+      <h1 id="hero-title" class="serif text-4xl md:text-6xl leading-tight text-gray-900">
+        MS_COSMETICS.de<br>
+        by Mobina Shahri
+      </h1>
+
+      <p id="hero-sub" class="mt-6 text-lg max-w-3xl mx-auto text-gray-700">
+        Ein privates Beauty Atelier in Düsseldorf für anspruchsvolle Behandlungen, educator-level care und professionelle Schulungen für angehende Beauty-Professionals.
+      </p>
+
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#contact" class="btn-primary inline-block px-8 py-3 rounded-full text-sm cta-contact">Privaten Termin buchen</a>
+        <a href="#courses" class="inline-block border border-gray-400 text-gray-800 px-8 py-3 rounded-full text-sm hover:bg-gray-100">Training entdecken</a>
+      </div>
+
+      <p class="mt-6 text-sm text-gray-600">
+        Nur nach Vereinbarung · Persisch · Deutsch · Englisch
+      </p>
+    </div>
+  </section>
+
+  <!-- Trust Strip -->
+  <section class="py-10 bg-white border-y border-gray-100">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-4 gap-6 text-center">
+      <div>
+        <h3 class="serif text-xl mb-2">18+ Jahre</h3>
+        <p class="text-sm text-gray-600">Berufserfahrung in Nail, Beauty, Hair und Skin Care.</p>
+      </div>
+      <div>
+        <h3 class="serif text-xl mb-2">800+ Schüler:innen</h3>
+        <p class="text-sm text-gray-600">Mehr als 800 ausgebildete Schüler:innen durch jahrelange praktische Unterrichtserfahrung im Iran.</p>
+      </div>
+      <div>
+        <h3 class="serif text-xl mb-2">National Instructor</h3>
+        <p class="text-sm text-gray-600">Instruktorinnen-Erfahrung mit international bekannten Beauty-Marken und Trainingssystemen.</p>
+      </div>
+      <div>
+        <h3 class="serif text-xl mb-2">Internationale Erfahrung</h3>
+        <p class="text-sm text-gray-600">Trainings- und Wettbewerbserfahrung in Deutschland, Lettland, Italien, Iran und den VAE.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-20">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+      <img id="about-img" src="images/about.jpg" class="w-full rounded-2xl shadow-soft" alt="Mobina Shahri">
+
+      <div>
+        <p class="uppercase tracking-[0.3em] text-xs text-gray-500 mb-3">Meet Mobina Shahri</p>
+        <h2 id="about-title" class="serif text-3xl mb-4">
+          Beauty-Expertin, Educator und Trainerin mit internationaler Erfahrung
+        </h2>
+
+        <p id="about-text-1" class="text-gray-700 leading-relaxed mb-4">
+          Mobina Shahri ist eine erfahrene Beauty-Professional und Educator mit mehr als 18 Jahren Branchenerfahrung in Nail, Hair, Beauty und Skin Care. Ihre Arbeit verbindet fundiertes technisches Können, strukturierte Wissensvermittlung und langjährige praktische Erfahrung.
+        </p>
+
+        <p id="about-text-2" class="text-gray-700 leading-relaxed mb-6">
+          Im Laufe der Jahre hat sie mehr als 800 Schüler:innen im Iran ausgebildet, führende Beauty-Marken bei internationalen Wettbewerben vertreten und sich einen Namen als National Instructor gemacht. Heute führt sie ihre Arbeit in Düsseldorf durch private Behandlungen und spezialisierte Beauty-Schulungen für persischsprachige Menschen in Europa fort.
+        </p>
+
+        <ul class="space-y-2 text-gray-700 list-disc pl-5">
+          <li>18+ Jahre professionelle Beauty-Erfahrung</li>
+          <li>800+ ausgebildete Schüler:innen</li>
+          <li>National Instructor Hintergrund bei Kinetics und Trosani</li>
+          <li>Internationale Trainings- und Wettbewerbserfahrung</li>
+          <li>Unterricht in Persisch und Deutsch</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="max-w-2xl mb-12">
+        <h2 id="services-title" class="serif text-3xl mb-4">Signature Behandlungen</h2>
+        <p class="text-gray-700">
+          Das Atelier konzentriert sich auf eine sorgfältig ausgewählte Palette an Behandlungen, bei denen Expertise, ästhetisches Gespür und Präzision entscheidend sind. Statt einer überladenen Leistungsliste steht hier eine verfeinerte, beratungsorientierte Auswahl im Mittelpunkt.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-[#FDFBF6] p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-3">Signature Nail Atelier</h3>
+          <p class="text-gray-700">
+            Anspruchsvolle Nagelarbeit für Kund:innen, die elegante Formen, technische Präzision und ein hochwertiges Finish wünschen.
+          </p>
+        </div>
+
+        <div class="bg-[#FDFBF6] p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-3">Lash Design & Lift</h3>
+          <p class="text-gray-700">
+            Lash-Behandlungen, die natürliche Schönheit mit Balance, Definition und einem verfeinerten Endergebnis unterstreichen.
+          </p>
+        </div>
+
+        <div class="bg-[#FDFBF6] p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-3">Skin Renewal Protocols</h3>
+          <p class="text-gray-700">
+            Ausgewählte hautfokussierte Behandlungen mit beratungsorientierter Betreuung, strukturierter Planung und professioneller Nachsorge.
+          </p>
+        </div>
+
+        <div class="bg-[#FDFBF6] p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-3">Erweiterte Beratungsbehandlungen</h3>
+          <p class="text-gray-700">
+            Für Leistungen, die vor der Buchung eine genauere Beurteilung, Eignungsprüfung und individuelle Planung erfordern.
+          </p>
+        </div>
+
+        <div class="bg-[#FDFBF6] p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-3">Private Bridal & Event Vorbereitung</h3>
+          <p class="text-gray-700">
+            Eine ruhige und zuverlässige Vorbereitung für Hochzeiten, Shootings, Gala-Abende und besondere Anlässe.
+          </p>
+        </div>
+
+        <div class="bg-[#FDFBF6] p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-3">Appointment-Led Beauty Care</h3>
+          <p class="text-gray-700">
+            Ein persönlicherer und diskreter Ansatz für Kund:innen, die Vertrauen, Klarheit und hochwertige Aufmerksamkeit einer schnellen Salonroutine vorziehen.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Clients Choose -->
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="serif text-3xl mb-8">Warum Kund:innen MS Cosmetics wählen</h2>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-3">Präzision statt Masse</h3>
+          <p class="text-gray-700">
+            Dieses Atelier ist auf Qualität statt Geschwindigkeit ausgerichtet. Behandlungen werden mit mehr Sorgfalt, mehr Struktur und mehr Aufmerksamkeit ausgeführt.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-3">Education-led Beauty</h3>
+          <p class="text-gray-700">
+            Mobinas Educator-Hintergrund prägt sowohl die Kund:innen- als auch die Trainingserfahrung. Empfehlungen werden klar erklärt, und jede Behandlung wird wissensbasiert statt intuitiv durchgeführt.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-3">Mehrsprachiges Vertrauen</h3>
+          <p class="text-gray-700">
+            Kommunikation ist entscheidend. Persisch, Deutsch und Englisch schaffen ein tieferes Gefühl von Komfort und Vertrauen für internationale Kund:innen und Beauty-Schüler:innen in Europa.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-3">Private und diskrete Atmosphäre</h3>
+          <p class="text-gray-700">
+            Anspruchsvolle Kund:innen und ernsthafte Lernende schätzen Ruhe, Privatsphäre und Verlässlichkeit. Dieses Atelier ist als persönliches und bewusst geführtes Beauty-Erlebnis konzipiert.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Courses / Training -->
+  <section id="courses" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <p class="uppercase tracking-[0.3em] text-xs text-gray-500 mb-3">Advanced Beauty Training</p>
+        <h2 id="courses-title" class="serif text-3xl mb-4">
+          Professionelles Training für persischsprachige Beauty-Professionals in Europa
+        </h2>
+
+        <p id="courses-text" class="text-gray-700 mb-4">
+          Die Arbeit von Mobina Shahri geht über Kund:innenbehandlungen hinaus. Mit jahrelanger Unterrichtserfahrung, National Instructor Rollen und internationaler Trainingserfahrung bietet sie eine starke Grundlage für angehende Beauty-Professionals, die praxisnahe, glaubwürdige und technikorientierte Ausbildung suchen.
+        </p>
+
+        <p class="text-gray-700 mb-4">
+          Im März 2024 registrierte sie ihre Unterrichtslizenz in Deutschland und begann spezialisierte Nail-Schulungen für persischsprachige Menschen in Europa. Dadurch ist MS Cosmetics nicht nur ein Beauty Atelier, sondern auch eine vertrauenswürdige Trainingsplattform für zukünftige Fachkräfte.
+        </p>
+
+        <ul id="courses-bullets" class="space-y-2 text-gray-700 list-disc pl-5">
+          <li>Professionelle Nail-Trainings- und Instructor-Erfahrung in Europa</li>
+          <li>National Instructor Hintergrund bei Kinetics und Trosani</li>
+          <li>Fortgeschrittene Ausbildung in Nail-, Skin- und Beauty-Techniken</li>
+          <li>Internationale Erfahrung durch Wettbewerbe und Advanced Courses</li>
+          <li>Strukturierte Begleitung für persischsprachige Beauty-Professionals in Europa</li>
+        </ul>
+
+        <a href="#contact" class="btn-primary inline-block mt-6 px-6 py-3 rounded-full text-sm">Trainingsinformationen anfragen</a>
+      </div>
+
+      <img id="courses-img" src="images/courses.jpg" class="w-full rounded-2xl shadow-soft" alt="Advanced Beauty Training">
+    </div>
+  </section>
+
+  <!-- Qualifications -->
+  <section id="qualifications" class="py-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="max-w-3xl mb-10">
+        <p class="uppercase tracking-[0.3em] text-xs text-gray-500 mb-3">Qualifikationen</p>
+        <h2 class="serif text-3xl mb-4">Beruflicher Hintergrund & spezialisierte Ausbildung</h2>
+        <p class="text-gray-700">
+          Der Hintergrund von Mobina Shahri basiert auf langjähriger Berufspraxis, internationalem Training, Instruktorinnen-Ausbildung und technischer Weiterentwicklung in Nail, Beauty und Skin Care.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-4">Instruktorinnen- & Berufserfahrung</h3>
+          <ul class="space-y-3 text-gray-700 list-disc pl-5">
+            <li>2011–Heute: National Nail Instructor – Kinetics</li>
+            <li>2012–2021: National Nail Instructor – Trosani GmbH</li>
+            <li>2019: Teilnahme an der Nail Nations League, Rom, Italien</li>
+            <li>März 2024: Registrierte Unterrichtslizenz in Deutschland, Düsseldorf</li>
+            <li>Beginn spezialisierter Nail-Schulungen für persischsprachige Menschen in Europa</li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-4">Ausgewählte Kurse & Spezialisierungen</h3>
+          <ul class="space-y-3 text-gray-700 list-disc pl-5">
+            <li>Juli 2024: Aquafacial – SHR, Deutschland</li>
+            <li>April 2023: NiSV Akademie – Ultraschall & elektromagnetische Felder, Deutschland</li>
+            <li>August 2019: Eyelash Extension Course – Iran</li>
+            <li>2017–2018: National Educator & Nail Extension Expert – Riga, Lettland</li>
+            <li>2012–2015: Advanced Nail Instructor Courses – Trosani Deutschland, Düsseldorf</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery / Atelier -->
+  <section id="gallery" class="py-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 id="gallery-title" class="serif text-3xl mb-4">Das Atelier</h2>
+      <p class="text-gray-700 max-w-3xl mb-8">
+        Ruhe, Licht, Präzision und ein privateres Beauty-Erlebnis. Jede Behandlung wird mit Sorgfalt, Struktur und einem hochwertigen Anspruch umgesetzt.
+      </p>
+      <div id="gallery-grid" class="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <img src="images/gallery1.jpg" class="w-full h-56 object-cover rounded-xl shadow" alt="MS Cosmetics Galerie Bild 1">
+        <img src="images/gallery2.jpg" class="w-full h-56 object-cover rounded-xl shadow" alt="MS Cosmetics Galerie Bild 2">
+        <img src="images/gallery3.jpg" class="w-full h-56 object-cover rounded-xl shadow" alt="MS Cosmetics Galerie Bild 3">
+        <img src="images/gallery4.jpg" class="w-full h-56 object-cover rounded-xl shadow" alt="MS Cosmetics Galerie Bild 4">
+      </div>
+    </div>
+  </section>
+
+  <!-- Journal / Authority Content -->
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="serif text-3xl mb-4">Journal</h2>
+      <p class="text-gray-700 max-w-3xl">
+        Sorgfältige Beauty-Guides, Behandlungsvorbereitung, Nachsorge, Technik-Insights und edukative Inhalte, die Vertrauen und professionelle Autorität stärken.
+      </p>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section id="reviews" class="py-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 id="reviews-title" class="serif text-3xl mb-8">Kund:innen- & Schüler:innen-Feedback</h2>
+      <p class="text-gray-700 max-w-2xl mb-8">
+        Ein hochwertiges Beauty- und Trainingserlebnis basiert auf Vertrauen, Beständigkeit, sichtbarer Sorgfalt und echten professionellen Ergebnissen.
+      </p>
+
+      <div id="reviews-wrap" class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-2xl shadow-soft">
+          <div class="text-[var(--accent)] text-lg mb-3">★★★★★</div>
+          <p class="text-gray-700 italic leading-relaxed">
+            „Eine sehr ruhige, professionelle und präzise Erfahrung. Ich habe mich von der ersten Beratung an verstanden gefühlt und das Ergebnis war elegant und genau so, wie ich es mir gewünscht habe.“
+          </p>
+          <div class="mt-4">
+            <p class="font-semibold text-gray-900">Private Kundin</p>
+            <p class="text-sm text-gray-500">Signature Nail Atelier</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-soft">
+          <div class="text-[var(--accent)] text-lg mb-3">★★★★★</div>
+          <p class="text-gray-700 italic leading-relaxed">
+            „Der Unterricht ist strukturiert, geduldig und sehr praxisnah. Man merkt sofort den Unterschied, wenn jemand echte Unterrichtserfahrung mitbringt.“
+          </p>
+          <div class="mt-4">
+            <p class="font-semibold text-gray-900">Schüler:innen-Feedback</p>
+            <p class="text-sm text-gray-500">Professionelles Training</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-soft">
+          <div class="text-[var(--accent)] text-lg mb-3">★★★★★</div>
+          <p class="text-gray-700 italic leading-relaxed">
+            „Professionell, vertrauenswürdig und sehr erfahren. Das Niveau an Sorgfalt und Erklärung macht das gesamte Erlebnis besonders hochwertig.“
+          </p>
+          <div class="mt-4">
+            <p class="font-semibold text-gray-900">Private Kundin</p>
+            <p class="text-sm text-gray-500">Beratung & Beauty Care</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10">
+      <div>
+        <h2 id="contact-title" class="serif text-3xl mb-4">Private Buchung & Trainingskontakt</h2>
+        <p id="contact-text" class="text-gray-700 mb-6">
+          MS Cosmetics in Düsseldorf begrüßt sowohl private Beauty-Kund:innen als auch angehende Beauty-Professionals, die ernsthaftes Training suchen. Sie können sich für Termine, Trainingsanfragen, Mentoring oder individuelle Beratung melden.
+        </p>
+
+        <div class="space-y-3 text-gray-700">
+          <div>
+            <strong>MS Cosmetics by Mobina Shahri</strong><br>
+            Toulouser Allee 15, 5-03<br>
+            40211 Düsseldorf, DE
+          </div>
+          <div>
+            Telefon:
+            <a class="underline" href="tel:+491738983223">+49 173 8983223</a>
+          </div>
+          <div>
+            E-Mail:
+            <a class="underline" href="mailto:Mobina.shahri@web.de">Mobina.shahri@web.de</a>
+          </div>
+          <div>
+            Öffnungszeiten: Nur nach Vereinbarung
+          </div>
+          <div>
+            Sprachen: Persisch · Deutsch · Englisch
+          </div>
+        </div>
+      </div>
+
+      <form action="https://formspree.io/f/xbdpwqkl" method="POST" class="bg-[#FDFBF6] p-6 rounded-2xl shadow-soft">
+        <label for="name" class="text-sm">Name</label>
+        <input id="name" name="name" class="w-full mb-4 mt-1 px-3 py-2 border rounded-lg" type="text" required>
+
+        <label for="email" class="text-sm">E-Mail</label>
+        <input id="email" name="email" class="w-full mb-4 mt-1 px-3 py-2 border rounded-lg" type="email" required>
+
+        <label for="message" class="text-sm">Nachricht</label>
+        <textarea id="message" name="message" class="w-full mb-4 mt-1 px-3 py-2 border rounded-lg" rows="4" required></textarea>
+
+        <button type="submit" class="btn-primary px-5 py-2 rounded-full text-sm">
+          Nachricht senden
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#1a1a1a] text-white">
+    <div class="max-w-6xl mx-auto px-4 py-8 flex items-center justify-between">
+      <p class="text-sm">© 2025 MS Cosmetics by Mobina Shahri</p>
+      <div class="space-x-4 text-sm">
+        <a href="#" class="text-gray-300 hover:text-white">Impressum</a>
+        <a href="#" class="text-gray-300 hover:text-white">Datenschutz</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Chatbot -->
+  <div class="fixed bottom-4 right-4">
+    <button id="chat-toggle" class="btn-primary px-4 py-3 rounded-full shadow-lg">Concierge</button>
+    <div id="chat-window" class="hidden mt-2 w-80 bg-white rounded-2xl shadow-2xl overflow-hidden">
+      <div class="bg-[var(--accent)] text-white px-4 py-2 flex justify-between items-center">
+        <span>Private Concierge</span>
+        <button onclick="document.getElementById('chat-window').classList.add('hidden')">×</button>
+      </div>
+      <div id="chat-messages" class="h-64 overflow-y-auto p-3 bg-gray-50">
+        <div class="mb-2">
+          <div class="inline-block bg-gray-100 text-gray-800 px-3 py-2 rounded-2xl">
+            Willkommen. Wie kann ich Ihnen bei Behandlungen, Training oder Buchungen helfen?
+          </div>
+        </div>
+      </div>
+      <div class="p-3 flex space-x-2">
+        <input id="chat-input" class="flex-1 border rounded-full px-3 py-2" placeholder="Nachricht schreiben …">
+        <button id="chat-send" class="btn-primary rounded-full px-3">➤</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const root = document.getElementById('hero-carousel');
+      if (!root) return;
+
+      const slides = Array.from(root.querySelectorAll('.hero-slide'));
+      const prevBtn = document.getElementById('hero-prev');
+      const nextBtn = document.getElementById('hero-next');
+
+      let index = 0;
+      let timer;
+
+      function showSlide(newIndex) {
+        slides.forEach(slide => slide.classList.remove('is-active'));
+        index = (newIndex + slides.length) % slides.length;
+        slides[index].classList.add('is-active');
+      }
+
+      function startAutoSlide() {
+        clearInterval(timer);
+        timer = setInterval(() => {
+          showSlide(index + 1);
+        }, 3000);
+      }
+
+      function resetAutoSlide() {
+        startAutoSlide();
+      }
+
+      nextBtn.addEventListener('click', () => {
+        showSlide(index + 1);
+        resetAutoSlide();
+      });
+
+      prevBtn.addEventListener('click', () => {
+        showSlide(index - 1);
+        resetAutoSlide();
+      });
+
+      showSlide(0);
+      startAutoSlide();
+    })();
+  </script>
+
+</body>
+</html>
