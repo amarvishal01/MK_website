@@ -20,9 +20,10 @@ export default async function handler(req, res) {
 
     const CONTACT = {
       name: "MS Cosmetics by Mobina Shahri",
-      address: "Toulouser Allee 15, 5-03, 40211 Düsseldorf, Germany",
-      phone: "+49 173 8983223",
+    ,
       email: "Mobina.shahri@web.de",
+      
+      Instagram: "ms_cosmetics.de",
       languages: "Persian, German, English",
       appointments: "By appointment only"
     };
@@ -42,9 +43,8 @@ export default async function handler(req, res) {
         reply:
           `Gerne. Termine sind nur nach Vereinbarung möglich.\n\n` +
           `Sie können das Studio direkt kontaktieren:\n` +
-          `Telefon: ${CONTACT.phone}\n` +
           `E-Mail: ${CONTACT.email}\n` +
-          `Adresse: ${CONTACT.address}`
+          `Instagram: ${CONTACT.instagram}`
       });
     }
 
@@ -54,16 +54,16 @@ export default async function handler(req, res) {
         lower.includes("booking") ||
         lower.includes("appointment") ||
         lower.includes("contact") ||
-        lower.includes("phone") ||
+        lower.includes("instagram") ||
         lower.includes("email"))
     ) {
       return res.status(200).json({
         reply:
           `Appointments are by appointment only.\n\n` +
           `You can contact the studio directly:\n` +
-          `Phone: ${CONTACT.phone}\n` +
+          
           `Email: ${CONTACT.email}\n` +
-          `Address: ${CONTACT.address}`
+          `Instagram: ${CONTACT.instagram}`
       });
     }
 
@@ -72,7 +72,6 @@ export default async function handler(req, res) {
       (lower.includes("رزرو") ||
         lower.includes("وقت") ||
         lower.includes("تماس") ||
-        lower.includes("تلفن") ||
         lower.includes("ایمیل"))
     ) {
       return res.status(200).json({
@@ -81,7 +80,7 @@ export default async function handler(req, res) {
           `می‌توانید مستقیماً با مجموعه تماس بگیرید:\n` +
           `تلفن: ${CONTACT.phone}\n` +
           `ایمیل: ${CONTACT.email}\n` +
-          `آدرس: ${CONTACT.address}`
+          `Instagram: ${CONTACT.instagram}`
       });
     }
 
@@ -96,9 +95,8 @@ Wenn Informationen nicht sicher bekannt sind, sage klar, dass die Person das Stu
 Verwende nur diese Kontaktdaten:
 
 - Name: MS Cosmetics by Mobina Shahri
-- Adresse: Toulouser Allee 15, 5-03, 40211 Düsseldorf, Deutschland
-- Telefon: +49 173 8983223
 - E-Mail: Mobina.shahri@web.de
+- Instagram: ms_cosmetics.de
 - Sprachen: Persisch, Deutsch, Englisch
 - Termine: nur nach Vereinbarung
 
@@ -131,9 +129,8 @@ If something is not explicitly known, clearly tell the visitor to contact the st
 Use only these contact details:
 
 - Name: MS Cosmetics by Mobina Shahri
-- Address: Toulouser Allee 15, 5-03, 40211 Düsseldorf, Germany
-- Phone: +49 173 8983223
 - Email: Mobina.shahri@web.de
+- Instagram: ms_cosmetics.de
 - Languages: Persian, German, English
 - Appointments: by appointment only
 
@@ -166,8 +163,7 @@ Keep replies polite, clear, and fairly short.`,
 فقط از این اطلاعات تماس استفاده کن:
 
 - نام: MS Cosmetics by Mobina Shahri
-- آدرس: Toulouser Allee 15, 5-03, 40211 Düsseldorf, Germany
-- تلفن: +49 173 8983223
+- Instagram: ms_cosmetics.de
 - ایمیل: Mobina.shahri@web.de
 - زبان‌ها: فارسی، آلمانی، انگلیسی
 - وقت‌ها: فقط با تعیین وقت قبلی
