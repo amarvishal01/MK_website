@@ -30,38 +30,44 @@
 </head>
 <body class="bg-[#FDFBF6]">
 
-  <!-- Header -->
- <header class="bg-white/80 backdrop-blur sticky top-0 z-40 shadow-sm" dir="rtl">
-  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+ <!-- Header -->
+<header class="bg-white/80 backdrop-blur sticky top-0 z-40 shadow-sm" dir="rtl">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between gap-6">
     
-    <!-- Logo -->
-    <div class="flex items-center space-x-3 space-x-reverse">
-      <img src="images/logo.svg" class="h-8" alt="MS COSMETICS Logo">
-      <span class="serif text-2xl">MS_COSMETICS.de</span>
+    <!-- Brand -->
+    <div class="flex items-center space-x-2 space-x-reverse min-w-0 shrink-0">
+      <img src="images/logo.svg" class="h-8 w-auto shrink-0" alt="MS COSMETICS Logo">
+      <span class="serif text-xl lg:text-2xl leading-none truncate">
+        MS Cosmetics
+      </span>
     </div>
 
     <!-- Desktop nav -->
-    <nav class="hidden md:flex items-center space-x-6 space-x-reverse text-sm uppercase tracking-wider">
-      <a href="#about">درباره موبینا</a>
-      <a href="#services">خدمات</a>
-      <a href="#courses">آموزش</a>
-      <a href="#qualifications">مدارک</a>
-      <a href="#gallery">گالری</a>
-      <a href="#reviews">نظرات</a>
-      <a href="#contact">تماس</a>
+    <nav class="hidden lg:flex items-center space-x-5 space-x-reverse text-xs xl:text-sm uppercase tracking-wider">
+      <a href="#about" class="hover:text-[var(--accent)]">درباره موبینا</a>
+      <a href="#services" class="hover:text-[var(--accent)]">خدمات</a>
+      <a href="#courses" class="hover:text-[var(--accent)]">آموزش</a>
+      <a href="#qualifications" class="hover:text-[var(--accent)]">مدارک</a>
+      <a href="#gallery" class="hover:text-[var(--accent)]">گالری</a>
+      <a href="#reviews" class="hover:text-[var(--accent)]">نظرات</a>
+      <a href="#contact" class="hover:text-[var(--accent)]">تماس</a>
 
-      <a href="index.html" class="text-xs">DE</a>
-      <a href="en.html" class="text-xs">EN</a>
+      <a href="index.html" class="hover:text-[var(--accent)] text-xs">DE</a>
+      <a href="en.html" class="hover:text-[var(--accent)] text-xs">EN</a>
 
-      <a href="#contact" class="btn-primary px-4 py-2 rounded-full text-xs">رزرو خصوصی</a>
+      <a href="#contact" class="btn-primary px-4 py-2 rounded-full text-xs whitespace-nowrap">
+        رزرو خصوصی
+      </a>
     </nav>
 
     <!-- Mobile button -->
-    <button id="mobile-menu-btn" class="md:hidden text-3xl">☰</button>
+    <button id="mobile-menu-btn" class="lg:hidden text-3xl leading-none shrink-0" aria-label="باز کردن منو">
+      ☰
+    </button>
   </div>
 
   <!-- Mobile menu -->
-  <div id="mobile-menu" class="hidden md:hidden px-4 pb-4 bg-white border-t text-right">
+  <div id="mobile-menu" class="hidden lg:hidden px-4 pb-4 bg-white border-t text-right">
     <div class="flex flex-col space-y-4 text-sm uppercase tracking-wider pt-4">
       <a href="#about">درباره موبینا</a>
       <a href="#services">خدمات</a>
@@ -71,10 +77,14 @@
       <a href="#reviews">نظرات</a>
       <a href="#contact">تماس</a>
 
-      <a href="index.html">DE</a>
-      <a href="en.html">EN</a>
+      <div class="flex items-center justify-end gap-4 pt-2">
+        <a href="index.html" class="text-xs">DE</a>
+        <a href="en.html" class="text-xs">EN</a>
+      </div>
 
-      <a href="#contact" class="btn-primary px-4 py-2 rounded-full text-xs inline-block w-fit">رزرو خصوصی</a>
+      <a href="#contact" class="btn-primary px-4 py-2 rounded-full text-xs inline-block w-fit whitespace-nowrap">
+        رزرو خصوصی
+      </a>
     </div>
   </div>
 </header>
