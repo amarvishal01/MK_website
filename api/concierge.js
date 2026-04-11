@@ -47,7 +47,11 @@ Keep replies polite, clear, and fairly short.`,
 پاسخ‌ها را مودبانه، روشن و نسبتاً کوتاه نگه دار.`
     };
 
-    const response = await fetch("https://api.openai.com/v1/responses", {
+    if (!process.env.OPENAI_API_KEY) {
+      return res.status(500).json({ error: "Missing OPENAI_API_KEY in Vercel environment variables" });
+    }
+
+    const openaiResponse = await fetch("https://api.openai.com/v1/responses", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -68,16 +72,28 @@ Keep replies polite, clear, and fairly short.`,
       })
     });
 
-    const data = await response.json();
+    const data = await openaiResponse.json();
+
+    if (!openaiResponse.ok) {
+      console.error("OpenAI API error:", data);
+      return res.status(openaiResponse.status).json({
+        error: data?.error?.message || "OpenAI API request failed"
+      });
+    }
 
     const reply =
       data.output_text ||
       data.output?.[0]?.content?.[0]?.text ||
-      "Sorry, no response was generated.";
+      null;
+
+    if (!reply) {
+      console.error("Unexpected OpenAI response:", data);
+      return res.status(500).json({ error: "No reply text returned from OpenAI" });
+    }
 
     return res.status(200).json({ reply });
   } catch (error) {
-    console.error(error);
+    console.error("Server error:", error);
     return res.status(500).json({ error: "Server error" });
   }
 }
