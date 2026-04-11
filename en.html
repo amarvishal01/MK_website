@@ -30,38 +30,44 @@
 </head>
 <body class="bg-[#FDFBF6]">
 
-  <!-- Header -->
- <header class="bg-white/80 backdrop-blur sticky top-0 z-40 shadow-sm">
-  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+<!-- Header -->
+<header class="bg-white/80 backdrop-blur sticky top-0 z-40 shadow-sm">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between gap-6">
     
-    <!-- Logo -->
-    <div class="flex items-center space-x-3">
-      <img src="images/logo.svg" class="h-8" alt="MS COSMETICS Logo">
-      <span class="serif text-2xl">MS_COSMETICS.de</span>
+    <!-- Brand -->
+    <div class="flex items-center space-x-2 min-w-0 shrink-0">
+      <img src="images/logo.svg" class="h-8 w-auto shrink-0" alt="MS COSMETICS Logo">
+      <span class="serif text-xl lg:text-2xl leading-none truncate">
+        MS Cosmetics
+      </span>
     </div>
 
     <!-- Desktop nav -->
-    <nav class="hidden md:flex items-center space-x-6 text-sm uppercase tracking-wider">
-      <a href="#about">About Mobina</a>
-      <a href="#services">Treatments</a>
-      <a href="#courses">Training</a>
-      <a href="#qualifications">Qualifications</a>
-      <a href="#gallery">Atelier</a>
-      <a href="#reviews">Reviews</a>
-      <a href="#contact">Contact</a>
+    <nav class="hidden lg:flex items-center space-x-5 text-xs xl:text-sm uppercase tracking-wider">
+      <a href="#about" class="hover:text-[var(--accent)]">About Mobina</a>
+      <a href="#services" class="hover:text-[var(--accent)]">Treatments</a>
+      <a href="#courses" class="hover:text-[var(--accent)]">Training</a>
+      <a href="#qualifications" class="hover:text-[var(--accent)]">Qualifications</a>
+      <a href="#gallery" class="hover:text-[var(--accent)]">Atelier</a>
+      <a href="#reviews" class="hover:text-[var(--accent)]">Reviews</a>
+      <a href="#contact" class="hover:text-[var(--accent)]">Contact</a>
 
-      <a href="index.html" class="text-xs">DE</a>
-      <a href="fa.html" class="text-xs">FA</a>
+      <a href="index.html" class="hover:text-[var(--accent)] text-xs">DE</a>
+      <a href="fa.html" class="hover:text-[var(--accent)] text-xs">FA</a>
 
-      <a href="#contact" class="btn-primary px-4 py-2 rounded-full text-xs">Private Booking</a>
+      <a href="#contact" class="btn-primary px-4 py-2 rounded-full text-xs whitespace-nowrap">
+        Private Booking
+      </a>
     </nav>
 
     <!-- Mobile button -->
-    <button id="mobile-menu-btn" class="md:hidden text-3xl">☰</button>
+    <button id="mobile-menu-btn" class="lg:hidden text-3xl leading-none shrink-0" aria-label="Open menu">
+      ☰
+    </button>
   </div>
 
   <!-- Mobile menu -->
-  <div id="mobile-menu" class="hidden md:hidden px-4 pb-4 bg-white border-t">
+  <div id="mobile-menu" class="hidden lg:hidden px-4 pb-4 bg-white border-t">
     <div class="flex flex-col space-y-4 text-sm uppercase tracking-wider pt-4">
       <a href="#about">About Mobina</a>
       <a href="#services">Treatments</a>
@@ -71,10 +77,14 @@
       <a href="#reviews">Reviews</a>
       <a href="#contact">Contact</a>
 
-      <a href="index.html">DE</a>
-      <a href="fa.html">FA</a>
+      <div class="flex items-center gap-4 pt-2">
+        <a href="index.html" class="text-xs">DE</a>
+        <a href="fa.html" class="text-xs">FA</a>
+      </div>
 
-      <a href="#contact" class="btn-primary px-4 py-2 rounded-full text-xs inline-block w-fit">Private Booking</a>
+      <a href="#contact" class="btn-primary px-4 py-2 rounded-full text-xs inline-block w-fit whitespace-nowrap">
+        Private Booking
+      </a>
     </div>
   </div>
 </header>
