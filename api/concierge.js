@@ -1,10 +1,8 @@
 export default async function handler(req, res) {
-  // CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  // Preflight request
   if (req.method === "OPTIONS") {
     return res.status(200).end();
   }
@@ -58,18 +56,18 @@ Keep replies polite, clear, and fairly short.`,
     };
 
     if (!process.env.OPENAI_API_KEY) {
-      return res.status(500).json({ error: "Missing OPENAI_API_KEY" });
+      return res.status(500).json({ error: "Missing Hugging Face token in environment variables" });
     }
 
-    const openaiResponse = await fetch("https://api.openai.com/v1/responses", {
+    const hfResponse = await fetch("https://router.huggingface.co/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
       },
       body: JSON.stringify({
-        model: "gpt-4.1-mini",
-        input: [
+        model: "openai/gpt-oss-20b",
+        messages: [
           {
             role: "system",
             content: systemPrompts[lang] || systemPrompts.en
@@ -78,27 +76,26 @@ Keep replies polite, clear, and fairly short.`,
             role: "user",
             content: message
           }
-        ]
+        ],
+        max_tokens: 300,
+        temperature: 0.4
       })
     });
 
-    const data = await openaiResponse.json();
+    const data = await hfResponse.json();
 
-    if (!openaiResponse.ok) {
-      console.error("OpenAI API error:", data);
-      return res.status(openaiResponse.status).json({
-        error: data?.error?.message || "OpenAI API request failed"
+    if (!hfResponse.ok) {
+      console.error("Hugging Face API error:", data);
+      return res.status(hfResponse.status).json({
+        error: data?.error?.message || data?.error || "Hugging Face API request failed"
       });
     }
 
-    const reply =
-      data.output_text ||
-      data.output?.[0]?.content?.[0]?.text ||
-      null;
+    const reply = data?.choices?.[0]?.message?.content || null;
 
     if (!reply) {
-      console.error("Unexpected OpenAI response:", data);
-      return res.status(500).json({ error: "No reply text returned from OpenAI" });
+      console.error("Unexpected Hugging Face response:", data);
+      return res.status(500).json({ error: "No reply text returned from Hugging Face" });
     }
 
     return res.status(200).json({ reply });
