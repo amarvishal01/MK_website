@@ -1,1 +1,514 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MS Cosmetics by Mobina Shahri | آتلیه خصوصی زیبایی در دوسلدورف</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@700&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="آتلیه خصوصی زیبایی در دوسلدورف توسط موبینا شهری. خدمات تخصصی ناخن، مژه و زیبایی، مراقبت حرفه‌ای با رویکرد آموزشی، خدمات چندزبانه و آموزش تخصصی برای فارسی‌زبانان ساکن اروپا.">
 
+  <script>
+    fetch('content.json').then(r => r.json()).then(c => {
+      const ld = document.createElement('script');
+      ld.type = 'application/ld+json';
+      ld.textContent = JSON.stringify(c.seo);
+      document.head.appendChild(ld);
+    });
+  </script>
+
+  <style>
+    :root { --accent:#B4A284; }
+    body { font-family: 'Vazirmatn', 'Lato', sans-serif; color:#333; direction: rtl; text-align: right; }
+    h1,h2,h3,.serif { font-family: 'Vazirmatn', 'Playfair Display', serif; }
+    .btn-primary { background: var(--accent); color:#fff; }
+    .btn-primary:hover { filter: brightness(0.95); }
+  </style>
+</head>
+<body class="bg-[#FDFBF6]">
+
+  <!-- Header -->
+  <header class="bg-white/80 backdrop-blur sticky top-0 z-40 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center space-x-0 space-x-reverse space-x-3">
+        <img src="images/logo.svg" class="h-8" alt="لوگوی MS Cosmetics">
+        <span id="brand" class="serif text-2xl">MS Cosmetics</span>
+      </div>
+
+      <nav class="hidden md:flex items-center space-x-0 space-x-reverse space-x-6 text-sm uppercase tracking-wider">
+        <a href="#about" class="hover:text-[var(--accent)]">درباره موبینا</a>
+        <a href="#services" class="hover:text-[var(--accent)]">خدمات</a>
+        <a href="#courses" class="hover:text-[var(--accent)]">آموزش</a>
+        <a href="#qualifications" class="hover:text-[var(--accent)]">سوابق و مدارک</a>
+        <a href="#gallery" class="hover:text-[var(--accent)]">آتلیه</a>
+        <a href="#reviews" class="hover:text-[var(--accent)]">نظرات</a>
+        <a href="#contact" class="hover:text-[var(--accent)]">تماس</a>
+
+        <a href="index.html" class="hover:text-[var(--accent)] text-xs">EN</a>
+        <a href="de.html" class="hover:text-[var(--accent)] text-xs">DE</a>
+
+        <a href="#contact" class="btn-primary px-4 py-2 rounded-full text-xs">رزرو خصوصی</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Carousel -->
+  <section id="hero-carousel" class="relative h-[78vh] overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="images/hero1.jpg" class="hero-slide is-active absolute inset-0 w-full h-full object-cover object-top" alt="آتلیه خصوصی زیبایی در دوسلدورف">
+      <img src="images/hero2.jpg" class="hero-slide absolute inset-0 w-full h-full object-cover object-top" alt="خدمات لوکس زیبایی">
+      <img src="images/hero3.jpg" class="hero-slide absolute inset-0 w-full h-full object-cover object-top" alt="فضای آتلیه زیبایی">
+    </div>
+
+    <button id="hero-prev" aria-label="تصویر قبلی" class="hero-nav absolute right-4 top-1/2 -translate-y-1/2 z-20 text-white text-3xl px-4 py-2 rounded-full">
+      ›
+    </button>
+
+    <button id="hero-next" aria-label="تصویر بعدی" class="hero-nav absolute left-4 top-1/2 -translate-y-1/2 z-20 text-white text-3xl px-4 py-2 rounded-full">
+      ‹
+    </button>
+  </section>
+
+  <!-- Hero Text Block -->
+  <section class="bg-[#FDFBF6] py-14 md:py-16">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <p class="uppercase tracking-[0.35em] text-xs md:text-sm mb-4 text-gray-500">
+        دوسلدورف · آتلیه خصوصی زیبایی
+      </p>
+
+      <h1 id="hero-title" class="serif text-4xl md:text-6xl leading-tight text-gray-900">
+        MS_COSMETICS.de<br>
+        by Mobina Shahri
+      </h1>
+
+      <p id="hero-sub" class="mt-6 text-lg max-w-3xl mx-auto text-gray-700">
+        یک آتلیه خصوصی زیبایی در دوسلدورف برای خدمات حرفه‌ای، مراقبت تخصصی با رویکرد آموزشی، و آموزش پیشرفته برای هنرجویان و متخصصان زیبایی.
+      </p>
+
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#contact" class="btn-primary inline-block px-8 py-3 rounded-full text-sm cta-contact">رزرو وقت خصوصی</a>
+        <a href="#courses" class="inline-block border border-gray-400 text-gray-800 px-8 py-3 rounded-full text-sm hover:bg-gray-100">مشاهده آموزش‌ها</a>
+      </div>
+
+      <p class="mt-6 text-sm text-gray-600">
+        فقط با تعیین وقت قبلی · فارسی · آلمانی · انگلیسی
+      </p>
+    </div>
+  </section>
+
+  <!-- Trust Strip -->
+  <section class="py-10 bg-white border-y border-gray-100">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-4 gap-6 text-center">
+      <div>
+        <h3 class="serif text-xl mb-2">+۱۸ سال</h3>
+        <p class="text-sm text-gray-600">سابقه حرفه‌ای در زمینه ناخن، زیبایی، مو و مراقبت از پوست.</p>
+      </div>
+      <div>
+        <h3 class="serif text-xl mb-2">+۸۰۰ هنرجو</h3>
+        <p class="text-sm text-gray-600">آموزش بیش از ۸۰۰ هنرجو در ایران از طریق سال‌ها تجربه عملی و آموزشی.</p>
+      </div>
+      <div>
+        <h3 class="serif text-xl mb-2">مربی رسمی</h3>
+        <p class="text-sm text-gray-600">سابقه تدریس و مربی‌گری با برندها و سیستم‌های آموزشی شناخته‌شده بین‌المللی.</p>
+      </div>
+      <div>
+        <h3 class="serif text-xl mb-2">تجربه بین‌المللی</h3>
+        <p class="text-sm text-gray-600">دوره‌ها و رقابت‌های حرفه‌ای در آلمان، لتونی، ایتالیا، ایران و امارات.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-20">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+      <img id="about-img" src="images/about.jpg" class="w-full rounded-2xl shadow-soft" alt="Mobina Shahri">
+
+      <div>
+        <p class="uppercase tracking-[0.3em] text-xs text-gray-500 mb-3">آشنایی با موبینا شهری</p>
+        <h2 id="about-title" class="serif text-3xl mb-4">
+          متخصص زیبایی، مدرس و مربی با تجربه بین‌المللی
+        </h2>
+
+        <p id="about-text-1" class="text-gray-700 leading-relaxed mb-4">
+          موبینا شهری یک متخصص با‌تجربه در حوزه زیبایی و مدرس حرفه‌ای است که بیش از ۱۸ سال سابقه در زمینه ناخن، مو، زیبایی و مراقبت از پوست دارد. فعالیت او ترکیبی از مهارت فنی پیشرفته، انتقال ساختارمند دانش و تجربه عملی طولانی‌مدت است.
+        </p>
+
+        <p id="about-text-2" class="text-gray-700 leading-relaxed mb-6">
+          او در طول سال‌ها بیش از ۸۰۰ هنرجو را در ایران آموزش داده، برندهای مطرح زیبایی را در مسابقات بین‌المللی نمایندگی کرده و به عنوان مدرس رسمی ملی شناخته شده است. امروز او فعالیت خود را در دوسلدورف از طریق خدمات خصوصی و آموزش تخصصی زیبایی برای فارسی‌زبانان ساکن اروپا ادامه می‌دهد.
+        </p>
+
+        <ul class="space-y-2 text-gray-700 list-disc pr-5">
+          <li>بیش از ۱۸ سال تجربه حرفه‌ای در صنعت زیبایی</li>
+          <li>آموزش بیش از ۸۰۰ هنرجو</li>
+          <li>سابقه مربی رسمی با Kinetics و Trosani</li>
+          <li>تجربه بین‌المللی در آموزش و مسابقات</li>
+          <li>آموزش به زبان‌های فارسی و آلمانی</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="max-w-2xl mb-12">
+        <h2 id="services-title" class="serif text-3xl mb-4">خدمات ویژه</h2>
+        <p class="text-gray-700">
+          این آتلیه روی مجموعه‌ای منتخب از خدمات تمرکز دارد؛ خدماتی که در آن‌ها تخصص، سلیقه زیبایی‌شناختی و دقت نقش اصلی را دارند. به جای یک منوی شلوغ، تجربه‌ای دقیق، شخصی‌سازی‌شده و مشاوره‌محور ارائه می‌شود.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-[#FDFBF6] p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-3">Signature Nail Atelier</h3>
+          <p class="text-gray-700">
+            خدمات حرفه‌ای ناخن برای کسانی که فرم زیبا، دقت فنی و نتیجه‌ای ظریف و لوکس می‌خواهند.
+          </p>
+        </div>
+
+        <div class="bg-[#FDFBF6] p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-3">Lash Design & Lift</h3>
+          <p class="text-gray-700">
+            خدمات مژه با هدف برجسته‌کردن زیبایی طبیعی، ایجاد تعادل، فرم مناسب و نتیجه‌ای ظریف و حرفه‌ای.
+          </p>
+        </div>
+
+        <div class="bg-[#FDFBF6] p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-3">Skin Renewal Protocols</h3>
+          <p class="text-gray-700">
+            خدمات منتخب مراقبت از پوست با رویکرد مشاوره‌محور، برنامه‌ریزی ساختارمند و مراقبت پس از درمان.
+          </p>
+        </div>
+
+        <div class="bg-[#FDFBF6] p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-3">درمان‌ها و مشاوره‌های پیشرفته</h3>
+          <p class="text-gray-700">
+            برای خدماتی که نیاز به بررسی بیشتر، ارزیابی شرایط و برنامه‌ریزی اختصاصی قبل از رزرو دارند.
+          </p>
+        </div>
+
+        <div class="bg-[#FDFBF6] p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-3">آماده‌سازی خصوصی عروس و مراسم</h3>
+          <p class="text-gray-700">
+            تجربه‌ای آرام، دقیق و قابل‌اعتماد برای عروسی، عکاسی، مهمانی رسمی و مناسبت‌های مهم.
+          </p>
+        </div>
+
+        <div class="bg-[#FDFBF6] p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-3">Beauty Care با وقت قبلی</h3>
+          <p class="text-gray-700">
+            رویکردی شخصی‌تر و خصوصی‌تر برای افرادی که اعتماد، وضوح و توجه حرفه‌ای را به خدمات سریع و پرحجم ترجیح می‌دهند.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Clients Choose -->
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="serif text-3xl mb-8">چرا MS Cosmetics را انتخاب می‌کنند</h2>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-3">دقت به جای حجم بالا</h3>
+          <p class="text-gray-700">
+            این آتلیه بر پایه کیفیت ساخته شده، نه سرعت. هر خدمت با دقت، ساختار و توجه بیشتری انجام می‌شود.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-3">زیبایی با رویکرد آموزشی</h3>
+          <p class="text-gray-700">
+            پیشینه آموزشی موبینا هم تجربه مشتری و هم تجربه هنرجو را شکل می‌دهد. توصیه‌ها با شفافیت توضیح داده می‌شوند و هر خدمات بر اساس دانش و تجربه ارائه می‌شود.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-3">اعتماد چندزبانه</h3>
+          <p class="text-gray-700">
+            ارتباط مؤثر مهم است. فارسی، آلمانی و انگلیسی باعث ایجاد حس راحتی و اعتماد بیشتر برای مشتریان و هنرجویان بین‌المللی در اروپا می‌شود.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-3">فضای خصوصی و آرام</h3>
+          <p class="text-gray-700">
+            مشتریان خاص و هنرجویان جدی اغلب آرامش، حریم خصوصی و نظم را ترجیح می‌دهند. این آتلیه برای یک تجربه شخصی و حرفه‌ای طراحی شده است.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Courses / Training -->
+  <section id="courses" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <p class="uppercase tracking-[0.3em] text-xs text-gray-500 mb-3">آموزش پیشرفته زیبایی</p>
+        <h2 id="courses-title" class="serif text-3xl mb-4">
+          آموزش حرفه‌ای برای فارسی‌زبانان فعال در حوزه زیبایی در اروپا
+        </h2>
+
+        <p id="courses-text" class="text-gray-700 mb-4">
+          فعالیت موبینا شهری فقط به خدمات مشتریان محدود نمی‌شود. با سال‌ها تجربه تدریس، سابقه مربی رسمی ملی و حضور در دوره‌ها و رقابت‌های بین‌المللی، او پایه‌ای قوی برای افرادی فراهم می‌کند که به دنبال آموزش عملی، معتبر و تکنیک‌محور هستند.
+        </p>
+
+        <p class="text-gray-700 mb-4">
+          در مارس ۲۰۲۴، او مجوز تدریس خود را در آلمان ثبت کرد و آموزش تخصصی ناخن را برای فارسی‌زبانان ساکن اروپا آغاز نمود. به همین دلیل، MS Cosmetics فقط یک آتلیه زیبایی نیست، بلکه بستری قابل‌اعتماد برای رشد حرفه‌ای آینده نیز هست.
+        </p>
+
+        <ul id="courses-bullets" class="space-y-2 text-gray-700 list-disc pr-5">
+          <li>تجربه حرفه‌ای آموزش ناخن و مربی‌گری در اروپا</li>
+          <li>سابقه مربی رسمی ملی با Kinetics و Trosani</li>
+          <li>آموزش پیشرفته در تکنیک‌های ناخن، پوست و زیبایی</li>
+          <li>تجربه بین‌المللی از طریق مسابقات و دوره‌های پیشرفته</li>
+          <li>راهنمایی ساختارمند برای متخصصان فارسی‌زبان زیبایی در اروپا</li>
+        </ul>
+
+        <a href="#contact" class="btn-primary inline-block mt-6 px-6 py-3 rounded-full text-sm">درخواست اطلاعات آموزش</a>
+      </div>
+
+      <img id="courses-img" src="images/courses.jpg" class="w-full rounded-2xl shadow-soft" alt="Advanced Beauty Training">
+    </div>
+  </section>
+
+  <!-- Qualifications -->
+  <section id="qualifications" class="py-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="max-w-3xl mb-10">
+        <p class="uppercase tracking-[0.3em] text-xs text-gray-500 mb-3">سوابق و مدارک</p>
+        <h2 class="serif text-3xl mb-4">پیشینه حرفه‌ای و آموزش‌های تخصصی</h2>
+        <p class="text-gray-700">
+          مسیر حرفه‌ای موبینا شهری بر پایه سال‌ها تجربه عملی، آموزش بین‌المللی، تربیت مربی و توسعه تخصصی در حوزه ناخن، زیبایی و مراقبت از پوست شکل گرفته است.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-4">سابقه مربی‌گری و تجربه حرفه‌ای</h3>
+          <ul class="space-y-3 text-gray-700 list-disc pr-5">
+            <li>از ۲۰۱۱ تاکنون: National Nail Instructor – Kinetics</li>
+            <li>۲۰۱۲ تا ۲۰۲۱: National Nail Instructor – Trosani GmbH</li>
+            <li>۲۰۱۹: شرکت در Nail Nations League در شهر رم، ایتالیا</li>
+            <li>مارس ۲۰۲۴: ثبت مجوز تدریس در آلمان، دوسلدورف</li>
+            <li>آغاز آموزش تخصصی ناخن برای فارسی‌زبانان ساکن اروپا</li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-soft">
+          <h3 class="serif text-2xl mb-4">دوره‌ها و تخصص‌های منتخب</h3>
+          <ul class="space-y-3 text-gray-700 list-disc pr-5">
+            <li>جولای ۲۰۲۴: Aquafacial – SHR، آلمان</li>
+            <li>آوریل ۲۰۲۳: آکادمی NiSV – Ultrasound & Electromagnetic Fields، آلمان</li>
+            <li>آگوست ۲۰۱۹: دوره اکستنشن مژه – ایران</li>
+            <li>۲۰۱۷ تا ۲۰۱۸: National Educator & Nail Extension Expert – ریگا، لتونی</li>
+            <li>۲۰۱۲ تا ۲۰۱۵: Advanced Nail Instructor Courses – Trosani Deutschland، دوسلدورف</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery / Atelier -->
+  <section id="gallery" class="py-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 id="gallery-title" class="serif text-3xl mb-4">آتلیه</h2>
+      <p class="text-gray-700 max-w-3xl mb-8">
+        آرامش، نور، دقت و یک تجربه خصوصی‌تر از زیبایی. هر خدمت با مراقبت، ساختار و استانداردی حرفه‌ای ارائه می‌شود.
+      </p>
+      <div id="gallery-grid" class="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <img src="images/gallery1.jpg" class="w-full h-56 object-cover rounded-xl shadow" alt="تصویر گالری ۱">
+        <img src="images/gallery2.jpg" class="w-full h-56 object-cover rounded-xl shadow" alt="تصویر گالری ۲">
+        <img src="images/gallery3.jpg" class="w-full h-56 object-cover rounded-xl shadow" alt="تصویر گالری ۳">
+        <img src="images/gallery4.jpg" class="w-full h-56 object-cover rounded-xl shadow" alt="تصویر گالری ۴">
+      </div>
+    </div>
+  </section>
+
+  <!-- Journal -->
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="serif text-3xl mb-4">ژورنال</h2>
+      <p class="text-gray-700 max-w-3xl">
+        مطالب تخصصی درباره آمادگی قبل از درمان، مراقبت بعد از خدمات، نکات تکنیکی، و محتوای آموزشی که اعتماد و اعتبار حرفه‌ای را تقویت می‌کند.
+      </p>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section id="reviews" class="py-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 id="reviews-title" class="serif text-3xl mb-8">بازخورد مشتریان و هنرجویان</h2>
+      <p class="text-gray-700 max-w-2xl mb-8">
+        یک تجربه حرفه‌ای در زیبایی و آموزش بر پایه اعتماد، ثبات، دقت قابل‌مشاهده و نتایج واقعی ساخته می‌شود.
+      </p>
+
+      <div id="reviews-wrap" class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-2xl shadow-soft">
+          <div class="text-[var(--accent)] text-lg mb-3">★★★★★</div>
+          <p class="text-gray-700 italic leading-relaxed">
+            «تجربه‌ای بسیار آرام، حرفه‌ای و دقیق بود. از همان مشاوره اول احساس کردم کاملاً درک می‌شوم و نتیجه دقیقاً همان چیزی بود که می‌خواستم.»
+          </p>
+          <div class="mt-4">
+            <p class="font-semibold text-gray-900">مشتری خصوصی</p>
+            <p class="text-sm text-gray-500">Signature Nail Atelier</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-soft">
+          <div class="text-[var(--accent)] text-lg mb-3">★★★★★</div>
+          <p class="text-gray-700 italic leading-relaxed">
+            «شیوه آموزش بسیار منظم، صبورانه و عملی است. وقتی کسی واقعاً تجربه تدریس دارد، تفاوت آن را کاملاً حس می‌کنید.»
+          </p>
+          <div class="mt-4">
+            <p class="font-semibold text-gray-900">بازخورد هنرجو</p>
+            <p class="text-sm text-gray-500">آموزش حرفه‌ای</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-soft">
+          <div class="text-[var(--accent)] text-lg mb-3">★★★★★</div>
+          <p class="text-gray-700 italic leading-relaxed">
+            «حرفه‌ای، قابل‌اعتماد و بسیار باتجربه. سطح توضیح و دقت در کار باعث می‌شود کل تجربه، لوکس و مطمئن به نظر برسد.»
+          </p>
+          <div class="mt-4">
+            <p class="font-semibold text-gray-900">مشتری خصوصی</p>
+            <p class="text-sm text-gray-500">مشاوره و Beauty Care</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10">
+      <div>
+        <h2 id="contact-title" class="serif text-3xl mb-4">رزرو خصوصی و تماس برای آموزش</h2>
+        <p id="contact-text" class="text-gray-700 mb-6">
+          MS Cosmetics در دوسلدورف از مشتریان خصوصی زیبایی و همچنین افرادی که به دنبال آموزش جدی و حرفه‌ای هستند استقبال می‌کند. برای رزرو وقت، دریافت اطلاعات آموزش، منتورینگ یا مشاوره اختصاصی می‌توانید در تماس باشید.
+        </p>
+
+        <div class="space-y-3 text-gray-700">
+          <div>
+            <strong>MS Cosmetics by Mobina Shahri</strong><br>
+            Toulouser Allee 15, 5-03<br>
+            40211 Düsseldorf, DE
+          </div>
+          <div>
+            تلفن:
+            <a class="underline" href="tel:+491738983223">+49 173 8983223</a>
+          </div>
+          <div>
+            ایمیل:
+            <a class="underline" href="mailto:Mobina.shahri@web.de">Mobina.shahri@web.de</a>
+          </div>
+          <div>
+            ساعات کاری: فقط با تعیین وقت قبلی
+          </div>
+          <div>
+            زبان‌ها: فارسی · آلمانی · انگلیسی
+          </div>
+        </div>
+      </div>
+
+      <form action="https://formspree.io/f/xbdpwqkl" method="POST" class="bg-[#FDFBF6] p-6 rounded-2xl shadow-soft">
+        <label for="name" class="text-sm">نام</label>
+        <input id="name" name="name" class="w-full mb-4 mt-1 px-3 py-2 border rounded-lg" type="text" required>
+
+        <label for="email" class="text-sm">ایمیل</label>
+        <input id="email" name="email" class="w-full mb-4 mt-1 px-3 py-2 border rounded-lg" type="email" required>
+
+        <label for="message" class="text-sm">پیام</label>
+        <textarea id="message" name="message" class="w-full mb-4 mt-1 px-3 py-2 border rounded-lg" rows="4" required></textarea>
+
+        <button type="submit" class="btn-primary px-5 py-2 rounded-full text-sm">
+          ارسال پیام
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#1a1a1a] text-white">
+    <div class="max-w-6xl mx-auto px-4 py-8 flex items-center justify-between">
+      <p class="text-sm">© 2025 MS Cosmetics by Mobina Shahri</p>
+      <div class="space-x-0 space-x-reverse space-x-4 text-sm">
+        <a href="#" class="text-gray-300 hover:text-white">اطلاعات حقوقی</a>
+        <a href="#" class="text-gray-300 hover:text-white">حریم خصوصی</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Chatbot -->
+  <div class="fixed bottom-4 left-4">
+    <button id="chat-toggle" class="btn-primary px-4 py-3 rounded-full shadow-lg">مشاوره</button>
+    <div id="chat-window" class="hidden mt-2 w-80 bg-white rounded-2xl shadow-2xl overflow-hidden">
+      <div class="bg-[var(--accent)] text-white px-4 py-2 flex justify-between items-center">
+        <span>مشاوره خصوصی</span>
+        <button onclick="document.getElementById('chat-window').classList.add('hidden')">×</button>
+      </div>
+      <div id="chat-messages" class="h-64 overflow-y-auto p-3 bg-gray-50">
+        <div class="mb-2">
+          <div class="inline-block bg-gray-100 text-gray-800 px-3 py-2 rounded-2xl">
+            خوش آمدید. چگونه می‌توانم در مورد خدمات، آموزش یا رزرو به شما کمک کنم؟
+          </div>
+        </div>
+      </div>
+      <div class="p-3 flex space-x-0 space-x-reverse space-x-2">
+        <input id="chat-input" class="flex-1 border rounded-full px-3 py-2" placeholder="پیام خود را بنویسید …">
+        <button id="chat-send" class="btn-primary rounded-full px-3">➤</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const root = document.getElementById('hero-carousel');
+      if (!root) return;
+
+      const slides = Array.from(root.querySelectorAll('.hero-slide'));
+      const prevBtn = document.getElementById('hero-prev');
+      const nextBtn = document.getElementById('hero-next');
+
+      let index = 0;
+      let timer;
+
+      function showSlide(newIndex) {
+        slides.forEach(slide => slide.classList.remove('is-active'));
+        index = (newIndex + slides.length) % slides.length;
+        slides[index].classList.add('is-active');
+      }
+
+      function startAutoSlide() {
+        clearInterval(timer);
+        timer = setInterval(() => {
+          showSlide(index + 1);
+        }, 3000);
+      }
+
+      function resetAutoSlide() {
+        startAutoSlide();
+      }
+
+      nextBtn.addEventListener('click', () => {
+        showSlide(index + 1);
+        resetAutoSlide();
+      });
+
+      prevBtn.addEventListener('click', () => {
+        showSlide(index - 1);
+        resetAutoSlide();
+      });
+
+      showSlide(0);
+      startAutoSlide();
+    })();
+  </script>
+
+</body>
+</html>
