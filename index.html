@@ -31,29 +31,51 @@
 <body class="bg-[#FDFBF6]">
 
   <!-- Header -->
-  <header class="bg-white/80 backdrop-blur sticky top-0 z-40 shadow-sm">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <img src="images/logo.svg" class="h-8" alt="MS Cosmetics Logo">
-        <span id="brand" class="serif text-2xl">MS Cosmetics</span>
-      </div>
-
-      <nav class="hidden md:flex items-center space-x-6 text-sm uppercase tracking-wider">
-        <a href="#about" class="hover:text-[var(--accent)]">Über Mobina</a>
-        <a href="#services" class="hover:text-[var(--accent)]">Behandlungen</a>
-        <a href="#courses" class="hover:text-[var(--accent)]">Training</a>
-        <a href="#qualifications" class="hover:text-[var(--accent)]">Qualifikationen</a>
-        <a href="#gallery" class="hover:text-[var(--accent)]">Atelier</a>
-        <a href="#reviews" class="hover:text-[var(--accent)]">Bewertungen</a>
-        <a href="#contact" class="hover:text-[var(--accent)]">Kontakt</a>
-
-        <a href="en.html" class="hover:text-[var(--accent)] text-xs">EN</a>
-        <a href="fa.html" class="hover:text-[var(--accent)] text-xs">FA</a>
-
-        <a href="#contact" class="btn-primary px-4 py-2 rounded-full text-xs">Private Buchung</a>
-      </nav>
+ <header class="bg-white/80 backdrop-blur sticky top-0 z-40 shadow-sm">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <img src="images/logo.svg" class="h-8" alt="MS Cosmetics Logo">
+      <span id="brand" class="serif text-2xl">MS Cosmetics</span>
     </div>
-  </header>
+
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex items-center space-x-6 text-sm uppercase tracking-wider">
+      <a href="#about" class="hover:text-[var(--accent)]">Über Mobina</a>
+      <a href="#services" class="hover:text-[var(--accent)]">Behandlungen</a>
+      <a href="#courses" class="hover:text-[var(--accent)]">Training</a>
+      <a href="#qualifications" class="hover:text-[var(--accent)]">Qualifikationen</a>
+      <a href="#gallery" class="hover:text-[var(--accent)]">Atelier</a>
+      <a href="#reviews" class="hover:text-[var(--accent)]">Bewertungen</a>
+      <a href="#contact" class="hover:text-[var(--accent)]">Kontakt</a>
+
+      <a href="en.html" class="hover:text-[var(--accent)] text-xs">EN</a>
+      <a href="fa.html" class="hover:text-[var(--accent)] text-xs">FA</a>
+
+      <a href="#contact" class="btn-primary px-4 py-2 rounded-full text-xs">Private Buchung</a>
+    </nav>
+
+    <!-- Mobile menu button -->
+    <button id="mobile-menu-btn" class="md:hidden text-3xl leading-none">
+      ☰
+    </button>
+  </div>
+
+  <!-- Mobile nav -->
+  <div id="mobile-menu" class="hidden md:hidden px-4 pb-4 bg-white border-t">
+    <div class="flex flex-col space-y-4 text-sm uppercase tracking-wider pt-4">
+      <a href="#about">Über Mobina</a>
+      <a href="#services">Behandlungen</a>
+      <a href="#courses">Training</a>
+      <a href="#qualifications">Qualifikationen</a>
+      <a href="#gallery">Atelier</a>
+      <a href="#reviews">Bewertungen</a>
+      <a href="#contact">Kontakt</a>
+      <a href="en.html">EN</a>
+      <a href="fa.html">FA</a>
+      <a href="#contact" class="btn-primary px-4 py-2 rounded-full text-xs inline-block w-fit">Private Buchung</a>
+    </div>
+  </div>
+</header>
 
   <!-- Hero Carousel -->
   <section id="hero-carousel" class="relative h-[78vh] overflow-hidden">
@@ -678,6 +700,21 @@
   });
 })();
 </script>
+
+<script>
+  (function () {
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+
+    if (!btn || !menu) return;
+
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  })();
+</script>
+
+
   
 </body>
 </html>
