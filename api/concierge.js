@@ -196,45 +196,50 @@ Keep replies polite, clear, and fairly short.`,
       return res.status(500).json({ error: "Missing OPENAI_API_KEY" });
     }
 
-    const openaiResponse = await fetch("https://api.openai.com/v1/responses", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
+
+    
+   const hfResponse = await fetch("https://router.huggingface.co/v1/chat/completions", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
+  },
+  body: JSON.stringify({
+    model: "openai/gpt-oss-120b:fastest",
+    messages: [
+      {
+        role: "system",
+        content: systemPrompts[language] || systemPrompts.en
       },
-      body: JSON.stringify({
-        model: "gpt-4.1-mini",
-        input: [
-          {
-            role: "system",
-            content: systemPrompts[language] || systemPrompts.en
-          },
-          {
-            role: "user",
-            content: `User question: ${userMessage}
+      {
+        role: "user",
+        content: `User question: ${userMessage}
 
 Known contact details:
 Phone: ${CONTACT.phone}
 Email: ${CONTACT.email}
 Address: ${CONTACT.address}`
-          }
-        ]
-      })
-    });
+      }
+    ],
+    max_tokens: 300,
+    temperature: 0.4
+  })
+});
 
-    const data = await openaiResponse.json();
+const data = await hfResponse.json();
 
-    if (!openaiResponse.ok) {
-      console.error("OpenAI API error:", data);
-      return res.status(openaiResponse.status).json({
-        error: data?.error?.message || "OpenAI API request failed"
-      });
-    }
+if (!hfResponse.ok) {
+  console.error("Hugging Face API error:", data);
+  return res.status(hfResponse.status).json({
+    error: data?.error?.message || data?.error || "Hugging Face API request failed"
+  });
+}
 
-    const reply =
-      data.output_text ||
-      data.output?.[0]?.content?.[0]?.text ||
-      null;
+const reply = data?.choices?.[0]?.message?.content || null;
+
+
+
+    
 
     if (!reply) {
       console.error("Unexpected OpenAI response:", data);
