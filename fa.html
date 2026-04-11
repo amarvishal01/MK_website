@@ -31,29 +31,53 @@
 <body class="bg-[#FDFBF6]">
 
   <!-- Header -->
-  <header class="bg-white/80 backdrop-blur sticky top-0 z-40 shadow-sm">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-      <div class="flex items-center space-x-0 space-x-reverse space-x-3">
-        <img src="images/logo.svg" class="h-8" alt="لوگوی MS Cosmetics">
-        <span id="brand" class="serif text-2xl">MS Cosmetics</span>
-      </div>
-
-      <nav class="hidden md:flex items-center space-x-0 space-x-reverse space-x-6 text-sm uppercase tracking-wider">
-        <a href="#about" class="hover:text-[var(--accent)]">درباره موبینا</a>
-        <a href="#services" class="hover:text-[var(--accent)]">خدمات</a>
-        <a href="#courses" class="hover:text-[var(--accent)]">آموزش</a>
-        <a href="#qualifications" class="hover:text-[var(--accent)]">سوابق و مدارک</a>
-        <a href="#gallery" class="hover:text-[var(--accent)]">آتلیه</a>
-        <a href="#reviews" class="hover:text-[var(--accent)]">نظرات</a>
-        <a href="#contact" class="hover:text-[var(--accent)]">تماس</a>
-
-        <a href="en.html" class="hover:text-[var(--accent)] text-xs">EN</a>
-        <a href="index.html" class="hover:text-[var(--accent)] text-xs">DE</a>
-
-        <a href="#contact" class="btn-primary px-4 py-2 rounded-full text-xs">رزرو خصوصی</a>
-      </nav>
+ <header class="bg-white/80 backdrop-blur sticky top-0 z-40 shadow-sm" dir="rtl">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+    
+    <!-- Logo -->
+    <div class="flex items-center space-x-3 space-x-reverse">
+      <img src="images/logo.svg" class="h-8" alt="MS Cosmetics Logo">
+      <span class="serif text-2xl">MS Cosmetics</span>
     </div>
-  </header>
+
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex items-center space-x-6 space-x-reverse text-sm uppercase tracking-wider">
+      <a href="#about">درباره موبینا</a>
+      <a href="#services">خدمات</a>
+      <a href="#courses">آموزش</a>
+      <a href="#qualifications">مدارک</a>
+      <a href="#gallery">گالری</a>
+      <a href="#reviews">نظرات</a>
+      <a href="#contact">تماس</a>
+
+      <a href="index.html" class="text-xs">DE</a>
+      <a href="en.html" class="text-xs">EN</a>
+
+      <a href="#contact" class="btn-primary px-4 py-2 rounded-full text-xs">رزرو خصوصی</a>
+    </nav>
+
+    <!-- Mobile button -->
+    <button id="mobile-menu-btn" class="md:hidden text-3xl">☰</button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden md:hidden px-4 pb-4 bg-white border-t text-right">
+    <div class="flex flex-col space-y-4 text-sm uppercase tracking-wider pt-4">
+      <a href="#about">درباره موبینا</a>
+      <a href="#services">خدمات</a>
+      <a href="#courses">آموزش</a>
+      <a href="#qualifications">مدارک</a>
+      <a href="#gallery">گالری</a>
+      <a href="#reviews">نظرات</a>
+      <a href="#contact">تماس</a>
+
+      <a href="index.html">DE</a>
+      <a href="en.html">EN</a>
+
+      <a href="#contact" class="btn-primary px-4 py-2 rounded-full text-xs inline-block w-fit">رزرو خصوصی</a>
+    </div>
+  </div>
+</header>
 
   <!-- Hero Carousel -->
   <section id="hero-carousel" class="relative h-[78vh] overflow-hidden">
@@ -631,6 +655,20 @@
 })();
 </script>
 
+
+
+  <script>
+  (function () {
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+
+    if (!btn || !menu) return;
+
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  })();
+</script>
   
 </body>
 </html>
