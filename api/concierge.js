@@ -66,7 +66,7 @@ Keep replies polite, clear, and fairly short.`,
         "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
       },
       body: JSON.stringify({
-        model: "openai/gpt-oss-20b",
+        model: "openai/gpt-oss-120b:fastest",
         messages: [
           {
             role: "system",
