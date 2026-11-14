@@ -1,0 +1,43 @@
+name: Generate SEO Pages
+
+on:
+  push:
+    branches:
+      - staging
+      - main
+    paths:
+      - 'seo_targets.json'
+      - 'generate_pages.py'
+      - 'index.html'
+  workflow_dispatch: # Allows you to manually click a button to run it
+
+permissions:
+  contents: write
+
+jobs:
+  generate-pages:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install beautifulsoup4
+          
+      - name: Run page generator
+        run: python generate_pages.py
+        
+      - name: Commit and push new pages
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add services/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-generate SEO pages via GitHub Actions" && git push)
