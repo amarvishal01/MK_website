@@ -12,8 +12,8 @@ HF_TOKEN = os.environ.get("HF_TOKEN")
 # Using Zephyr-7b as it is exceptionally fast and reliable on the free tier for JSON formatting
 HF_API_URL = "https://api-inference.huggingface.co/models/HuggingFaceH4/zephyr-7b-beta"
 
-def get_breakout_trends():
-    """Scrapes Google Trends for breakout queries related to seed keywords."""
+def get_rising_trends():
+    """Scrapes Google Trends for breakout AND rising queries (>150%)."""
     pytrend = TrendReq(hl='de-DE', tz=360)
     new_trends = []
     
@@ -24,8 +24,18 @@ def get_breakout_trends():
             
             if related_queries and keyword in related_queries and related_queries[keyword]['rising'] is not None:
                 rising_df = related_queries[keyword]['rising']
-                breakouts = rising_df[rising_df['value'] == 'Breakout']['query'].tolist()
-                new_trends.extend(breakouts)
+                
+                # Catch massive 'Breakout' spikes AND any trend growing by more than 150%
+                for index, row in rising_df.iterrows():
+                    val = row['value']
+                    if val == 'Breakout':
+                        new_trends.append(row['query'])
+                    else:
+                        try:
+                            if int(val) >= 150:
+                                new_trends.append(row['query'])
+                        except ValueError:
+                            pass
             time.sleep(2) 
         except Exception as e:
             print(f"Error fetching trends for {keyword}: {e}")
@@ -71,11 +81,11 @@ Generate a JSON object with strictly these keys:
 
 # 2. Execution
 if __name__ == "__main__":
-    print("Checking for new local beauty trends in NRW...")
-    breakouts = get_breakout_trends()
+    print("Checking for new breakout and rising trends (>150%) in NRW...")
+    rising_trends = get_rising_trends()
     
-    if not breakouts:
-        print("No new breakouts today.")
+    if not rising_trends:
+        print("No new rising trends today.")
         exit(0)
         
     with open(JSON_FILE, "r", encoding="utf-8") as f:
@@ -84,11 +94,11 @@ if __name__ == "__main__":
     existing_slugs = {item.get("slug") for item in existing_data}
     added_new = False
     
-    for trend in breakouts:
+    for trend in rising_trends:
         if any(trend.split()[0] in slug for slug in existing_slugs):
             continue
             
-        print(f"Found new breakout trend: {trend}. Generating SEO copy via Hugging Face...")
+        print(f"Found new rising trend: {trend}. Generating SEO copy via Hugging Face...")
         new_block = generate_seo_content(trend)
         
         if new_block and new_block.get("slug") and new_block["slug"] not in existing_slugs:
