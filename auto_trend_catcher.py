@@ -1,7 +1,10 @@
 import json
 import os
 import time
+import random
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 from pytrends.request import TrendReq
 
 # 1. Configuration
@@ -9,12 +12,23 @@ GEO_REGION = 'DE-NW'
 SEED_KEYWORDS = ['aquafacial', 'wimpernlifting', 'nageldesign', 'brautmakeup']
 JSON_FILE = 'seo_targets.json'
 HF_TOKEN = os.environ.get("HF_TOKEN")
-# Using Zephyr-7b as it is exceptionally fast and reliable on the free tier for JSON formatting
 HF_API_URL = "https://api-inference.huggingface.co/models/HuggingFaceH4/zephyr-7b-beta"
 
+# Setup robust network session with automatic retries for Hugging Face DNS blips
+session = requests.Session()
+retries = Retry(total=5, backoff_factor=2, status_forcelist=[500, 502, 503, 504])
+session.mount('https://', HTTPAdapter(max_retries=retries))
+
 def get_rising_trends():
-    """Scrapes Google Trends for breakout AND rising queries (>150%)."""
-    pytrend = TrendReq(hl='de-DE', tz=360)
+    """Scrapes Google Trends with anti-rate-limit delays and custom User-Agent."""
+    # Use a real browser User-Agent and built-in retries to bypass 429 errors
+    pytrend = TrendReq(
+        hl='de-DE', 
+        tz=360, 
+        retries=3, 
+        backoff_factor=5,
+        requests_args={'headers': {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}}
+    )
     new_trends = []
     
     for keyword in SEED_KEYWORDS:
@@ -25,7 +39,6 @@ def get_rising_trends():
             if related_queries and keyword in related_queries and related_queries[keyword]['rising'] is not None:
                 rising_df = related_queries[keyword]['rising']
                 
-                # Catch massive 'Breakout' spikes AND any trend growing by more than 150%
                 for index, row in rising_df.iterrows():
                     val = row['value']
                     if val == 'Breakout':
@@ -36,9 +49,14 @@ def get_rising_trends():
                                 new_trends.append(row['query'])
                         except ValueError:
                             pass
-            time.sleep(2) 
+            
+            # Randomized long sleep to mimic human behavior and avoid bans
+            sleep_time = random.randint(10, 25)
+            time.sleep(sleep_time)
+            
         except Exception as e:
             print(f"Error fetching trends for {keyword}: {e}")
+            time.sleep(30) # Heavy sleep penalty on error before trying the next keyword
             
     return list(set(new_trends))
 
@@ -68,11 +86,11 @@ Generate a JSON object with strictly these keys:
     }
 
     try:
-        response = requests.post(HF_API_URL, headers=headers, json=payload)
+        # Use the robust session instead of standard requests.post
+        response = session.post(HF_API_URL, headers=headers, json=payload, timeout=30)
         response.raise_for_status()
         output_text = response.json()[0]['generated_text']
         
-        # Re-attach the opening brace stripped by the prompt priming
         clean_json = "{" + output_text.strip().removeprefix('```json').removesuffix('```').strip()
         return json.loads(clean_json)
     except Exception as e:
