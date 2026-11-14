@@ -1,0 +1,39 @@
+name: Daily Trend Hunter
+
+on:
+  schedule:
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  hunt-trends:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytrends requests
+          
+      - name: Run Trend Hunter
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: python auto_trend_catcher.py
+        
+      - name: Check for changes and commit
+        run: |
+          git config --global user.name "TrendBot"
+          git config --global user.email "trendbot@users.noreply.github.com"
+          git add seo_targets.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-added new local beauty trends" && git push)
