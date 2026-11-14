@@ -13,7 +13,7 @@ from google.analytics.data_v1beta.types import DateRange, Dimension, Metric, Run
 # 1. Configuration
 SITE_URL = "sc-domain:mobinashahri.de" 
 GA4_PROPERTY_ID = "240417284" # <-- Paste your numeric GA4 Property ID here
-RECIPIENT_EMAIL = "Mobina.shahri@web.de"
+RECIPIENT_EMAIL = "amarvishal01@gmail.com"
 SENDER_EMAIL = os.environ.get("SENDER_EMAIL")
 SENDER_PASSWORD = os.environ.get("EMAIL_APP_PASSWORD")
 
