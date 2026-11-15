@@ -702,5 +702,80 @@
     });
   })();
 </script>
+<script>
+  const chatToggle = document.getElementById('chat-toggle');
+  const chatWindow = document.getElementById('chat-window');
+  const chatInput = document.getElementById('chat-input');
+  const chatSend = document.getElementById('chat-send');
+  const chatMessages = document.getElementById('chat-messages');
+
+  // This connects the frontend to your specific Gemini backend
+  const WORKER_URL = 'https://ms-concierge.amarvishal01-379.workers.dev'; 
+
+  chatToggle.addEventListener('click', () => {
+    chatWindow.classList.toggle('hidden');
+  });
+
+  async function sendMessage() {
+    const message = chatInput.value.trim();
+    if (!message) return;
+
+    // 1. Show the user's message in the chat window
+    appendMessage(message, 'user');
+    chatInput.value = '';
+
+    // 2. Show a temporary loading indicator
+    const loadingId = appendMessage('...', 'bot');
+
+    try {
+      // 3. Send the message to your Cloudflare Worker
+      const response = await fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: message })
+      });
+
+      const data = await response.json();
+      
+      // 4. Remove loading indicator and show Gemini's reply
+      document.getElementById(loadingId).remove();
+      if (data.reply) {
+        appendMessage(data.reply, 'bot');
+      } else {
+        appendMessage('Fehler bei der Antwort.', 'bot');
+      }
+    } catch (error) {
+      document.getElementById(loadingId).remove();
+      appendMessage('Verbindung fehlgeschlagen. Bitte versuchen Sie es später.', 'bot');
+    }
+  }
+
+  function appendMessage(text, sender) {
+    const messageRow = document.createElement('div');
+    messageRow.className = 'mb-2 text-' + (sender === 'user' ? 'right' : 'left');
+    
+    const bubble = document.createElement('div');
+    bubble.className = 'inline-block px-3 py-2 rounded-2xl ' + 
+      (sender === 'user' ? 'bg-[#98817b] text-white' : 'bg-gray-100 text-gray-800'); // Assuming var(--accent) is roughly #98817b
+    bubble.textContent = text;
+    
+    const id = 'msg-' + Date.now();
+    messageRow.id = id;
+    
+    messageRow.appendChild(bubble);
+    chatMessages.appendChild(messageRow);
+    
+    // Auto-scroll to the newest message
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    
+    return id;
+  }
+
+  // Trigger send on button click or Enter key
+  chatSend.addEventListener('click', sendMessage);
+  chatInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendMessage();
+  });
+</script>
 </body>
 </html>
