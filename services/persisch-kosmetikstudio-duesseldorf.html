@@ -486,6 +486,7 @@
 </div>
 </div>
 </div>
+<!-- 1. Image Carousel Script -->
 <script>
     (function () {
       const root = document.getElementById('hero-carousel');
@@ -529,213 +530,118 @@
       startAutoSlide();
     })();
   </script>
-<script>
-(function () {
-  // 1. Updated to point to your new Gemini Cloudflare Worker
-  const WORKER_URL = "https://ms-concierge.amarvishal01-379.workers.dev"; 
-  const PAGE_LANG = "de"; // use "de" on index.html, "en" on en.html, "fa" on fa.html
-
-  const toggleBtn = document.getElementById('chat-toggle');
-  const chatWindow = document.getElementById('chat-window');
-  const chatMessages = document.getElementById('chat-messages');
-  const chatInput = document.getElementById('chat-input');
-  const chatSend = document.getElementById('chat-send');
-
-  if (!toggleBtn || !chatWindow || !chatMessages || !chatInput || !chatSend) return;
-
-  function addMessage(text, sender = 'bot') {
-    const row = document.createElement('div');
-
-    if (PAGE_LANG === 'fa') {
-      row.className = 'mb-2 ' + (sender === 'user' ? 'text-left' : 'text-right');
-    } else {
-      row.className = 'mb-2 ' + (sender === 'user' ? 'text-right' : 'text-left');
-    }
-
-    const bubble = document.createElement('div');
-    // Keeps your strict styling limit and colors
-    bubble.className =
-      (sender === 'user'
-        ? 'inline-block bg-amber-700 text-white'
-        : 'inline-block bg-gray-100 text-gray-800') +
-      ' px-3 py-2 rounded-2xl max-w-xs';
-
-    if (PAGE_LANG === 'fa') {
-      bubble.style.direction = 'rtl';
-      bubble.style.textAlign = 'right';
-    }
-
-    // Strips markdown asterisks sent by Gemini
-    bubble.textContent = text.replace(/\*\*/g, '');
-    row.appendChild(bubble);
-    chatMessages.appendChild(row);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-
-  function getTypingText(lang) {
-    const map = {
-      de: "Schreibt …",
-      en: "Typing…",
-      fa: "در حال نوشتن…"
-    };
-    return map[lang] || "Typing…";
-  }
-
-  function getErrorText(lang) {
-    const map = {
-      de: "Entschuldigung, der Concierge ist momentan nicht verfügbar.",
-      en: "Sorry, the concierge is temporarily unavailable.",
-      fa: "متأسفم، کانسیرج در حال حاضر در دسترس نیست."
-    };
-    return map[lang] || "Sorry, the concierge is temporarily unavailable.";
-  }
-
-  async function askConcierge(message) {
-    // 2. Updated to fetch from WORKER_URL
-    const response = await fetch(WORKER_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        message: message,
-        lang: PAGE_LANG
-      })
-    });
-
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-
-    const data = await response.json();
-    return data.reply || getErrorText(PAGE_LANG);
-  }
-
-  toggleBtn.addEventListener('click', () => {
-    chatWindow.classList.toggle('hidden');
-  });
-
-  chatSend.addEventListener('click', async () => {
-    const message = chatInput.value.trim();
-    if (!message) return;
-
-    addMessage(message, 'user');
-    chatInput.value = '';
-    addMessage(getTypingText(PAGE_LANG), 'bot');
-
-    try {
-      const reply = await askConcierge(message);
-
-      const rows = chatMessages.children;
-      if (rows.length) {
-        rows[rows.length - 1].remove();
-      }
-
-      addMessage(reply, 'bot');
-    } catch (error) {
-      const rows = chatMessages.children;
-      if (rows.length) {
-        rows[rows.length - 1].remove();
-      }
-
-      addMessage(getErrorText(PAGE_LANG), 'bot');
-      console.error(error);
-    }
-  });
-
-  chatInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      chatSend.click();
-    }
-  });
-})();
-</script>
+<!-- 2. Strict UI Chatbot Script (Gemini Connected) -->
 <script>
   (function () {
-    const btn = document.getElementById('mobile-menu-btn');
-    const menu = document.getElementById('mobile-menu');
+    const WORKER_URL = "https://ms-concierge.amarvishal01-379.workers.dev"; 
+    const PAGE_LANG = "de"; // Change this on en.html and fa.html
 
-    if (!btn || !menu) return;
+    const toggleBtn = document.getElementById('chat-toggle');
+    const chatWindow = document.getElementById('chat-window');
+    const chatMessages = document.getElementById('chat-messages');
+    const chatInput = document.getElementById('chat-input');
+    const chatSend = document.getElementById('chat-send');
 
-    btn.addEventListener('click', () => {
-      menu.classList.toggle('hidden');
-    });
-  })();
-</script>
-<script>
-  const chatToggle = document.getElementById('chat-toggle');
-  const chatWindow = document.getElementById('chat-window');
-  const chatInput = document.getElementById('chat-input');
-  const chatSend = document.getElementById('chat-send');
-  const chatMessages = document.getElementById('chat-messages');
+    if (!toggleBtn || !chatWindow || !chatMessages || !chatInput || !chatSend) return;
 
-  // This connects the frontend to your specific Gemini backend
-  const WORKER_URL = 'https://ms-concierge.amarvishal01-379.workers.dev'; 
+    function addMessage(text, sender = 'bot') {
+      const row = document.createElement('div');
 
-  chatToggle.addEventListener('click', () => {
-    chatWindow.classList.toggle('hidden');
-  });
+      if (PAGE_LANG === 'fa') {
+        row.className = 'mb-2 ' + (sender === 'user' ? 'text-left' : 'text-right');
+      } else {
+        row.className = 'mb-2 ' + (sender === 'user' ? 'text-right' : 'text-left');
+      }
 
-  async function sendMessage() {
-    const message = chatInput.value.trim();
-    if (!message) return;
+      const bubble = document.createElement('div');
+      bubble.className =
+        (sender === 'user'
+          ? 'inline-block bg-[#98817b] text-white' 
+          : 'inline-block bg-gray-100 text-gray-800') +
+        ' px-3 py-2 rounded-2xl max-w-xs';
 
-    // 1. Show the user's message in the chat window
-    appendMessage(message, 'user');
-    chatInput.value = '';
+      if (PAGE_LANG === 'fa') {
+        bubble.style.direction = 'rtl';
+        bubble.style.textAlign = 'right';
+      }
 
-    // 2. Show a temporary loading indicator
-    const loadingId = appendMessage('...', 'bot');
+      bubble.textContent = text.replace(/\*\*/g, '');
+      row.appendChild(bubble);
+      chatMessages.appendChild(row);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
 
-    try {
-      // 3. Send the message to your Cloudflare Worker
+    function getTypingText(lang) {
+      const map = { de: "Schreibt …", en: "Typing…", fa: "در حال نوشتن…" };
+      return map[lang] || "Typing…";
+    }
+
+    function getErrorText(lang) {
+      const map = {
+        de: "Entschuldigung, der Concierge ist momentan nicht verfügbar.",
+        en: "Sorry, the concierge is temporarily unavailable.",
+        fa: "متأسفم، کانسیرج در حال حاضر در دسترس نیست."
+      };
+      return map[lang] || "Sorry, the concierge is temporarily unavailable.";
+    }
+
+    async function askConcierge(message) {
       const response = await fetch(WORKER_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: message })
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: message, lang: PAGE_LANG })
       });
 
-      const data = await response.json();
-      
-      // 4. Remove loading indicator and show Gemini's reply
-      document.getElementById(loadingId).remove();
-      if (data.reply) {
-        appendMessage(data.reply, 'bot');
-      } else {
-        appendMessage('Fehler bei der Antwort.', 'bot');
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
       }
-    } catch (error) {
-      document.getElementById(loadingId).remove();
-      appendMessage('Verbindung fehlgeschlagen. Bitte versuchen Sie es später.', 'bot');
+
+      const data = await response.json();
+      return data.reply || getErrorText(PAGE_LANG);
     }
-  }
 
-  function appendMessage(text, sender) {
-    const messageRow = document.createElement('div');
-    messageRow.className = 'mb-2 text-' + (sender === 'user' ? 'right' : 'left');
-    
-    const bubble = document.createElement('div');
-    bubble.className = 'inline-block px-3 py-2 rounded-2xl ' + 
-      (sender === 'user' ? 'bg-[#98817b] text-white' : 'bg-gray-100 text-gray-800'); // Assuming var(--accent) is roughly #98817b
-    bubble.textContent = text;
-    
-    const id = 'msg-' + Date.now();
-    messageRow.id = id;
-    
-    messageRow.appendChild(bubble);
-    chatMessages.appendChild(messageRow);
-    
-    // Auto-scroll to the newest message
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-    
-    return id;
-  }
+    toggleBtn.addEventListener('click', () => {
+      chatWindow.classList.toggle('hidden');
+    });
 
-  // Trigger send on button click or Enter key
-  chatSend.addEventListener('click', sendMessage);
-  chatInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') sendMessage();
-  });
-</script>
+    chatSend.addEventListener('click', async () => {
+      const message = chatInput.value.trim();
+      if (!message) return;
+
+      addMessage(message, 'user');
+      chatInput.value = '';
+      addMessage(getTypingText(PAGE_LANG), 'bot');
+
+      try {
+        const reply = await askConcierge(message);
+        const rows = chatMessages.children;
+        if (rows.length) rows[rows.length - 1].remove();
+        addMessage(reply, 'bot');
+      } catch (error) {
+        const rows = chatMessages.children;
+        if (rows.length) rows[rows.length - 1].remove();
+        addMessage(getErrorText(PAGE_LANG), 'bot');
+        console.error(error);
+      }
+    });
+
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') chatSend.click();
+    });
+  })();
+  </script>
+<!-- 3. Mobile Menu Script -->
+<script>
+    (function () {
+      const btn = document.getElementById('mobile-menu-btn');
+      const menu = document.getElementById('mobile-menu');
+
+      if (!btn || !menu) return;
+
+      btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+      });
+    })();
+  </script>
 </body>
 </html>
