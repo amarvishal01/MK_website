@@ -23,7 +23,7 @@ LOCAL_DATA = {
 
 # 3. Gemini API Setup
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
-GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
+GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={GEMINI_API_KEY}"
 
 session = requests.Session()
 retries = Retry(total=5, backoff_factor=2, status_forcelist=[500, 502, 503, 504])
