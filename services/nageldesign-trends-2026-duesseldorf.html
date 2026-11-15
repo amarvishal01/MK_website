@@ -530,51 +530,8 @@
     })();
   </script>
 <script>
-    (function () {
-      const root = document.getElementById('hero-carousel');
-      if (!root) return;
-
-      const slides = Array.from(root.querySelectorAll('.hero-slide'));
-      const prevBtn = document.getElementById('hero-prev');
-      const nextBtn = document.getElementById('hero-next');
-
-      let index = 0;
-      let timer;
-
-      function showSlide(newIndex) {
-        slides.forEach(slide => slide.classList.remove('is-active'));
-        index = (newIndex + slides.length) % slides.length;
-        slides[index].classList.add('is-active');
-      }
-
-      function startAutoSlide() {
-        clearInterval(timer);
-        timer = setInterval(() => {
-          showSlide(index + 1);
-        }, 3000);
-      }
-
-      function resetAutoSlide() {
-        startAutoSlide();
-      }
-
-      nextBtn.addEventListener('click', () => {
-        showSlide(index + 1);
-        resetAutoSlide();
-      });
-
-      prevBtn.addEventListener('click', () => {
-        showSlide(index - 1);
-        resetAutoSlide();
-      });
-
-      showSlide(0);
-      startAutoSlide();
-    })();
-  </script>
-<script>
 (function () {
-  const API_BASE_URL = "https://mk-website-amber.vercel.app"; 
+  const API_BASE_URL = "https://ms-concierge.amarvishal01-379.workers.dev"; 
   const PAGE_LANG = "de"; // use "de" on index.html, "en" on en.html, "fa" on fa.html
 
   const toggleBtn = document.getElementById('chat-toggle');
