@@ -7,30 +7,33 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from pytrends.request import TrendReq
 
-# 1. Configuration
+# 1. Core Configuration
 GEO_REGION = 'DE-NW' 
 SEED_KEYWORDS = ['aquafacial', 'wimpernlifting', 'nageldesign', 'brautmakeup']
 JSON_FILE = 'seo_targets.json'
+MAX_DAILY_PAGES = 3 # Selective Scaling: Prevent crawl budget drain
 
-# Use the Google AI Studio Gemini API Key
+# 2. SOTA Data Layer (Differentiates every page)
+LOCAL_DATA = {
+    "business": "MS Cosmetics",
+    "owner": "Mobina Shahri",
+    "neighborhoods": ["Stadtmitte", "Pempelfort", "Oberkassel", "Carlstadt", "Flingern", "Medienhafen", "Golzheim"],
+    "usps": ["Höchste Hygienestandards", "Premium-Produkte", "Individuelle Typberatung"]
+}
+
+# 3. Gemini API Setup
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
-# Using Gemini 1.5 Flash for high speed and strict JSON compliance
 GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
 
-# Setup robust network session with automatic retries for DNS/network blips
 session = requests.Session()
 retries = Retry(total=5, backoff_factor=2, status_forcelist=[500, 502, 503, 504])
 session.mount('https://', HTTPAdapter(max_retries=retries))
 
 def get_rising_trends():
-    """Scrapes Google Trends with anti-rate-limit delays and custom User-Agent."""
-    # Use a real browser User-Agent and built-in retries to bypass 429 errors
+    """Scrapes Google Trends for Breakout or >150% rising queries."""
     pytrend = TrendReq(
-        hl='de-DE', 
-        tz=360, 
-        retries=3, 
-        backoff_factor=5,
-        requests_args={'headers': {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}}
+        hl='de-DE', tz=360, retries=3, backoff_factor=5,
+        requests_args={'headers': {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0'}}
     )
     new_trends = []
     
@@ -38,97 +41,120 @@ def get_rising_trends():
         try:
             pytrend.build_payload(kw_list=[keyword], geo=GEO_REGION, timeframe='today 3-m')
             related_queries = pytrend.related_queries()
-            
             if related_queries and keyword in related_queries and related_queries[keyword]['rising'] is not None:
                 rising_df = related_queries[keyword]['rising']
-                
                 for index, row in rising_df.iterrows():
                     val = row['value']
-                    if val == 'Breakout':
+                    if val == 'Breakout' or (str(val).isdigit() and int(val) >= 150):
                         new_trends.append(row['query'])
-                    else:
-                        try:
-                            if int(val) >= 150:
-                                new_trends.append(row['query'])
-                        except ValueError:
-                            pass
-            
-            # Randomized long sleep to mimic human behavior and avoid bans
-            sleep_time = random.randint(10, 25)
-            time.sleep(sleep_time)
-            
+            time.sleep(random.randint(5, 15))
         except Exception as e:
-            print(f"Error fetching trends for {keyword}: {e}")
-            time.sleep(30) # Heavy sleep penalty on error before trying the next keyword
+            print(f"Trend fetch error for {keyword}: {e}")
+            time.sleep(20)
             
     return list(set(new_trends))
 
-def generate_seo_content(keyword):
-    """Uses Gemini 1.5 Flash to generate structured JSON SEO copy with SOTA FAQs."""
+def generate_sota_content(keyword):
+    """Uses Gemini to generate deep content, JSON-LD Schema, and clustering metadata."""
     
-    prompt = f"""You are an expert SEO copywriter for a premium beauty atelier in Düsseldorf.
-A new trending local search term is: "{keyword}".
-Generate a JSON object with strictly these keys:
-- "slug": URL-friendly slug based on the keyword and "duesseldorf"
-- "page_title": Premium SEO title (max 60 chars) including the keyword and "Düsseldorf"
-- "meta_description": Professional German meta description (max 155 chars)
-- "h1": A high-end H1 tag for the landing page.
-- "faqs": An array of 3 highly relevant, localized FAQ objects (each with a 'question' and 'answer' in German) to build 2026-compliant SOTA content."""
+    neighborhood = random.choice(LOCAL_DATA["neighborhoods"])
+    usp = random.choice(LOCAL_DATA["usps"])
+    
+    prompt = f"""You are an elite SEO copywriter for {LOCAL_DATA['business']} (owned by {LOCAL_DATA['owner']}) in Düsseldorf.
+A new trending search term is: "{keyword}".
+
+Generate a comprehensive, 2026-compliant SOTA SEO data object in German. 
+Integrate this local data naturally: Neighborhood "{neighborhood}" and USP "{usp}".
+
+Output ONLY a JSON object with these exact keys:
+- "slug": URL-friendly slug (e.g., keyword-duesseldorf-neighborhood)
+- "category": Categorize as ONE of: "skin", "lashes", "nails", "makeup" (for Topic Clustering)
+- "page_title": Click-optimized SEO title (max 60 chars)
+- "meta_description": Conversion-focused meta description (max 155 chars)
+- "h1": High-end H1 tag
+- "intro_text": A 2-paragraph highly engaging, locally relevant introduction.
+- "faqs": Array of 3 FAQ objects (keys: "question", "answer").
+- "schema_markup": A nested valid JSON-LD object for 'FAQPage' schema containing the 3 FAQs to trigger Google AI Overviews.
+"""
 
     payload = {
-        "contents": [{
-            "parts": [{"text": prompt}]
-        }],
+        "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {
-            "temperature": 0.2,
-            "response_mime_type": "application/json" # This forces Gemini to output flawless JSON without markdown blocks
+            "temperature": 0.3, # Slightly higher for creative variation across local neighborhoods
+            "response_mime_type": "application/json"
         }
     }
 
     try:
-        # Use the robust session instead of standard requests.post
-        response = session.post(GEMINI_API_URL, json=payload, timeout=30)
+        response = session.post(GEMINI_API_URL, json=payload, timeout=40)
         response.raise_for_status()
         output = response.json()
-        
-        # Extract the pure JSON string from Gemini's response
         json_text = output['candidates'][0]['content']['parts'][0]['text']
         return json.loads(json_text)
-        
     except Exception as e:
-        print(f"Failed to parse Gemini output for {keyword}. Error: {e}")
+        print(f"Gemini generation failed for {keyword}: {e}")
         return None
 
-# 2. Execution
+def build_topic_clusters(existing_data):
+    """Automates internal linking by grouping pages by category."""
+    clusters = {"skin": [], "lashes": [], "nails": [], "makeup": []}
+    
+    # Group by category
+    for page in existing_data:
+        cat = page.get("category", "skin")
+        if cat in clusters:
+            clusters[cat].append({"slug": page["slug"], "title": page["page_title"]})
+            
+    # Inject related links back into the data
+    for page in existing_data:
+        cat = page.get("category", "skin")
+        related = [p for p in clusters[cat] if p["slug"] != page["slug"]]
+        # Keep top 3 related links to avoid spammy footer blocks
+        page["internal_links"] = related[:3] 
+        
+    return existing_data
+
+# 4. Execution Pipeline
 if __name__ == "__main__":
-    print("Checking for new breakout and rising trends (>150%) in NRW...")
+    print("Initializing SOTA Trend Hunter (Gemini 1.5 Flash)...")
+    
+    if os.path.exists(JSON_FILE):
+        with open(JSON_FILE, "r", encoding="utf-8") as f:
+            existing_data = json.load(f)
+    else:
+        existing_data = []
+        
+    existing_slugs = {item.get("slug") for item in existing_data}
     rising_trends = get_rising_trends()
     
-    if not rising_trends:
-        print("No new rising trends today.")
-        exit(0)
-        
-    with open(JSON_FILE, "r", encoding="utf-8") as f:
-        existing_data = json.load(f)
-    
-    existing_slugs = {item.get("slug") for item in existing_data}
+    pages_generated_today = 0
     added_new = False
     
     for trend in rising_trends:
-        # Prevent duplicates based on the first word of the trend
+        if pages_generated_today >= MAX_DAILY_PAGES:
+            print(f"Daily generation cap ({MAX_DAILY_PAGES}) reached. Selective scaling enforced.")
+            break
+            
         if any(trend.split()[0] in slug for slug in existing_slugs):
             continue
             
-        print(f"Found new rising trend: {trend}. Generating SEO copy via Gemini...")
-        new_block = generate_seo_content(trend)
+        print(f"Generating SOTA page for trend: '{trend}'...")
+        new_page = generate_sota_content(trend)
         
-        if new_block and new_block.get("slug") and new_block["slug"] not in existing_slugs:
-            existing_data.append(new_block)
-            existing_slugs.add(new_block["slug"])
+        if new_page and new_page.get("slug") and new_page["slug"] not in existing_slugs:
+            existing_data.append(new_page)
+            existing_slugs.add(new_page["slug"])
+            pages_generated_today += 1
             added_new = True
-            print(f"Added: {new_block['slug']}")
+            print(f"Success: Added {new_page['slug']} (Category: {new_page.get('category')})")
             
     if added_new:
+        # Re-build internal linking structure before saving
+        print("Re-calculating Topic Clusters for internal linking...")
+        existing_data = build_topic_clusters(existing_data)
+        
         with open(JSON_FILE, "w", encoding="utf-8") as f:
             json.dump(existing_data, f, indent=2, ensure_ascii=False)
-        print(f"Successfully updated {JSON_FILE}")
+        print(f"Pipeline complete. {pages_generated_today} new pages injected into {JSON_FILE}.")
+    else:
+        print("No new actionable trends found today. Pipeline sleeping.")
