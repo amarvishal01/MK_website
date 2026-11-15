@@ -1,6 +1,7 @@
 import os
 import json
 import smtplib
+import re 
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timedelta
@@ -48,8 +49,9 @@ except Exception as e:
 
 combined_data = {}
 for row in gsc_rows:
-    page = row['keys'][0].replace('https://mobinashahri.de', '')
-    if not page.startswith('/'): page = '/' + page
+# Replace the old 'page = ...' line in the GSC loop with this:
+page = re.sub(r'^https?://(www\.)?mobinashahri\.de', '', row['keys'][0])
+if not page.startswith('/'): page = '/' + page
     combined_data[page] = {
         'clicks': row['clicks'],
         'impressions': row['impressions'],
