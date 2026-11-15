@@ -47,16 +47,18 @@ except Exception as e:
     print(f"GSC API Error: {e}")
     gsc_rows = []
 
+
 combined_data = {}
 for row in gsc_rows:
-# Replace the old 'page = ...' line in the GSC loop with this:
-page = re.sub(r'^https?://(www\.)?mobinashahri\.de', '', row['keys'][0])
-if not page.startswith('/'): page = '/' + page
+    # These lines MUST be indented by 4 spaces
+    page = re.sub(r'^https?://(www\.)?mobinashahri\.de', '', row['keys'][0])
+    if not page.startswith('/'): page = '/' + page
+    
     combined_data[page] = {
         'clicks': row['clicks'],
         'impressions': row['impressions'],
         'position': f"{row['position']:.1f}",
-        'views': '0', 'bounce_rate': 'N/A', 'avg_time': 'N/A' # Default placeholders
+        'views': '0', 'bounce_rate': 'N/A', 'avg_time': 'N/A'
     }
 
 # 5. Pull Google Analytics 4 Data
