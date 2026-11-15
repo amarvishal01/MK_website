@@ -30,28 +30,41 @@ retries = Retry(total=5, backoff_factor=2, status_forcelist=[500, 502, 503, 504]
 session.mount('https://', HTTPAdapter(max_retries=retries))
 
 def get_rising_trends():
-    """Scrapes Google Trends for Breakout or >150% rising queries."""
+    """Scrapes Google Trends with manual retries to bypass urllib3 method_whitelist errors."""
+    
+    # Removed 'retries' and 'backoff_factor' to prevent the pytrends library crash
     pytrend = TrendReq(
-        hl='de-DE', tz=360, retries=3, backoff_factor=5,
+        hl='de-DE', 
+        tz=360, 
         requests_args={'headers': {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0'}}
     )
     new_trends = []
     
     for keyword in SEED_KEYWORDS:
-        try:
-            pytrend.build_payload(kw_list=[keyword], geo=GEO_REGION, timeframe='today 3-m')
-            related_queries = pytrend.related_queries()
-            if related_queries and keyword in related_queries and related_queries[keyword]['rising'] is not None:
-                rising_df = related_queries[keyword]['rising']
-                for index, row in rising_df.iterrows():
-                    val = row['value']
-                    if val == 'Breakout' or (str(val).isdigit() and int(val) >= 150):
-                        new_trends.append(row['query'])
-            time.sleep(random.randint(5, 15))
-        except Exception as e:
-            print(f"Trend fetch error for {keyword}: {e}")
-            time.sleep(20)
-            
+        success = False
+        attempts = 0
+        
+        # Manual retry loop replaces the broken pytrends internal retry
+        while not success and attempts < 3:
+            try:
+                pytrend.build_payload(kw_list=[keyword], geo=GEO_REGION, timeframe='today 3-m')
+                related_queries = pytrend.related_queries()
+                
+                if related_queries and keyword in related_queries and related_queries[keyword]['rising'] is not None:
+                    rising_df = related_queries[keyword]['rising']
+                    for index, row in rising_df.iterrows():
+                        val = row['value']
+                        if val == 'Breakout' or (str(val).isdigit() and int(val) >= 150):
+                            new_trends.append(row['query'])
+                            
+                success = True # Mark as successful to break the retry loop
+                time.sleep(random.randint(5, 15))
+                
+            except Exception as e:
+                attempts += 1
+                print(f"Trend fetch error for {keyword} (Attempt {attempts}/3): {e}")
+                time.sleep(20) # Heavy sleep penalty before retrying
+                
     return list(set(new_trends))
 
 def generate_sota_content(keyword):
