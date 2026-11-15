@@ -129,7 +129,7 @@ def build_topic_clusters(existing_data):
 
 # 4. Execution Pipeline
 if __name__ == "__main__":
-    print("Initializing SOTA Trend Hunter (Gemini 1.5 Flash)...")
+    print("Initializing SOTA Trend Hunter (Gemini 3.8 Flash)...")
     
     if os.path.exists(JSON_FILE):
         with open(JSON_FILE, "r", encoding="utf-8") as f:
