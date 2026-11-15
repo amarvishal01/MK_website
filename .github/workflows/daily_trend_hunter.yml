@@ -28,7 +28,7 @@ jobs:
           
       - name: Run Trend Hunter
         env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }} # Changed this line
         run: python auto_trend_catcher.py
         
       - name: Check for changes and commit
