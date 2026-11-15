@@ -512,6 +512,9 @@
   </div>
 </footer>
 
+
+  
+  
   <!-- Chatbot -->
   <div class="fixed bottom-4 right-4">
     <button id="chat-toggle" class="btn-primary px-4 py-3 rounded-full shadow-lg">Concierge</button>
@@ -578,140 +581,99 @@
     })();
   </script>
 
+  <script>
+  (function () {
+    const WORKER_URL = "https://ms-concierge.amarvishal01-379.workers.dev"; 
+    const PAGE_LANG = "en"; // English Language Setting
 
-<script>
-(function () {
-  const API_BASE_URL = "https://mk-website-amber.vercel.app"; 
-  const PAGE_LANG = "en"; // use "de" on index.html, "en" on en.html, "fa" on fa.html
+    const toggleBtn = document.getElementById('chat-toggle');
+    const chatWindow = document.getElementById('chat-window');
+    const chatMessages = document.getElementById('chat-messages');
+    const chatInput = document.getElementById('chat-input');
+    const chatSend = document.getElementById('chat-send');
 
-  const toggleBtn = document.getElementById('chat-toggle');
-  const chatWindow = document.getElementById('chat-window');
-  const chatMessages = document.getElementById('chat-messages');
-  const chatInput = document.getElementById('chat-input');
-  const chatSend = document.getElementById('chat-send');
+    if (!toggleBtn || !chatWindow || !chatMessages || !chatInput || !chatSend) return;
 
-  if (!toggleBtn || !chatWindow || !chatMessages || !chatInput || !chatSend) return;
-
-  function addMessage(text, sender = 'bot') {
-    const row = document.createElement('div');
-
-    if (PAGE_LANG === 'fa') {
-      row.className = 'mb-2 ' + (sender === 'user' ? 'text-left' : 'text-right');
-    } else {
+    function addMessage(text, sender = 'bot') {
+      const row = document.createElement('div');
       row.className = 'mb-2 ' + (sender === 'user' ? 'text-right' : 'text-left');
+
+      const bubble = document.createElement('div');
+      bubble.className =
+        (sender === 'user'
+          ? 'inline-block bg-[#98817b] text-white'
+          : 'inline-block bg-gray-100 text-gray-800') +
+        ' px-3 py-2 rounded-2xl max-w-xs';
+
+      bubble.textContent = text.replace(/\*\*/g, '');
+      row.appendChild(bubble);
+      chatMessages.appendChild(row);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    const bubble = document.createElement('div');
-    bubble.className =
-      (sender === 'user'
-        ? 'inline-block bg-amber-700 text-white'
-        : 'inline-block bg-gray-100 text-gray-800') +
-      ' px-3 py-2 rounded-2xl max-w-xs';
-
-    if (PAGE_LANG === 'fa') {
-      bubble.style.direction = 'rtl';
-      bubble.style.textAlign = 'right';
+    function getTypingText(lang) {
+      return "Typing…";
     }
 
-    bubble.textContent = text.replace(/\*\*/g, '');
-    row.appendChild(bubble);
-    chatMessages.appendChild(row);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
+    function getErrorText(lang) {
+      return "Sorry, the concierge is temporarily unavailable.";
+    }
 
-  function getTypingText(lang) {
-    const map = {
-      de: "Schreibt …",
-      en: "Typing…",
-      fa: "در حال نوشتن…"
-    };
-    return map[lang] || "Typing…";
-  }
+    async function askConcierge(message) {
+      const response = await fetch(WORKER_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: message, lang: PAGE_LANG })
+      });
 
-  function getErrorText(lang) {
-    const map = {
-      de: "Entschuldigung, der Concierge ist momentan nicht verfügbar.",
-      en: "Sorry, the concierge is temporarily unavailable.",
-      fa: "متأسفم، کانسیرج در حال حاضر در دسترس نیست."
-    };
-    return map[lang] || "Sorry, the concierge is temporarily unavailable.";
-  }
+      if (!response.ok) throw new Error("Network response was not ok");
+      
+      const data = await response.json();
+      return data.reply || getErrorText(PAGE_LANG);
+    }
 
-  async function askConcierge(message) {
-    const response = await fetch(`${API_BASE_URL}/api/concierge`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        message: message,
-        lang: PAGE_LANG
-      })
+    toggleBtn.addEventListener('click', () => {
+      chatWindow.classList.toggle('hidden');
     });
 
-    if (!response.ok) {
-      const errText = await response.text();
-      throw new Error(errText);
-    }
+    chatSend.addEventListener('click', async () => {
+      const message = chatInput.value.trim();
+      if (!message) return;
 
-    const data = await response.json();
-    return data.reply || getErrorText(PAGE_LANG);
-  }
+      addMessage(message, 'user');
+      chatInput.value = '';
+      addMessage(getTypingText(PAGE_LANG), 'bot');
 
-  toggleBtn.addEventListener('click', () => {
-    chatWindow.classList.toggle('hidden');
-  });
-
-  chatSend.addEventListener('click', async () => {
-    const message = chatInput.value.trim();
-    if (!message) return;
-
-    addMessage(message, 'user');
-    chatInput.value = '';
-    addMessage(getTypingText(PAGE_LANG), 'bot');
-
-    try {
-      const reply = await askConcierge(message);
-
-      const rows = chatMessages.children;
-      if (rows.length) {
-        rows[rows.length - 1].remove();
+      try {
+        const reply = await askConcierge(message);
+        const rows = chatMessages.children;
+        if (rows.length) rows[rows.length - 1].remove();
+        addMessage(reply, 'bot');
+      } catch (error) {
+        const rows = chatMessages.children;
+        if (rows.length) rows[rows.length - 1].remove();
+        addMessage(getErrorText(PAGE_LANG), 'bot');
+        console.error(error);
       }
+    });
 
-      addMessage(reply, 'bot');
-    } catch (error) {
-      const rows = chatMessages.children;
-      if (rows.length) {
-        rows[rows.length - 1].remove();
-      }
-
-      addMessage(getErrorText(PAGE_LANG), 'bot');
-      console.error(error);
-    }
-  });
-
-  chatInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      chatSend.click();
-    }
-  });
-})();
-</script>
-
-
-<script>
-  (function () {
-    const btn = document.getElementById('mobile-menu-btn');
-    const menu = document.getElementById('mobile-menu');
-
-    if (!btn || !menu) return;
-
-    btn.addEventListener('click', () => {
-      menu.classList.toggle('hidden');
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') chatSend.click();
     });
   })();
-</script>
+  </script>
 
-  
+  <script>
+    (function () {
+      const btn = document.getElementById('mobile-menu-btn');
+      const menu = document.getElementById('mobile-menu');
+
+      if (!btn || !menu) return;
+
+      btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+      });
+    })();
+  </script>
 </body>
 </html>
